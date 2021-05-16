@@ -1,10 +1,15 @@
 import assert from "assert";  // npm install @types/node --save-dev
 
 export class Physics{
+    x: number;  // Corresponding to a state of a rendered object
+    y: number;  // Corresponding to a state of a rendered object
+    hVelocity: number;
+    vVelocity: number;
+    hAcceleration: number;
+    vAcceleration: number;
 
     constructor(x: number, y: number, hVelocity: number, vVelocity: number, hAcceleration: number, vAcceleration: number){
-        // Not implemented yet
-        assert(false);
+        this.x = x;
     }
 
     setPosition(x: number, y: number){
@@ -21,8 +26,7 @@ export class Physics{
         assert(false);
     }
     getHorizontalPosition(){
-        // Not implemented yet
-        assert(false);
+        return this.x;
     }
 
     setVerticalPosition(y: number){
