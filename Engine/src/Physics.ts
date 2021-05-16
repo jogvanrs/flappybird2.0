@@ -1,4 +1,4 @@
-import * as  assert  from "assert";  // npm install @types/node --save-dev
+import assert from "assert";  // npm install @types/node --save-dev
 
 export class Physics{
 
