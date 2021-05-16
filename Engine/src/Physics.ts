@@ -1,7 +1,8 @@
 import * as  assert  from "assert";  // npm install @types/node --save-dev
 
 export class Physics{
-    Constructor(x: number, y: number, hVelocity: number, vVelocity: number, hAcceleration: number, vAcceleration: number){
+
+    constructor(x: number, y: number, hVelocity: number, vVelocity: number, hAcceleration: number, vAcceleration: number){
         // Not implemented yet
         assert(false);
     }

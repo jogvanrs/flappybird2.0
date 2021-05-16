@@ -8,6 +8,7 @@ import { Physics } from './Physics';
 const LOOP_FREQUENCY = 50; // To be replaced with a global constant?
 
 test('a test' , () => {
+    let physics = new Physics(0, 0, 0, 0, 0, 0);
     let x = 1;
     let Y = LOOP_FREQUENCY;
     expect(x).toBe(0);
