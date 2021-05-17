@@ -1,4 +1,4 @@
-import assert from "../../../node_modules/assert";
+import assert from 'assert'
 
 export class Physics{
     x: number;  // Corresponding to a state of a rendered object
@@ -10,6 +10,11 @@ export class Physics{
 
     constructor(x: number, y: number, hVelocity: number, vVelocity: number, hAcceleration: number, vAcceleration: number){
         this.x = x;
+        this.y = y;
+        this.hAcceleration = hAcceleration;
+        this.hVelocity = hVelocity;
+        this.vAcceleration = vAcceleration;
+        this.vVelocity = vVelocity
     }
 
     setPosition(x: number, y: number){
