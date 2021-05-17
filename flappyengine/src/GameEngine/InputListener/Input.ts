@@ -3,7 +3,7 @@
  * To be used with player actions
  */
 
-export function keyPressDown(keycode : string, method) {
+export function keyPressDown(keycode : string, method: any) {
 
     window.addEventListener("keydown", event => {
         event.preventDefault();
@@ -14,7 +14,7 @@ export function keyPressDown(keycode : string, method) {
     });
 }
 
-export function keyPressUp(keycode : string, method) {
+export function keyPressUp(keycode : string, method: any) {
 
     window.addEventListener("keyup", event => {
         event.preventDefault();
