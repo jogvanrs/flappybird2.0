@@ -16,10 +16,6 @@ export class Physics{
         // Not implemented yet
         assert(false);
     }
-    getPosition(){
-        // Not implemented yet
-        assert(false);
-    }
 
     setHorizontalPosition(x: number){
         // Not implemented yet
@@ -34,30 +30,41 @@ export class Physics{
         assert(false);
     }
     getVerticalPosition(){
-        // Not implemented yet
-        assert(false);
+        // Most likely only needed for testing
+        return this.y;
     }
 
     setHorizontalVelocity(horizontalVelocity: number){
         // Not implemented yet
         assert(false);
     }getHorizontalVelocity(){
-        // Not implemented yet
-        assert(false);
+        // Most likely only needed for testing
+        return this.hVelocity;
     }
 
     setVerticalVelocity(verticalVelocity: number){
         // Not implemented yet
         assert(false);
     }
+    getVerticalVelocity(){
+        return this.hVelocity;
+    }
 
     setVerticalAcceleration(vAccelleration: number){
         // Not implemented yet
         assert(false);
     }
+    getVerticalAcceleration(){
+        // Most likely only needed for testing
+        return this.vAcceleration;
+    }
 
     setHorizontalAcceleration(hAcceleration: number){
         // Not implemented yet
         assert(false);
+    }
+    getHorizontalAcceleration(){
+        // Most likely only needed for testing
+        return this.hAcceleration;
     }
 }
