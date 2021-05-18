@@ -8,7 +8,7 @@ import { Physics } from './Physics';
 const LOOP_FREQUENCY = 50; // To be replaced with a global constant?
 
 
-test('a test' , () => {
+test('testing getters and setters' , () => {
     let physics = new Physics(1, 2, 3, 4, 5, 6);
     expect(physics.getHorizontalPosition()).toBe(1);
     expect(physics.getVerticalPosition()).toBe(2);
