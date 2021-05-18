@@ -52,7 +52,7 @@ export class Physics{
         assert(false);
     }
     getVerticalVelocity(){
-        return this.hVelocity;
+        return this.vVelocity;
     }
 
     setVerticalAcceleration(vAccelleration: number){
