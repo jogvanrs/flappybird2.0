@@ -68,13 +68,23 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, g:number
     // g is the vertical acceleration.
     // To ensure leavin and returning to original elevation:
     assert(g*Math.sin(alpha)*velocity > 0);
+    assert(interval>0);
     expect(4).toBeCloseTo(4);
     const hVelocity = velocity * Math.cos(alpha);
     const vVelocity = velocity * Math.sin(alpha);
     let physics = new Physics(x, y, hVelocity, vVelocity, 0, g);
+    // timeTopExpected is expected time to reach the extreme elevation of the throw.
+    const timeTopExpected = vVelocity/g;
+    assert(timeTopExpected > 0);
+    const timeEndExpected = 2 * timeTopExpected;
+    const extremeElevationExpected = timeTopExpected * (vVelocity - (g*timeTopExpected)/2);
+    const iterationsToEnd = Math.round(timeEndExpected/interval) ;
+    assert(iterationsToEnd > 0, "Throw is too short to test");
+
 }
 
 test('throws' , () => {
+    // throwObject(0,0,0.0000005, 45, 109.8, 0.020); // This throw is less than one iteration
     throwObject(0,0,40, 45, 9.8, 0.020);
     throwObject(-10,20,40, 90, 9.8, 0.020);
     throwObject(0,0,4, 0.1, 0.8, 0.020);
