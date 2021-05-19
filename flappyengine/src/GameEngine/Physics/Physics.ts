@@ -67,8 +67,12 @@ export class Physics{
         return this.hAcceleration;
     }
 
-    move(x:number, y:number){
+    hyperMove(x:number, y:number){
+        // Instant 'hyperspace' move, changing position
+        // without changing speed or acceleration.
         this.x += x;
         this.y +=y;
     }
+
+
 }
