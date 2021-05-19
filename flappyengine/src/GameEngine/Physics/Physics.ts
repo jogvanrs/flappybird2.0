@@ -67,7 +67,8 @@ export class Physics{
         return this.hAcceleration;
     }
 
-    move(x,y){
-        assert(false);
+    move(x:number, y:number){
+        this.x += x;
+        this.y +=y;
     }
 }
