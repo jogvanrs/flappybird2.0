@@ -66,4 +66,8 @@ export class Physics{
         // Most likely only needed for testing
         return this.hAcceleration;
     }
+
+    move(x,y){
+        assert(false);
+    }
 }

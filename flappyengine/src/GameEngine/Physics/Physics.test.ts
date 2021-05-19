@@ -37,5 +37,16 @@ test('testing getters and setters' , () => {
     expect(physics.getHorizontalAcceleration()).toBe(15);
     expect(physics.getVerticalAcceleration()).toBe(16);
 
+    physics.move(20,30);
+
+    expect(physics.getHorizontalPosition()).toBe(31);
+    expect(physics.getVerticalPosition()).toBe(42);
+    expect(physics.getHorizontalVelocity()).toBe(13);
+    expect(physics.getVerticalVelocity()).toBe(14)
+    expect(physics.getHorizontalAcceleration()).toBe(15);
+    expect(physics.getVerticalAcceleration()).toBe(16);
+
+    physics.move(-20,-30);
+
 
 })
