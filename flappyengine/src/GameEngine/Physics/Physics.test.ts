@@ -1,4 +1,6 @@
 import { Physics } from './Physics';
+import assert from 'assert'
+
 // npm i --save-dev @types/jest
 // not enough, try:
 // npm install --save-dev jest
@@ -8,7 +10,8 @@ import { Physics } from './Physics';
 const LOOP_FREQUENCY = 50; // To be replaced with a global constant?
 
 
-test('testing getters and setters' , () => {
+test('getters and setters' , () => {
+
     let physics = new Physics(1, 2, 3, 4, 5, 6);
 
     expect(physics.getHorizontalPosition()).toBe(1);
@@ -48,5 +51,26 @@ test('testing getters and setters' , () => {
 
     physics.hyperMove(-20,-30);
 
+    expect(physics.getHorizontalPosition()).toBe(11);
+    expect(physics.getVerticalPosition()).toBe(12);
+    expect(physics.getHorizontalVelocity()).toBe(13);
+    expect(physics.getVerticalVelocity()).toBe(14)
+    expect(physics.getHorizontalAcceleration()).toBe(15);
+    expect(physics.getVerticalAcceleration()).toBe(16);
 
+})
+
+function throwObject(x:number, y:number, velocity:number, alpha:number, g:number, interval:number){
+    // Throws a Physics object,
+    // Checking time and place for extreme elevation and return to the horizontal plane.
+    // Horizontal acceleration is zero.
+    // alpha is 'gun elevation' in degrees
+    // g is the vertical acceleration.
+    // To ensure return the the ground:
+    assert(g*Math.sin(alpha) > 0);
+    expect(4).toBeCloseTo(4);
+}
+
+test('throws' , () => {
+    throwObject(0,0,40, 45, 9.8, 0.020);
 })
