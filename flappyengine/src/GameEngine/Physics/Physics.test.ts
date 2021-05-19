@@ -69,6 +69,9 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, g:number
     // To ensure leavin and returning to original elevation:
     assert(g*Math.sin(alpha)*velocity > 0);
     expect(4).toBeCloseTo(4);
+    const hVelocity = velocity * Math.cos(alpha);
+    const vVelocity = velocity * Math.sin(alpha);
+    let physics = new Physics(x, y, hVelocity, vVelocity, 0, g);
 }
 
 test('throws' , () => {
