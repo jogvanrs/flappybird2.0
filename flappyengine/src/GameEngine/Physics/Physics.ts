@@ -74,5 +74,10 @@ export class Physics{
         this.y +=y;
     }
 
+    step(loopInterval:number){
+        // Move through one game loop interval, according to Newton's laws.
+        assert(false);
+    }
+
 
 }
