@@ -62,15 +62,19 @@ test('getters and setters' , () => {
 
 function throwObject(x:number, y:number, velocity:number, alpha:number, g:number, interval:number){
     // Throws a Physics object,
-    // Checking time and place for extreme elevation and return to the horizontal plane.
+    // Checking time and place for extreme elevation and return to original elevation.
     // Horizontal acceleration is zero.
     // alpha is 'gun elevation' in degrees
     // g is the vertical acceleration.
-    // To ensure return the the ground:
-    assert(g*Math.sin(alpha) > 0);
+    // To ensure leavin and returning to original elevation:
+    assert(g*Math.sin(alpha)*velocity > 0);
     expect(4).toBeCloseTo(4);
 }
 
 test('throws' , () => {
     throwObject(0,0,40, 45, 9.8, 0.020);
+    throwObject(-10,20,40, 90, 9.8, 0.020);
+    throwObject(0,0,4, 0.1, 0.8, 0.020);
+    throwObject(0,0,-40, 45, -9.8, 0.020);
+    throwObject(0,0,40, 270, -19.8, 0.020);
 })
