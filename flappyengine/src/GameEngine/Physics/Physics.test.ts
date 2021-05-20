@@ -126,13 +126,21 @@ test('a minimal vertical throw' , () => {
     // throwObject(0,0,10, 90, 9.8, 1);
 })
 
-test('throws' , () => {
-    // throwObject(0,0,0.0000005, 45, 109.8, 0.020); // This throw is less than one iteration
+test('throw 1' , () => {
     throwObject(0,0,40, 45, 0.1, LOOP_INTERVAL);
+})
+test('throw 2' , () => {
     throwObject(0,0,40, 45, 9.8, LOOP_INTERVAL);
-    throwObject(-10,20,40, 90, 9.8, LOOP_INTERVAL);
+})
+test('throw 3' , () => {
     throwObject(0,0,4, 0.1, 0.8, LOOP_INTERVAL);
+})
+test('throw 4' , () => {
     throwObject(0,0,-40, 45, -9.8, LOOP_INTERVAL);
+})
+test('throw 5' , () => {
     throwObject(0,0,40, -45, -9.8, LOOP_INTERVAL);
+})
+test('throw 6' , () => {
     throwObject(0,0,40, 270, -19.8, LOOP_INTERVAL);
 })
