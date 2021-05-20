@@ -87,7 +87,7 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, g:number
     const gravityDirection = Math.sign(g);
     let extremeElevation = y;
     for (let iteration = 0; iteration < iterationsToEnd; ++iteration){
-        physics.step(LOOP_INTERVAL);
+        physics.step(interval);
         expect(physics.getHorizontalVelocity()).toBe(hVelocity); // No horizontal speed changes.
         if (gravityDirection == 1){
             // A normal throw
@@ -105,6 +105,7 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, g:number
         }
     }
     expect(extremeElevation).not.toBe(y);
+
     expect(Math.sign(g*extremeElevation)).toBe(-1);
     assert(timeTop != -1);  //  Internal test logic, not an expectation for the tested object.
     expect(timeTop).toBeCloseTo(timeTopExpected);
@@ -113,11 +114,15 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, g:number
     expect(physics.getHorizontalVelocity()).toBeCloseTo(-vVelocity);   // What goes up, comes down with the same speed.
 }
 
+test('a minimal vertical throw' , () => {
+    throwObject(0,0,10, 90, 9.8, 1);
+})
+
 test('throws' , () => {
     // throwObject(0,0,0.0000005, 45, 109.8, 0.020); // This throw is less than one iteration
-    throwObject(0,0,40, 45, 9.8, 0.020);
-    throwObject(-10,20,40, 90, 9.8, 0.020);
-    throwObject(0,0,4, 0.1, 0.8, 0.020);
-    throwObject(0,0,-40, 45, -9.8, 0.020);
-    throwObject(0,0,40, 270, -19.8, 0.020);
+    throwObject(0,0,40, 45, 9.8, LOOP_INTERVAL);
+    throwObject(-10,20,40, 90, 9.8, LOOP_INTERVAL);
+    throwObject(0,0,4, 0.1, 0.8, LOOP_INTERVAL);
+    throwObject(0,0,-40, 45, -9.8, LOOP_INTERVAL);
+    throwObject(0,0,40, 270, -19.8, LOOP_INTERVAL);
 })
