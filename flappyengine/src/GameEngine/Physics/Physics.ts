@@ -76,8 +76,9 @@ export class Physics{
 
     step(loopInterval:number){
         // Move through one game loop interval, according to Newton's laws.
-        console.log("Please implement Physics.step()")
+        this.x += this.hVelocity*loopInterval + (this.hAcceleration+loopInterval**2)/2;
+        this.y += this.vVelocity*loopInterval + (this.vAcceleration+loopInterval**2)/2;
+        this.hVelocity += this.hAcceleration * loopInterval;
+        this.vVelocity += this.vAcceleration * loopInterval;
     }
-
-
 }
