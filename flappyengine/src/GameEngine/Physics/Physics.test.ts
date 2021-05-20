@@ -66,7 +66,7 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, g:number
     // Horizontal acceleration is zero.
     // alpha is 'gun elevation' in degrees
     // g is the vertical acceleration.
-    // To ensure leavin and returning to original elevation:
+    // To ensure leaving and returning to original elevation:
     assert(g*Math.sin(alpha)*velocity > 0);
     assert(interval>0);
     expect(4).toBeCloseTo(4);
@@ -75,13 +75,33 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, g:number
     let physics = new Physics(x, y, hVelocity, vVelocity, 0, g);
     // timeTopExpected is expected time to reach the extreme elevation of the throw.
     const timeTopExpected = vVelocity/g;
+    let timeTop: number;
     assert(timeTopExpected > 0);
     const timeEndExpected = 2 * timeTopExpected;
     const extremeElevationExpected = timeTopExpected * (vVelocity - (g*timeTopExpected)/2);
     const iterationsToEnd = Math.round(timeEndExpected/interval) ;
     assert(iterationsToEnd > 0, "Throw is too short to test");
+    // Normal gravity is positive, i.e. down.
+    // Under normal gravity, a throw has its extreme elevation above the
+    // start elevation.
+    const gravityDirection = Math.sign(g);
+    let extremeElevation = y;
     for (let iteration = 0; iteration < iterationsToEnd; ++iteration){
         physics.step(LOOP_INTERVAL);
+        if (gravityDirection == 1){
+            // A normal throw
+            if (physics.getVerticalPosition() > extremeElevation){
+                timeTop = iteration*interval;
+                extremeElevation = physics.getVerticalPosition();
+;            }
+        } else {
+            assert(gravityDirection == -1);
+            // Throwing downwards, subject to upwards gravity
+            if (physics.getVerticalPosition() < extremeElevation){
+                timeTop = iteration*interval;
+                extremeElevation = physics.getVerticalPosition();
+            }
+        }
     }
 
 }
