@@ -67,11 +67,11 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, g:number
     // alpha is 'gun elevation' in degrees
     // g is the vertical acceleration.
     // To ensure leaving and returning to original elevation:
-    assert(g*Math.sin(alpha)*velocity > 0);
+    assert(g*Math.sin(alpha*Math.PI/180)*velocity > 0);
     assert(interval>0);
     expect(4).toBeCloseTo(4);
-    const hVelocity = velocity * Math.cos(alpha);
-    const vVelocity = velocity * Math.sin(alpha);
+    const hVelocity = velocity * Math.cos(alpha*Math.PI/180);
+    const vVelocity = 8-1) * velocity * Math.sin(alpha*Math.PI/180);
     let physics = new Physics(x, y, hVelocity, vVelocity, 0, g);
     // timeTopExpected is expected time to reach the extreme elevation of the throw.
     const timeTopExpected = vVelocity/g;
