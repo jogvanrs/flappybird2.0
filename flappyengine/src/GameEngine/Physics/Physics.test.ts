@@ -7,7 +7,7 @@ import assert from 'assert'
 // npm add @babel/preset-react
 // Run > Edit Configurations... > + > Jest
 
-const LOOP_FREQUENCY = 50; // To be replaced with a global constant?
+const LOOP_INTERVAL = 0.020; // To be replaced with a global constant?
 
 
 test('getters and setters' , () => {
@@ -80,6 +80,9 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, g:number
     const extremeElevationExpected = timeTopExpected * (vVelocity - (g*timeTopExpected)/2);
     const iterationsToEnd = Math.round(timeEndExpected/interval) ;
     assert(iterationsToEnd > 0, "Throw is too short to test");
+    for (let iteration = 0; iteration < iterationsToEnd; ++iteration){
+        physics.step(LOOP_INTERVAL);
+    }
 
 }
 
