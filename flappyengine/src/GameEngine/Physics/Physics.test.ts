@@ -71,7 +71,7 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, g:number
     assert(interval>0);
     expect(4).toBeCloseTo(4);
     const hVelocity = velocity * Math.cos(alpha*Math.PI/180);
-    const vVelocity = 8-1) * velocity * Math.sin(alpha*Math.PI/180);
+    const vVelocity = (-1) * velocity * Math.sin(alpha*Math.PI/180);
     let physics = new Physics(x, y, hVelocity, vVelocity, 0, g);
     // timeTopExpected is expected time to reach the extreme elevation of the throw.
     const timeTopExpected = vVelocity/g;
