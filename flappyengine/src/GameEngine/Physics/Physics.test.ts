@@ -75,7 +75,7 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, g:number
     let physics = new Physics(x, y, hVelocity, vVelocity, 0, g);
     // timeTopExpected is expected time to reach the extreme elevation of the throw.
     const timeTopExpected = vVelocity/g;
-    let timeTop: number;
+    let timeTop: number = -1; // Really: no value given yet.
     assert(timeTopExpected > 0);
     const timeEndExpected = 2 * timeTopExpected;
     const extremeElevationExpected = timeTopExpected * (vVelocity - (g*timeTopExpected)/2);
@@ -88,6 +88,7 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, g:number
     let extremeElevation = y;
     for (let iteration = 0; iteration < iterationsToEnd; ++iteration){
         physics.step(LOOP_INTERVAL);
+        expect(physics.getHorizontalVelocity()).toBe(hVelocity); // No horizontal speed changes.
         if (gravityDirection == 1){
             // A normal throw
             if (physics.getVerticalPosition() > extremeElevation){
@@ -103,7 +104,13 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, g:number
             }
         }
     }
-
+    expect(extremeElevation).not.toBe(y);
+    expect(Math.sign(g*extremeElevation)).toBe(-1);
+    assert(timeTop != -1);  //  Internal test logic, not an expectation for the tested object.
+    expect(timeTop).toBeCloseTo(timeTopExpected);
+    expect(extremeElevation).toBeCloseTo(extremeElevationExpected);
+    expect(physics.getVerticalPosition()).toBeCloseTo(y);   // The throw is timed to get back to original elevation.
+    expect(physics.getHorizontalVelocity()).toBeCloseTo(-vVelocity);   // What goes up, comes down with the same speed.
 }
 
 test('throws' , () => {
