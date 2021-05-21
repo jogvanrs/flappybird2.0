@@ -60,6 +60,10 @@ test('getters and setters' , () => {
 
 })
 
+function expectedPosition(x:number ,velocity:number , hAcceleration:number , time:number ){
+    return x + velocity*time + 0.5*hAcceleration**2;
+}
+
 function throwObject(x:number, y:number, velocity:number, alpha:number, g:number, interval:number){
     // Throws a Physics object,
     // Checking time and place for extreme elevation and return to original elevation.
@@ -83,7 +87,8 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, g:number
     let timeTop: number = -1; // Really: no value given yet.
     assert(timeTopExpected > 0);
     const timeEndExpected = 2 * timeTopExpected;
-    const extremeElevationExpected = timeTopExpected * (vVelocity - (g*timeTopExpected)/2);
+    // const extremeElevationExpected = y + timeTopExpected * (vVelocity + 0.5*g*(timeEndExpected));
+    const extremeElevationExpected = y + timeTopExpected * (vVelocity - (g*timeTopExpected)/2);
     const iterationsToEnd = Math.round(timeEndExpected/interval);
     assert(iterationsToEnd > 2);
     assert(iterationsToEnd > 0, "Throw is too short to test");
@@ -93,6 +98,7 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, g:number
     const gravityDirection = Math.sign(g);
     let extremeElevation = y;
     for (let iteration = 0; iteration < iterationsToEnd; ++iteration){
+        expect()
         physics.step(interval);
         expect(physics.getHorizontalVelocity()).toBe(hVelocity); // No horizontal speed changes.
         assert(Math.abs(gravityDirection)==1);
@@ -127,7 +133,7 @@ test('a minimal vertical throw' , () => {
 })
 
 test('throw 1' , () => {
-    throwObject(0,0,40, 45, 0.1, LOOP_INTERVAL);
+    throwObject(0,0,40, 45, 1000, LOOP_INTERVAL);
 })
 test('throw 2' , () => {
     throwObject(0,0,40, 45, 9.8, LOOP_INTERVAL);
