@@ -60,8 +60,8 @@ test('getters and setters' , () => {
 
 })
 
-function expectedPosition(x:number ,velocity:number , hAcceleration:number , time:number ){
-    return x + velocity*time + 0.5*hAcceleration**2;
+function expectedPosition(x:number ,velocity:number , acceleration:number , time:number ){
+    return x + velocity*time + 0.5*acceleration**2;
 }
 
 function throwObject(x:number, y:number, velocity:number, alpha:number, g:number, interval:number){
@@ -98,7 +98,8 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, g:number
     const gravityDirection = Math.sign(g);
     let extremeElevation = y;
     for (let iteration = 0; iteration < iterationsToEnd; ++iteration){
-        expect()
+        expect(physics.getHorizontalPosition()).toBeCloseTo(expectedPosition(x, hVelocity, 0, iteration*interval));
+        expect(physics.getVerticalPosition()).toBeCloseTo(expectedPosition(y, hVelocity, g, iteration*interval));
         physics.step(interval);
         expect(physics.getHorizontalVelocity()).toBe(hVelocity); // No horizontal speed changes.
         assert(Math.abs(gravityDirection)==1);
