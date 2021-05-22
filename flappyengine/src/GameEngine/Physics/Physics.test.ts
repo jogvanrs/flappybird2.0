@@ -62,7 +62,10 @@ test('getters and setters' , () => {
 })
 
 function expectedPosition(x:number ,velocity:number , acceleration:number , time:number ){
-    return x + velocity*time + 0.5*acceleration**2;
+    return x + velocity * time + 0.5 * acceleration * time**2;
+}
+function expectedVelocity(v:number,acceleration:number, time:number){
+    return v + (acceleration*time)/2;
 }
 
 function throwObject(x:number, y:number, velocity:number, alpha:number, g:number, interval:number){
@@ -103,19 +106,19 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, g:number
         const iteratedHorizontalTravel = physics.getHorizontalPosition() - x;
         const expectedVerticalTravel = expectedPosition(y, vVelocity, g, iteration*interval) - y;
         const iteratedVerticalTravel = physics.getVerticalPosition() - y;
-        if(Math.abs(iteratedHorizontalTravel - expectedHorizontalTravel) <5) {
+        if(Math.abs(iteratedHorizontalTravel - expectedHorizontalTravel) <2) {
             // Testing absolute difference
-            expect(iteratedHorizontalTravel).toBeCloseTo(expectedHorizontalTravel)
+            expect(iteratedHorizontalTravel).toBeCloseTo(expectedHorizontalTravel,-1)
         } else {
             // Testing relative difference
-            expect( iteratedVerticalTravel/ expectedHorizontalTravel).toBeCloseTo(1);
+            expect( iteratedVerticalTravel / expectedHorizontalTravel).toBeCloseTo(1);
         }
-        if(Math.abs(expectedVerticalTravel - expectedVerticalTravel) <5) {
+        if(Math.abs(iteratedVerticalTravel - expectedVerticalTravel) <2) {
             // Testing absolute difference
-            expect(iteratedVerticalTravel).toBeCloseTo(expectedVerticalTravel)
+            expect(iteratedVerticalTravel).toBeCloseTo(expectedVerticalTravel,0)
         } else {
             // Testing relative difference
-            expect( iteratedVerticalTravel/ expectedVerticalTravel).toBeCloseTo(1);
+            expect( iteratedVerticalTravel/ expectedVerticalTravel).toBeCloseTo(0);
         }
 
 
