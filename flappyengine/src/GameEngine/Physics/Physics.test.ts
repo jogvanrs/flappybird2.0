@@ -103,16 +103,22 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, g:number
         const iteratedHorizontalTravel = physics.getHorizontalPosition() - x;
         const expectedVerticalTravel = expectedPosition(y, vVelocity, g, iteration*interval) - y;
         const iteratedVerticalTravel = physics.getVerticalPosition() - y;
-        if(Math.abs(expectedHorizontalTravel - iteratedHorizontalTravel) <5) {
+        if(Math.abs(iteratedHorizontalTravel - expectedHorizontalTravel) <5) {
             // Testing absolute difference
             expect(iteratedHorizontalTravel).toBeCloseTo(expectedHorizontalTravel)
         } else {
             // Testing relative difference
-            expect( iteratedHorizontalTravel/ expectedHorizontalTravel).toBeCloseTo(1);
+            expect( iteratedVerticalTravel/ expectedHorizontalTravel).toBeCloseTo(1);
+        }
+        if(Math.abs(expectedVerticalTravel - expectedVerticalTravel) <5) {
+            // Testing absolute difference
+            expect(iteratedVerticalTravel).toBeCloseTo(expectedVerticalTravel)
+        } else {
+            // Testing relative difference
+            expect( iteratedVerticalTravel/ expectedVerticalTravel).toBeCloseTo(1);
         }
 
 
-        expect(physics.getVerticalPosition()).toBeCloseTo(expectedPosition(y, vVelocity, g, iteration*interval),1);
         physics.step(interval);
         expect(physics.getHorizontalVelocity()).toBe(hVelocity); // No horizontal speed changes.
         assert(Math.abs(gravityDirection)==1);
