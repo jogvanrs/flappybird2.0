@@ -1,5 +1,6 @@
 import { Physics } from './Physics';
 import assert from 'assert'
+import exp from "constants";
 
 // npm i --save-dev @types/jest
 // not enough, try:
@@ -102,7 +103,15 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, g:number
         const iteratedHorizontalTravel = physics.getHorizontalPosition() - x;
         const expectedVerticalTravel = expectedPosition(y, vVelocity, g, iteration*interval) - y;
         const iteratedVerticalTravel = physics.getVerticalPosition() - y;
-        expect(physics.getHorizontalPosition()).toBeCloseTo(expectedPosition(x, hVelocity, 0, iteration*interval));
+        if(Math.abs(expectedHorizontalTravel - iteratedHorizontalTravel) <5) {
+            // Testing absolute difference
+            expect(iteratedHorizontalTravel).toBeCloseTo(expectedHorizontalTravel)
+        } else {
+            // Testing relative difference
+            expect( iteratedHorizontalTravel/ expectedHorizontalTravel).toBeCloseTo(1);
+        }
+
+
         expect(physics.getVerticalPosition()).toBeCloseTo(expectedPosition(y, vVelocity, g, iteration*interval),1);
         physics.step(interval);
         expect(physics.getHorizontalVelocity()).toBe(hVelocity); // No horizontal speed changes.
