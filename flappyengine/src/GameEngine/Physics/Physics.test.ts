@@ -98,7 +98,11 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, g:number
     const gravityDirection = Math.sign(g);
     let extremeElevation = y;
     for (let iteration = 0; iteration < iterationsToEnd; ++iteration){
-        expect(physics.getHorizontalPosition()).toBeCloseTo(expectedPosition(x, hVelocity, 0, iteration*interval),1);
+        const expectedHorizontalTravel = expectedPosition(x, hVelocity, 0, iteration*interval) - x;
+        const iteratedHorizontalTravel = physics.getHorizontalPosition() - x;
+        const expectedVerticalTravel = expectedPosition(y, vVelocity, g, iteration*interval) - y;
+        const iteratedVerticalTravel = physics.getVerticalPosition() - y;
+        expect(physics.getHorizontalPosition()).toBeCloseTo(expectedPosition(x, hVelocity, 0, iteration*interval));
         expect(physics.getVerticalPosition()).toBeCloseTo(expectedPosition(y, vVelocity, g, iteration*interval),1);
         physics.step(interval);
         expect(physics.getHorizontalVelocity()).toBe(hVelocity); // No horizontal speed changes.
