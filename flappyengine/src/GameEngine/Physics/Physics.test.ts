@@ -155,6 +155,9 @@ test('a minimal vertical throw' , () => {
     // throwObject(0,0,10, 90, 9.8, 1);
 })
 
+test('vertical throw ' , () => {
+    throwObject(0,0,1, 90, 0.1, LOOP_INTERVAL);
+})
 test('throw 1' , () => {
     throwObject(0,0,40, 45, 0.1, LOOP_INTERVAL);
 })
