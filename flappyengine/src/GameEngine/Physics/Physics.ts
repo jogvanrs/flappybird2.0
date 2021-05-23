@@ -74,11 +74,11 @@ export class Physics{
         this.y +=y;
     }
 
-    step(loopInterval:number){
+    step(time:number){
         // Move through one game loop interval, according to Newton's laws.
-        this.x += this.hVelocity*loopInterval + (this.hAcceleration+loopInterval**2)/2;
-        this.y += this.vVelocity*loopInterval + (this.vAcceleration+loopInterval**2)/2;
-        this.hVelocity += this.hAcceleration * loopInterval;
-        this.vVelocity += this.vAcceleration * loopInterval;
+        this.x += this.hVelocity*time + (this.hAcceleration+time**2)/2;
+        this.y += this.vVelocity*time + (this.vAcceleration+time**2)/2;
+        this.hVelocity += this.hAcceleration * time;
+        this.vVelocity += this.vAcceleration * time;
     }
 }
