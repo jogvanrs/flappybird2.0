@@ -65,7 +65,7 @@ function expectedPosition(x:number ,velocity:number , acceleration:number , time
     return x + (velocity * time) + (acceleration * time*time)/2;
 }
 function expectedVelocity(v:number,acceleration:number, time:number){
-    return v + (acceleration*time)/2;
+    return v + (acceleration*time);
 }
 
 function throwObject(x:number, y:number, velocity:number, alpha:number, g:number, interval:number){
