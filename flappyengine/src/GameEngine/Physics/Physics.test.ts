@@ -62,7 +62,7 @@ test('getters and setters' , () => {
 })
 
 function expectedPosition(x:number ,velocity:number , acceleration:number , time:number ){
-    return x + velocity * time + 0.5 * acceleration * time**2;
+    return x + (velocity * time) + (acceleration * time*time)/2;
 }
 function expectedVelocity(v:number,acceleration:number, time:number){
     return v + (acceleration*time)/2;
