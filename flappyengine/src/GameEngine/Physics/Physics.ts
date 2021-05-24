@@ -1,5 +1,3 @@
-import assert from 'assert'
-
 export class Physics{
     x: number;  // Corresponding to a state of a rendered object
     y: number;  // Corresponding to a state of a rendered object
