@@ -147,8 +147,8 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, g:number
     assert(timeTop != -1);  //  Internal test logic, not an expectation for the tested object.
     expect(timeTop).toBeCloseTo(timeTopExpected, -2);
     // expect(extremeElevation).toBeCloseTo(extremeElevationExpected);
-    expect(physics.getVerticalPosition()).toBeCloseTo(y);   // The throw is timed to get back to original elevation.
-    expect(physics.getHorizontalVelocity()).toBeCloseTo(-hVelocity);   // What goes up, comes down with the same speed.
+    expect(physics.getVerticalPosition()).toBeCloseTo(y,0);   // The throw is timed to get back to original elevation.
+    expect(physics.getHorizontalVelocity()).toBeCloseTo(hVelocity);   // What goes up, comes down with the same speed.
 }
 
 
@@ -157,6 +157,7 @@ test('vertical throw ' , () => {
     throwObject(0,0,1, 90, 0.1, LOOP_INTERVAL);
 })
 test('throw 1' , () => {
+    assert(false); // Save for later - running too slow.
     throwObject(0,0,40, 45, 0.1, LOOP_INTERVAL);
 })
 test('throw 2' , () => {
