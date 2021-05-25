@@ -119,6 +119,9 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, a:number
         minPosition  = Math.min(minPosition, physics.getHorizontalPosition());
         maxElevation = Math.max(maxElevation, physics.getVerticalPosition());
         minElevation = Math.min(minElevation, physics.getVerticalPosition());
+        if(iteration == iterationsToHorizontalExtreme){
+            expect(physics.getHorizontalPosition()).toBeCloseTo(expectedHorizontalExtreme);
+        }
     }
 }
 
