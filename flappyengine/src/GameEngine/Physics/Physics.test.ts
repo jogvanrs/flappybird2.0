@@ -87,7 +87,7 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, a:number
         assert(a != 0);
         iterationsToHorizontalExtreme = - initialHorizontalVelocity / a;
         assert(iterationsToHorizontalExtreme > 0);
-        expectedHorizontalExtreme = -(1/2) * a * (interval * iterationsToHorizontalExtreme)**2;
+        expectedHorizontalExtreme = x - (1/2) * a * (interval * iterationsToHorizontalExtreme)**2;
     }
     let iterationsToVerticalExtreme = Infinity;
     let expectedVerticalExtreme = NaN;
@@ -95,7 +95,7 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, a:number
         assert(g != 0);
         iterationsToVerticalExtreme = - initialVerticalVelocity / g;
         assert(iterationsToVerticalExtreme > 0);
-        expectedVerticalExtreme = -(1/2) * g * (interval * iterationsToVerticalExtreme)**2;
+        expectedVerticalExtreme = y - (1/2) * g * (interval * iterationsToVerticalExtreme)**2;
     }
     const totalIterations = Math.min(maxIterations, Math.max(iterationsToHorizontalExtreme, iterationsToVerticalExtreme));
     assert(totalIterations > 5) // Or is the acceleration way too strong in this test?
@@ -105,8 +105,6 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, a:number
     let minPosition  = x;
     let maxElevation = y;
     let minElevation = y;
-    let timedHorizontalExtreme = NaN;
-    let timedVerticalExtreme = NaN;
 
     let physics = new Physics(x, y, initialHorizontalVelocity, initialVerticalVelocity, 0, g);
     for(let iteration = 1;iteration <= totalIterations; ++iteration){
