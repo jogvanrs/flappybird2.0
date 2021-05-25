@@ -67,108 +67,76 @@ function expectedVelocity(v:number,acceleration:number, time:number){
     return v + (acceleration*time);
 }
 
-function throwObject(x:number, y:number, velocity:number, alpha:number, g:number, interval:number){
-    // Throws a Physics object,
-    // Checking time and place for extreme elevation and return to original elevation.
-    // Horizontal acceleration is zero.
-    // alpha is 'gun elevation' in degrees
-    // g is the vertical acceleration.
-    assert(interval>0);
-    const ITERATION_LIMIT = 500; // Or the test takes too long
-    let iterationsToEnd  = ITERATION_LIMIT;
-    const hVelocity = velocity * Math.cos(alpha*Math.PI/180);
-    const vVelocity = (-1) * velocity * Math.sin(alpha*Math.PI/180);
+function throwObject(x:number, y:number, velocity:number, alpha:number, a:number, g:number, interval:number, maxIterations:number = 500){
+    // Throws a Physics object, and steps it through the iteratons.
+    // Checks that terminal speed and position is as expected
+    // Throw in a check for constant accelerations, for the heck of it.
+    // If the throw should change direction, time and position of those events are checked.
+    // If the throw should return to original elevation or position, time to those events are checked.
 
-    // To ensure that acceleration is soft enough to wait 5 intervals before reversing direction:
-    assert(Math.abs(vVelocity) > Math.abs(5 * interval * g));
-    let physics = new Physics(x, y, hVelocity, vVelocity, 0, g);
-    // timeTopExpected is expected time to reach the extreme elevation of the throw.
-    const timeTopExpected = (-1) * vVelocity/g;
-    let timeTop: number = -1; // Really: no value given yet.
-    assert(timeTopExpected > 0);
-    const timeEndExpected = 2 * timeTopExpected;
-    // const extremeElevationExpected = y + timeTopExpected * (vVelocity + 0.5*g*(timeEndExpected));
-    const extremeElevationExpected = y + timeTopExpected * (vVelocity - (g*timeTopExpected)/2);
-    const iterationsToEnd = Math.round(timeEndExpected/interval);
-    assert(iterationsToEnd > 2);
-    assert(iterationsToEnd > 0, "Throw is too short to test");
-    // Normal gravity is positive, i.e. down.
-    // Under normal gravity, a throw has its extreme elevation above the
-    // start elevation.
-    const gravityDirection = Math.sign(g);
-    let extremeElevation = y;
-    for (let iteration = 0; iteration < iterationsToEnd; ++iteration){
-        const expectedHorizontalTravel = expectedPosition(x, hVelocity, 0, iteration*interval) - x;
-        const iteratedHorizontalTravel = physics.getHorizontalPosition() - x;
-        // noinspection JSSuspiciousNameCombination
-        const expectedVerticalTravel = expectedPosition(y, vVelocity, g, iteration*interval) - y;
-        const iteratedVerticalTravel = physics.getVerticalPosition() - y;
-        if(Math.abs(iteratedHorizontalTravel - expectedHorizontalTravel) <2) {
-            // Testing absolute difference
-            expect(iteratedHorizontalTravel).toBeCloseTo(expectedHorizontalTravel,-1)
-        } else {
-            // Testing relative difference
-            expect( iteratedVerticalTravel / expectedHorizontalTravel).toBeCloseTo(1);
-        }
-        if(Math.abs(iteratedVerticalTravel - expectedVerticalTravel) <2) {
-            // Testing absolute difference
-            expect(iteratedVerticalTravel).toBeCloseTo(expectedVerticalTravel,0)
-        } else {
-            // Testing relative difference
-            expect( iteratedVerticalTravel/ expectedVerticalTravel).toBeCloseTo(0);
-        }
+    assert(interval > 0);
+    assert(maxIterations > 0);
+    assert(interval < Infinity);
+    assert(maxIterations < Infinity);
 
-
-        physics.step(interval);
-        expect(physics.getHorizontalVelocity()).toBe(hVelocity); // No horizontal speed changes.
-        assert(Math.abs(gravityDirection)==1);
-        if (gravityDirection == 1){
-            assert(gravityDirection == +1);
-            // A normal throw
-            if (physics.getVerticalPosition() < extremeElevation){
-                timeTop = iteration*interval;
-                extremeElevation = physics.getVerticalPosition();
-            }
-        } else {
-            assert(gravityDirection == -1);
-            // Throwing downwards, subject to upwards gravity
-            if (physics.getVerticalPosition() < extremeElevation){
-                timeTop = iteration*interval;
-                extremeElevation = physics.getVerticalPosition();
-            }
-        }
+    const initialHorizontalVelocity = Math.cos(alpha*Math.PI/180) * velocity;
+    const initialVerticalVelocity = - Math.sin(alpha*Math.PI/180) * velocity;
+    let iterationsToHorizontalExtreme = Infinity;
+    let expectedHorizontalExtreme = NaN;
+    if(initialHorizontalVelocity * a < 0){
+        assert(a != 0);
+        iterationsToHorizontalExtreme = - initialHorizontalVelocity / a;
+        assert(iterationsToHorizontalExtreme > 0);
+        expectedHorizontalExtreme = -(1/2) * a * (interval * iterationsToHorizontalExtreme)**2;
     }
-    expect(extremeElevation != y);
-    assert(Math.sign(g*extremeElevation) == -1);  //TODO should not be here, this should be expect
-    expect(Math.sign(g*extremeElevation)).toBeCloseTo(-1);
-    assert(timeTop != -1);  //  Internal test logic, not an expectation for the tested object.
-    expect(timeTop).toBeCloseTo(timeTopExpected, -2);
-    // expect(extremeElevation).toBeCloseTo(extremeElevationExpected);
-    expect(physics.getVerticalPosition()).toBeCloseTo(y,0);   // The throw is timed to get back to original elevation.
-    expect(physics.getHorizontalVelocity()).toBeCloseTo(hVelocity);   // What goes up, comes down with the same speed.
+    let iterationsToVerticalExtreme = Infinity;
+    let expectedVerticalExtreme = NaN;
+    if(initialVerticalVelocity * g < 0){
+        assert(g != 0);
+        iterationsToVerticalExtreme = - initialVerticalVelocity / g;
+        assert(iterationsToVerticalExtreme > 0);
+        expectedVerticalExtreme = -(1/2) * g * (interval * iterationsToVerticalExtreme)**2;
+    }
+    const totalIterations = Math.min(maxIterations, Math.max(iterationsToHorizontalExtreme, iterationsToVerticalExtreme));
+    assert(totalIterations > 5) // Or is the acceleration way too strong in this test?
+    assert(totalIterations <= maxIterations);
+
+    let maxPosition  = x;
+    let minPosition  = x;
+    let maxElevation = y;
+    let minElevation = y;
+    let timedHorizontalExtreme = NaN;
+    let timedVerticalExtreme = NaN;
+
+    let physics = new Physics(x, y, initialHorizontalVelocity, initialVerticalVelocity, 0, g);
+    for(let iteration = 0;iteration < totalIterations; ++iteration){
+        physics.step(interval);
+        expect(physics.getHorizontalPosition()).toBeCloseTo(expectedPosition(x,initialHorizontalVelocity, a , interval*iteration));
+        expect(physics.getVerticalPosition()).toBeCloseTo(expectedPosition(y,initialVerticalVelocity,g , interval*iteration));
+    }
 }
 
 
 
 test('vertical throw ' , () => {
-    throwObject(0,0,1, 90, 0.1, LOOP_INTERVAL);
+    throwObject(0,0,1, 90, 0, 0.1, LOOP_INTERVAL);
 })
 test('throw 1' , () => {
     // assert(false); // Save for later - running too slow.
-    throwObject(0,0,40, 45, 0.1, LOOP_INTERVAL);
+    throwObject(0,0,40, 45, 0,  0.1, LOOP_INTERVAL);
 })
 test('throw 2' , () => {
-    throwObject(0,0,40, 45, 9.8, LOOP_INTERVAL);
+    throwObject(0,0,40, 45, 0,  9.8, LOOP_INTERVAL);
 })
 test('throw 3' , () => {
-    throwObject(0,0,4, 0.1, 0.8, LOOP_INTERVAL);
+    throwObject(0,0,4, 0.1,  0, 0.8, LOOP_INTERVAL);
 })
 test('throw 4' , () => {
-    throwObject(0,0,-40, 45, -9.8, LOOP_INTERVAL);
+    throwObject(0,0,-40, 45,  0, -9.8, LOOP_INTERVAL);
 })
 test('throw 5' , () => {
-    throwObject(0,0,40, -45, -9.8, LOOP_INTERVAL);
+    throwObject(0,0,40, -45, 0,  -9.8, LOOP_INTERVAL);
 })
 test('throw 6' , () => {
-    throwObject(0,0,40, 270, -19.8, LOOP_INTERVAL);
+    throwObject(0,0,40, 270, 0,  -19.8, LOOP_INTERVAL);
 })
