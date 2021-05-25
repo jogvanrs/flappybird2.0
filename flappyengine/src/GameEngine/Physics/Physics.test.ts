@@ -113,6 +113,8 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, a:number
         physics.step(interval);
         expect(physics.getHorizontalPosition()).toBeCloseTo(expectedPosition(x,initialHorizontalVelocity, a , interval*iteration));
         expect(physics.getVerticalPosition()).toBeCloseTo(expectedPosition(y,initialVerticalVelocity,g , interval*iteration));
+        expect(physics.getHorizontalVelocity()).toBeCloseTo(expectedVelocity(initialHorizontalVelocity, a , interval*iteration));
+        expect(physics.getVerticalVelocity()).toBeCloseTo(expectedVelocity(initialVerticalVelocity,g , interval*iteration));
     }
 }
 
