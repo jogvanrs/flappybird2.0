@@ -109,7 +109,7 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, a:number
     let timedVerticalExtreme = NaN;
 
     let physics = new Physics(x, y, initialHorizontalVelocity, initialVerticalVelocity, 0, g);
-    for(let iteration = 0;iteration < totalIterations; ++iteration){
+    for(let iteration = 1;iteration <= totalIterations; ++iteration){
         physics.step(interval);
         expect(physics.getHorizontalPosition()).toBeCloseTo(expectedPosition(x,initialHorizontalVelocity, a , interval*iteration));
         expect(physics.getVerticalPosition()).toBeCloseTo(expectedPosition(y,initialVerticalVelocity,g , interval*iteration));
