@@ -112,6 +112,7 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, a:number
     for(let iteration = 1;iteration <= totalIterations; ++iteration){
         physics.step(interval);
         expect(physics.getHorizontalPosition()).toBeCloseTo(expectedPosition(x,initialHorizontalVelocity, a , interval*iteration));
+        // noinspection JSSuspiciousNameCombination
         expect(physics.getVerticalPosition()).toBeCloseTo(expectedPosition(y,initialVerticalVelocity,g , interval*iteration));
         expect(physics.getHorizontalVelocity()).toBeCloseTo(expectedVelocity(initialHorizontalVelocity, a , interval*iteration));
         expect(physics.getVerticalVelocity()).toBeCloseTo(expectedVelocity(initialVerticalVelocity,g , interval*iteration));
@@ -122,13 +123,22 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, a:number
         if(iteration == iterationsToHorizontalExtreme){
             expect(physics.getHorizontalPosition()).toBeCloseTo(expectedHorizontalExtreme);
         }
+        if(iteration == iterationsToVerticalExtreme){
+            expect(physics.getVerticalPosition()).toBeCloseTo(expectedVerticalExtreme, 0);
+        }
+        if(iteration == 2 * iterationsToHorizontalExtreme){
+            expect(physics.getHorizontalPosition()).toBeCloseTo(x);
+        }
+        if(iteration == 2 * iterationsToVerticalExtreme){
+            expect(physics.getVerticalPosition()).toBeCloseTo(y, 0);
+        }
     }
 }
 
 
 
 test('vertical throw ' , () => {
-    throwObject(0,0,1, 90, 0, 0.1, LOOP_INTERVAL);
+    throwObject(3,4,1, 90, 0, 0.1, LOOP_INTERVAL);
 })
 test('throw 1' , () => {
     // assert(false); // Save for later - running too slow.
