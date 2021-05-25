@@ -79,10 +79,8 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, g:number
     expect(4).toBeCloseTo(4);
     const hVelocity = velocity * Math.cos(alpha*Math.PI/180);
     const vVelocity = (-1) * velocity * Math.sin(alpha*Math.PI/180);
-    // Initial velocity must be against gravity, for object to ever return to initial elevation:
-    assert(vVelocity * g < 0)
+
     // To ensure that acceleration is soft enough to wait 5 intervals before reversing direction:
-    // assert(false);
     assert(Math.abs(vVelocity) > Math.abs(5 * interval * g));
     let physics = new Physics(x, y, hVelocity, vVelocity, 0, g);
     // timeTopExpected is expected time to reach the extreme elevation of the throw.
@@ -157,7 +155,7 @@ test('vertical throw ' , () => {
     throwObject(0,0,1, 90, 0.1, LOOP_INTERVAL);
 })
 test('throw 1' , () => {
-    assert(false); // Save for later - running too slow.
+    // assert(false); // Save for later - running too slow.
     throwObject(0,0,40, 45, 0.1, LOOP_INTERVAL);
 })
 test('throw 2' , () => {
