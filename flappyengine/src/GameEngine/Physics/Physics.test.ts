@@ -73,10 +73,9 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, g:number
     // Horizontal acceleration is zero.
     // alpha is 'gun elevation' in degrees
     // g is the vertical acceleration.
-    // To ensure leaving and returning to original elevation:
-    assert(g*Math.sin(alpha*Math.PI/180)*velocity > 0);
     assert(interval>0);
-    expect(4).toBeCloseTo(4);
+    const ITERATION_LIMIT = 500; // Or the test takes too long
+    let iterationsToEnd  = ITERATION_LIMIT;
     const hVelocity = velocity * Math.cos(alpha*Math.PI/180);
     const vVelocity = (-1) * velocity * Math.sin(alpha*Math.PI/180);
 
