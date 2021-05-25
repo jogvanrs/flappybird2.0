@@ -115,6 +115,10 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, a:number
         expect(physics.getVerticalPosition()).toBeCloseTo(expectedPosition(y,initialVerticalVelocity,g , interval*iteration));
         expect(physics.getHorizontalVelocity()).toBeCloseTo(expectedVelocity(initialHorizontalVelocity, a , interval*iteration));
         expect(physics.getVerticalVelocity()).toBeCloseTo(expectedVelocity(initialVerticalVelocity,g , interval*iteration));
+        maxPosition  = Math.max(maxPosition, physics.getHorizontalPosition());
+        minPosition  = Math.min(minPosition, physics.getHorizontalPosition());
+        maxElevation = Math.max(maxElevation, physics.getVerticalPosition());
+        minElevation = Math.min(minElevation, physics.getVerticalPosition());
     }
 }
 
