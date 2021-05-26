@@ -138,9 +138,22 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, a:number
 test('vertical throw ' , () => {
     throwObject(3,4,1, 90, 0, 0.1, LOOP_INTERVAL);
 })
+test('one way vertical throw ' , () => {
+    throwObject(3,4,-1, 90, 0, 0.1, LOOP_INTERVAL);
+})
+test('horizontal throw ' , () => {
+    throwObject(3,4,1, 0, 0.1, 0, LOOP_INTERVAL);
+})
+test('one way horizontal throw ' , () => {
+    throwObject(3,4,-1, 0, 0.1, 0, LOOP_INTERVAL);
+})
 test('throw 1' , () => {
     // assert(false); // Save for later - running too slow.
     throwObject(0,0,40, 45, 0,  0.1, LOOP_INTERVAL);
+})
+test('throw 1.1' , () => {
+    // assert(false); // Save for later - running too slow.
+    throwObject(0,0,40, 45, 0.1,  0.1, LOOP_INTERVAL);
 })
 test('throw 2' , () => {
     throwObject(0,0,40, 45, 0,  9.8, LOOP_INTERVAL);
