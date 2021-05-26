@@ -124,21 +124,23 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, a:number
         maxElevation = Math.max(maxElevation, physics.getVerticalPosition());
         minElevation = Math.min(minElevation, physics.getVerticalPosition());
         if(iteration == iterationsToHorizontalExtreme){
-            expect(physics.getHorizontalPosition()).toBeCloseTo(expectedHorizontalExtreme,0);
+            const steppedHorizontalPosition = physics.getHorizontalPosition();
+            expect(steppedHorizontalPosition).toBeCloseTo(expectedHorizontalExtreme,0);
         }
         if(iteration == iterationsToVerticalExtreme){
-            expect(physics.getVerticalPosition()).toBeCloseTo(expectedVerticalExtreme, 0);
+            const steppedVerticalPosition = physics.getVerticalPosition();
+            expect(steppedVerticalPosition).toBeCloseTo(expectedVerticalExtreme, 0);
         }
         if(iteration == 2 * iterationsToHorizontalExtreme){
-            expect(physics.getHorizontalPosition()).toBeCloseTo(x,0);
+            const steppedHorizontalPosition = physics.getHorizontalPosition();
+            expect(steppedHorizontalPosition).toBeCloseTo(x,0);
         }
         if(iteration == 2 * iterationsToVerticalExtreme){
-            expect(physics.getVerticalPosition()).toBeCloseTo(y, 0);
+            const steppedVerticalPosition = physics.getVerticalPosition();
+            expect(steppedVerticalPosition).toBeCloseTo(y, 0);
         }
     }
 }
-
-
 
 test('vertical throw ' , () => {
     throwObject(3,4,1, 90, 0, 0.1, LOOP_INTERVAL);
