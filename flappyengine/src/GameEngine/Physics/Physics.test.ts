@@ -110,7 +110,7 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, a:number
         physics.step(interval);
         const steppedHorizontalPosition = physics.getHorizontalPosition();
         const targetHorizontalPosition = expectedPosition(x,initialHorizontalVelocity, a , interval*iteration);
-        expect(steppedHorizontalPosition).toBeCloseTo(targetHorizontalPosition,-1);
+        expect(steppedHorizontalPosition).toBeCloseTo(targetHorizontalPosition,2);
         // noinspection JSSuspiciousNameCombination
         expect(physics.getVerticalPosition()).toBeCloseTo(expectedPosition(y,initialVerticalVelocity,g , interval*iteration));
         const steppedHorizontalVelocity = physics.getHorizontalVelocity();
