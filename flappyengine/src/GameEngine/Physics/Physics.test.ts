@@ -116,7 +116,9 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, a:number
         const steppedHorizontalVelocity = physics.getHorizontalVelocity();
         const targetHorizontalVelocity = expectedVelocity(initialHorizontalVelocity, a , interval*iteration);
         expect(steppedHorizontalVelocity).toBeCloseTo(targetHorizontalVelocity,0);
-        expect(physics.getVerticalVelocity()).toBeCloseTo(expectedVelocity(initialVerticalVelocity,g , interval*iteration));
+        const steppedVerticalVelocity = physics.getVerticalVelocity();
+        const targetVerticalVelocity = expectedVelocity(initialVerticalVelocity,g , interval*iteration);
+        expect(steppedVerticalVelocity).toBeCloseTo(targetVerticalVelocity);
         maxPosition  = Math.max(maxPosition, physics.getHorizontalPosition());
         minPosition  = Math.min(minPosition, physics.getHorizontalPosition());
         maxElevation = Math.max(maxElevation, physics.getVerticalPosition());
