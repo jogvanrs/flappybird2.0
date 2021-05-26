@@ -112,13 +112,13 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, a:number
         const targetHorizontalPosition = expectedPosition(x,initialHorizontalVelocity, a , interval*iteration);
         expect(steppedHorizontalPosition).toBeCloseTo(targetHorizontalPosition,2);
         // noinspection JSSuspiciousNameCombination
-        expect(physics.getVerticalPosition()).toBeCloseTo(expectedPosition(y,initialVerticalVelocity,g , interval*iteration));
+        expect(physics.getVerticalPosition()).toBeCloseTo(expectedPosition(y,initialVerticalVelocity,g , interval*iteration),2);
         const steppedHorizontalVelocity = physics.getHorizontalVelocity();
         const targetHorizontalVelocity = expectedVelocity(initialHorizontalVelocity, a , interval*iteration);
-        expect(steppedHorizontalVelocity).toBeCloseTo(targetHorizontalVelocity,0);
+        expect(steppedHorizontalVelocity).toBeCloseTo(targetHorizontalVelocity,2);
         const steppedVerticalVelocity = physics.getVerticalVelocity();
         const targetVerticalVelocity = expectedVelocity(initialVerticalVelocity,g , interval*iteration);
-        expect(steppedVerticalVelocity).toBeCloseTo(targetVerticalVelocity);
+        expect(steppedVerticalVelocity).toBeCloseTo(targetVerticalVelocity, 2);
         maxPosition  = Math.max(maxPosition, physics.getHorizontalPosition());
         minPosition  = Math.min(minPosition, physics.getHorizontalPosition());
         maxElevation = Math.max(maxElevation, physics.getVerticalPosition());
@@ -127,9 +127,11 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, a:number
             const steppedHorizontalPosition = physics.getHorizontalPosition();
             expect(steppedHorizontalPosition).toBeCloseTo(expectedHorizontalExtreme,0);
         }
-        if(iteration == iterationsToVerticalExtreme){
+        {
             const steppedVerticalPosition = physics.getVerticalPosition();
-            expect(steppedVerticalPosition).toBeCloseTo(expectedVerticalExtreme, 0);
+            if(iteration == iterationsToVerticalExtreme){
+                expect(steppedVerticalPosition).toBeCloseTo(expectedVerticalExtreme, 0);
+            }
         }
         if(iteration == 2 * iterationsToHorizontalExtreme){
             const steppedHorizontalPosition = physics.getHorizontalPosition();
@@ -140,6 +142,8 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, a:number
             expect(steppedVerticalPosition).toBeCloseTo(y, 0);
         }
     }
+    // Final testing of extreme values
+
 }
 
 test('vertical throw ' , () => {
