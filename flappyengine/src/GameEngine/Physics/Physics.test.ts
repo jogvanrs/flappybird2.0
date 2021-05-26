@@ -66,7 +66,7 @@ function expectedVelocity(v:number,acceleration:number, time:number){
     return v + (acceleration*time);
 }
 
-function throwObject(x:number, y:number, velocity:number, alpha:number, a:number, g:number, interval:number, maxIterations:number = 500){
+function throwObject(x:number, y:number, velocity:number, alpha:number, a:number, g:number, interval:number, maxIterations:number = 500) {
     // Throws a Physics object, and steps it through the iteratons.
     // Checks that terminal speed and position is as expected
     // Throw in a check for constant accelerations, for the heck of it.
@@ -78,72 +78,97 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, a:number
     assert(interval < Infinity);
     assert(maxIterations < Infinity);
 
-    const initialHorizontalVelocity = Math.cos(alpha*Math.PI/180) * velocity;
-    const initialVerticalVelocity = - Math.sin(alpha*Math.PI/180) * velocity;
+    const initialHorizontalVelocity = Math.cos(alpha * Math.PI / 180) * velocity;
+    const initialVerticalVelocity = -Math.sin(alpha * Math.PI / 180) * velocity;
     let iterationsToHorizontalExtreme = Infinity;
     let expectedHorizontalExtreme = NaN;
-    if(initialHorizontalVelocity * a < 0){
+    if (initialHorizontalVelocity * a < 0) {
         assert(a != 0);
-        iterationsToHorizontalExtreme = - initialHorizontalVelocity / a;
+        iterationsToHorizontalExtreme = -initialHorizontalVelocity / a;
         assert(iterationsToHorizontalExtreme > 0);
-        expectedHorizontalExtreme = x - (1/2) * a * (interval * iterationsToHorizontalExtreme)**2;
+        expectedHorizontalExtreme = x
+            + (initialHorizontalVelocity * interval * iterationsToHorizontalExtreme)
+            + (0.5  * (interval * iterationsToHorizontalExtreme) ** 2);
     }
     let iterationsToVerticalExtreme = Infinity;
     let expectedVerticalExtreme = NaN;
-    if(initialVerticalVelocity * g < 0){
+    if (initialVerticalVelocity * g < 0) {
         assert(g != 0);
-        iterationsToVerticalExtreme = - initialVerticalVelocity / g;
+        iterationsToVerticalExtreme = -initialVerticalVelocity / g;
         assert(iterationsToVerticalExtreme > 0);
-        expectedVerticalExtreme = y - (1/2) * g * (interval * iterationsToVerticalExtreme)**2;
+        expectedVerticalExtreme = y - (1 / 2) * g * (interval * iterationsToVerticalExtreme) ** 2;
     }
+    /*
+    There are no else cases for the previous two if statements.
+    In those cases, the final value is the expected extreme.
+    But every step i the loop tests the position agaunnst expectation,
+    this is already tested.
+    All we have to do, is not test against a NaN extreme.
+    */
     const totalIterations = Math.min(maxIterations, Math.max(iterationsToHorizontalExtreme, iterationsToVerticalExtreme));
     assert(totalIterations > 5) // Or is the acceleration way too strong in this test?
     assert(totalIterations <= maxIterations);
+    /*
+    * Do we have enough iteration to reach max? If not, reset expected max to NaN.
+    * */
+    if (iterationsToHorizontalExtreme > totalIterations) {
+        expectedHorizontalExtreme = NaN;
+    }
+    if (iterationsToVerticalExtreme > totalIterations) {
+        expectedVerticalExtreme = NaN;
+    }
 
-    let maxPosition  = x;
-    let minPosition  = x;
+    let maxPosition = x;
+    let minPosition = x;
     let maxElevation = y;
     let minElevation = y;
 
     let physics = new Physics(x, y, initialHorizontalVelocity, initialVerticalVelocity, a, g);
-    for(let iteration = 1;iteration <= totalIterations; ++iteration){
+    for (let iteration = 1; iteration <= totalIterations; ++iteration) {
         physics.step(interval);
         const steppedHorizontalPosition = physics.getHorizontalPosition();
-        const targetHorizontalPosition = expectedPosition(x,initialHorizontalVelocity, a , interval*iteration);
-        expect(steppedHorizontalPosition).toBeCloseTo(targetHorizontalPosition,2);
+        const targetHorizontalPosition = expectedPosition(x, initialHorizontalVelocity, a, interval * iteration);
+        expect(steppedHorizontalPosition).toBeCloseTo(targetHorizontalPosition, 2);
         // noinspection JSSuspiciousNameCombination
-        expect(physics.getVerticalPosition()).toBeCloseTo(expectedPosition(y,initialVerticalVelocity,g , interval*iteration),2);
+        expect(physics.getVerticalPosition()).toBeCloseTo(expectedPosition(y, initialVerticalVelocity, g, interval * iteration), 2);
         const steppedHorizontalVelocity = physics.getHorizontalVelocity();
-        const targetHorizontalVelocity = expectedVelocity(initialHorizontalVelocity, a , interval*iteration);
-        expect(steppedHorizontalVelocity).toBeCloseTo(targetHorizontalVelocity,2);
+        const targetHorizontalVelocity = expectedVelocity(initialHorizontalVelocity, a, interval * iteration);
+        expect(steppedHorizontalVelocity).toBeCloseTo(targetHorizontalVelocity, 2);
         const steppedVerticalVelocity = physics.getVerticalVelocity();
-        const targetVerticalVelocity = expectedVelocity(initialVerticalVelocity,g , interval*iteration);
+        const targetVerticalVelocity = expectedVelocity(initialVerticalVelocity, g, interval * iteration);
         expect(steppedVerticalVelocity).toBeCloseTo(targetVerticalVelocity, 2);
-        maxPosition  = Math.max(maxPosition, physics.getHorizontalPosition());
-        minPosition  = Math.min(minPosition, physics.getHorizontalPosition());
+        maxPosition = Math.max(maxPosition, physics.getHorizontalPosition());
+        minPosition = Math.min(minPosition, physics.getHorizontalPosition());
         maxElevation = Math.max(maxElevation, physics.getVerticalPosition());
         minElevation = Math.min(minElevation, physics.getVerticalPosition());
-        if(iteration == iterationsToHorizontalExtreme){
+        if (iteration == iterationsToHorizontalExtreme) {
             const steppedHorizontalPosition = physics.getHorizontalPosition();
-            expect(steppedHorizontalPosition).toBeCloseTo(expectedHorizontalExtreme,0);
+            expect(steppedHorizontalPosition).toBeCloseTo(expectedHorizontalExtreme, 0);
         }
         {
             const steppedVerticalPosition = physics.getVerticalPosition();
-            if(iteration == iterationsToVerticalExtreme){
+            if (iteration == iterationsToVerticalExtreme) {
                 expect(steppedVerticalPosition).toBeCloseTo(expectedVerticalExtreme, 0);
             }
         }
-        if(iteration == 2 * iterationsToHorizontalExtreme){
+        if (iteration == 2 * iterationsToHorizontalExtreme) {
             const steppedHorizontalPosition = physics.getHorizontalPosition();
-            expect(steppedHorizontalPosition).toBeCloseTo(x,0);
+            expect(steppedHorizontalPosition).toBeCloseTo(x, 0);
         }
-        if(iteration == 2 * iterationsToVerticalExtreme){
+        if (iteration == 2 * iterationsToVerticalExtreme) {
             const steppedVerticalPosition = physics.getVerticalPosition();
             expect(steppedVerticalPosition).toBeCloseTo(y, 0);
         }
     }
     // Final testing of extreme values
-
+    if (!isNaN(expectedHorizontalExtreme)) {
+        // I.e. we expect an extreme before the last iteration
+        if (initialHorizontalVelocity > 0) {
+            expect(maxPosition).toBeCloseTo(expectedHorizontalExtreme);
+        } else {
+            expect(minPosition).toBeCloseTo(expectedHorizontalExtreme);
+        }
+    }
 }
 
 test('vertical throw ' , () => {
@@ -157,6 +182,9 @@ test('one way vertical throw ' , () => {
 })
 test('one way horizontal throw ' , () => {
     throwObject(3,4,1, 0, 0.1, 0, LOOP_INTERVAL);
+})
+test('no throw ' , () => {
+    throwObject(3,4,0, 0, 0, 0, LOOP_INTERVAL);
 })
 test('throw 1' , () => {
     // assert(false); // Save for later - running too slow.
