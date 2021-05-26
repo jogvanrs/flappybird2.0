@@ -20,7 +20,6 @@ test('getters and setters' , () => {
     expect(physics.getVerticalVelocity()).toBe(4)
     expect(physics.getHorizontalAcceleration()).toBe(5);
     expect(physics.getVerticalAcceleration()).toBe(6);
-    expect(physics.getVerticalAcceleration()).toBeCloseTo(6) ;
 
     physics.setPosition(101,102);
     expect(physics.getHorizontalPosition()).toBe(101);
