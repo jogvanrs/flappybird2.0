@@ -171,6 +171,14 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, a:number
             expect(minPosition).toBeCloseTo(expectedHorizontalExtreme);
         }
     }
+    if (!isNaN(expectedVerticalExtreme)){
+        // I.e. we expect an extreme before the last iteration
+        if(initialVerticalVelocity > 0) {
+            expect(maxElevation).toBeCloseTo(expectedVerticalExtreme);
+        } else {
+            expect(minElevation).toBeCloseTo(expectedVerticalExtreme);
+        }
+    }
 }
 
 test('vertical throw ' , () => {
