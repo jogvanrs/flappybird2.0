@@ -87,7 +87,6 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, a:number
         const timeToHorizontalExtreme = -initialHorizontalVelocity / a;
         iterationsToHorizontalExtreme = timeToHorizontalExtreme / interval;
         assert(iterationsToHorizontalExtreme > 0);
-        expectedHorizontalExtreme = expectedPosition(x, initialHorizontalVelocity, a, (interval * iterationsToHorizontalExtreme));
     }
     let iterationsToVerticalExtreme = Infinity;
     let expectedVerticalExtreme = NaN;
@@ -96,12 +95,11 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, a:number
         const timeToVerticalExtreme = -initialVerticalVelocity / g;
         iterationsToVerticalExtreme = timeToVerticalExtreme / interval;
         assert(iterationsToVerticalExtreme > 0);
-        expectedVerticalExtreme = expectedPosition(y, initialVerticalVelocity, g, (interval * iterationsToVerticalExtreme));
     }
     /*
     There are no else cases for the previous two if statements.
     In those cases, the final value is the expected extreme.
-    But every step i the loop tests the position agaunnst expectation,
+    But every step in the loop tests the position against expectation,
     this is already tested.
     All we have to do, is not test against a NaN extreme.
     */
@@ -111,11 +109,12 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, a:number
     /*
     * Do we have enough iteration to reach max? If not, reset expected max to NaN.
     * */
-    if (iterationsToHorizontalExtreme > totalIterations) {
-        expectedHorizontalExtreme = NaN;
+    if (iterationsToHorizontalExtreme <= totalIterations) {
+        expectedHorizontalExtreme = expectedPosition(x, initialHorizontalVelocity, a, (interval * iterationsToHorizontalExtreme));
     }
-    if (iterationsToVerticalExtreme > totalIterations) {
-        iterationsToVerticalExtreme = NaN;
+    if (iterationsToVerticalExtreme <= totalIterations) {
+        // noinspection JSSuspiciousNameCombination
+        expectedVerticalExtreme = expectedPosition(y, initialVerticalVelocity, g, (interval * iterationsToVerticalExtreme));
     }
 
     let maxPosition = x;
