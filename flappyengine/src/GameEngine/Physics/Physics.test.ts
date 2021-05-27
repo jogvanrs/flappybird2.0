@@ -93,9 +93,10 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, a:number
     let expectedVerticalExtreme = NaN;
     if (initialVerticalVelocity * g < 0) {
         assert(g != 0);
-        iterationsToVerticalExtreme = -initialVerticalVelocity / g;
+        const timeToVerticalExtreme = -initialVerticalVelocity / g;
+        iterationsToVerticalExtreme = timeToVerticalExtreme / interval;
         assert(iterationsToVerticalExtreme > 0);
-        expectedVerticalExtreme = y - (1 / 2) * g * (interval * iterationsToVerticalExtreme) ** 2;
+        expectedVerticalExtreme = expectedPosition(y, initialVerticalVelocity, g, (interval * iterationsToVerticalExtreme));
     }
     /*
     There are no else cases for the previous two if statements.
@@ -107,9 +108,6 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, a:number
     const totalIterations = Math.min(maxIterations, Math.max(iterationsToHorizontalExtreme, iterationsToVerticalExtreme));
     assert(totalIterations > 5) // Or is the acceleration way too strong in this test?
     assert(totalIterations <= maxIterations);
-    if(iterationsToHorizontalExtreme > totalIterations){
-        expectedHorizontalExtreme = NaN;
-    }
     /*
     * Do we have enough iteration to reach max? If not, reset expected max to NaN.
     * */
