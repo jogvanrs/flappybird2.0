@@ -84,11 +84,10 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, a:number
     let expectedHorizontalExtreme = NaN;
     if (initialHorizontalVelocity * a < 0) {
         assert(a != 0);
-        iterationsToHorizontalExtreme = -initialHorizontalVelocity / a;
+        const timeToHorizontalExtreme = -initialHorizontalVelocity / a;
+        iterationsToHorizontalExtreme = timeToHorizontalExtreme / interval;
         assert(iterationsToHorizontalExtreme > 0);
-        expectedHorizontalExtreme = x
-            + (initialHorizontalVelocity * interval * iterationsToHorizontalExtreme)
-            + (0.5  * (interval * iterationsToHorizontalExtreme) ** 2);
+        expectedHorizontalExtreme = expectedPosition(x, initialHorizontalVelocity, a, (interval * iterationsToHorizontalExtreme));
     }
     let iterationsToVerticalExtreme = Infinity;
     let expectedVerticalExtreme = NaN;
@@ -108,6 +107,9 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, a:number
     const totalIterations = Math.min(maxIterations, Math.max(iterationsToHorizontalExtreme, iterationsToVerticalExtreme));
     assert(totalIterations > 5) // Or is the acceleration way too strong in this test?
     assert(totalIterations <= maxIterations);
+    if(iterationsToHorizontalExtreme > totalIterations){
+        expectedHorizontalExtreme = NaN;
+    }
     /*
     * Do we have enough iteration to reach max? If not, reset expected max to NaN.
     * */
@@ -115,7 +117,7 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, a:number
         expectedHorizontalExtreme = NaN;
     }
     if (iterationsToVerticalExtreme > totalIterations) {
-        expectedVerticalExtreme = NaN;
+        iterationsToVerticalExtreme = NaN;
     }
 
     let maxPosition = x;
@@ -174,8 +176,11 @@ function throwObject(x:number, y:number, velocity:number, alpha:number, a:number
 test('vertical throw ' , () => {
     throwObject(3,4,1, 90, 0, 0.1, LOOP_INTERVAL);
 })
-test('horizontal throw ' , () => {
-    throwObject(3,4,-1, 0, 0.1, 0, LOOP_INTERVAL);
+test('horizontal throw 1' , () => {
+    throwObject(4,3,-1, 0, 0.1, 0, LOOP_INTERVAL);
+})
+test('horizontal throw 2' , () => {
+    throwObject(10,0,-5, 0, 1, 0, LOOP_INTERVAL);
 })
 test('one way vertical throw ' , () => {
     throwObject(3,4,-1, 90, 0, 0.1, LOOP_INTERVAL);
