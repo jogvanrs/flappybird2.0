@@ -16,5 +16,9 @@ function createTestRectangle(id, top, left, height, width){
 
 function CreateTestRectangles(root){
     const R1 = createTestRectangle("R1",40,40,40,40);
+    const R2 = createTestRectangle("R2",40,120,40,40);
+    const R3 = createTestRectangle("R3",40,200,40,40);
     root.appendChild(R1);
+    root.appendChild(R2);
+    root.appendChild(R3);
 }
