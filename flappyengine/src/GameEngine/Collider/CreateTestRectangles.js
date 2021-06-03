@@ -4,11 +4,12 @@ Using Javascript, because the .ts file extension for Typescript got the server c
 
 function createTestRectangle(id, top, left, height, width){
     const R = document.createElement("div");
-    R.setAttribute("position","absolute");
-    R.setAttribute("top",top);
-    R.setAttribute("left", left);
-    R.setAttribute("height", height);
-    R.setAttribute("width",width);
+    //R.setAttribute("style", "position:absolute; top:10; left:10; height:10; width:10;")
+    R.style.position = "absolute";
+    R.style.top = top + "px";
+    R.style.left = left + "px";
+    R.style.height = height + "px";
+    R.style.width = width + "px";
     return R;
 }
 
