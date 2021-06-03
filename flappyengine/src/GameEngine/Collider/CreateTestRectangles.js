@@ -10,7 +10,6 @@ function createTestRectangle(id, top, left, height, width){
     R.style.left = left + "px";
     R.style.height = height + "px";
     R.style.width = width + "px";
-    R.className = "testRectangle";
     return R;
 }
 
