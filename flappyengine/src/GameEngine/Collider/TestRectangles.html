@@ -6,10 +6,12 @@
     <script src="CreateTestRectangles.js"></script>
     <style>
         div {border: thin solid red;}
+        div.testRectangle {border:medium dotted blue;}
     </style>
 </head>
-<body id="frame">
+<body>
 <h1>The rectangles used to test collision detection</h1>
+<div id="frame" style="position:absolute;"></div>
 <script>
     const frame = document.getElementById("frame");
     CreateTestRectangles(frame);
