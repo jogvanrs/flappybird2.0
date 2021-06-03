@@ -24,7 +24,18 @@ function CreateTestRectangles(root){
     const R7  = createTestRectangle("R7",200,40,40,40);
     const R8  = createTestRectangle("R8",200,120,40,40);
     const R9  = createTestRectangle("R9",200,200,40,40);
-    const R10 = createTestRectangle("R10",160,240,40,40);
+    const R10 = createTestRectangle("R10",0,240,40,40);
+    const R11 = createTestRectangle("R11",240,240,40,40);
+    const R12 = createTestRectangle("R12",60,60,160,160);
+    const R13 = createTestRectangle("R13",120,320,40,200);
+    const R14 = createTestRectangle("R14",40,400,200,40);
+    const R15 = createTestRectangle("R15",90,370,40,40);
+    const R16 = createTestRectangle("R16",90,430,40,40);
+    const R17 = createTestRectangle("R17",150,370,40,40);
+    const R18 = createTestRectangle("R18",150,430,40,40);
+    const R19 = createTestRectangle("R19",80,360,120,120);
+    const R20 = createTestRectangle("R20",240,0,40,40);
+    const R21 = createTestRectangle("R21",0,0,40,40);
     root.appendChild(R1);
     root.appendChild(R2);
     root.appendChild(R3);
@@ -35,4 +46,15 @@ function CreateTestRectangles(root){
     root.appendChild(R8);
     root.appendChild(R9);
     root.appendChild(R10);
+    root.appendChild(R11);
+    root.appendChild(R12);
+    root.appendChild(R13);
+    root.appendChild(R14);
+    root.appendChild(R15);
+    root.appendChild(R16);
+    root.appendChild(R17);
+    root.appendChild(R18);
+    root.appendChild(R19);
+    root.appendChild(R20);
+    root.appendChild(R21);
 }
