@@ -5,11 +5,26 @@ Mostly taken from previous project:
 https://github.com/Slow4life/FlappyBirdReact/blob/main/src/components/collision.test.tsx
  */
 
-test('constructor from html and DOmrect ', () => {
+test('constructor from html', () => {
     const r = document.createElement("div");
     const collider = new Collider(r);
     assert(collider);
     const domRect = r.getBoundingClientRect();
-    const collider2 = new Collider(domRect);
-    assert(collider2);
+})
+
+function expectCollision(c1:Collider, c2:Collider){
+    expect(c1.collidesWith(c2));
+    expect(c2.collidesWith(c1));
+}
+function expectNoCollision(c1:Collider, c2:Collider){
+    expect(! c1.collidesWith(c2));
+    expect(! c2.collidesWith(c1));
+}
+
+test('Collisions', () => {
+    const frame = document.createElement("div");
+    createTestRectangles(frame);
+    const r1 = document.getElementById("R1");
+    const c1 = new Collider(r1);
+    expectNoCollision(c1, c2);
 })

@@ -5,13 +5,8 @@ export class Collider{
     private top:number;
     private width: number;
     private height: number;
-    constructor(htmlElement: HTMLElement|DOMRect){
-        let domRect: DOMRect;
-        if (htmlElement instanceof HTMLElement){
-            domRect = htmlElement.getBoundingClientRect();
-        } else {
-            domRect = htmlElement;
-        }
+    constructor(htmlElement: HTMLElement){
+        let domRect = htmlElement.getBoundingClientRect();
         assert(domRect);
         this.left = domRect.left;
         this.top = domRect.top;
