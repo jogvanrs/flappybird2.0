@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import { Collider } from './Collider';
 import { createTestRectangles } from './CreateTestRectangles';
 import assert from "assert";
@@ -26,10 +30,17 @@ test('Collisions', () => {
     const frame = document.createElement("div");
     assert(frame); // we did create some element?
     assert(document.body);
-    document.body.appendChild(frame);
+
     createTestRectangles(frame);
-    const r1 = document.getElementById("R1");
-    assert(r1); // We did find r1 ?
+    document.body.appendChild(frame);
+    const noOfRectangles = frame.childNodes.length;
+    const noOfBodyElements = document.body.childNodes.length;
+    const R0 = document.getElementById("R1");  // Somehow does not work.
+    assert(R0);
+    assert(R0.id == "R0");
+    //const r0 = frame.childNodes[0];
+    //assert(r0); // We did find r1 ?
+    //assert(r0.id == "R0");
     const c1 = new Collider(r1);
     expectNoCollision(c1, c2);
 })
