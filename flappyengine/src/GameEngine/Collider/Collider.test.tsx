@@ -25,6 +25,9 @@ function expectNoCollision(c1:Collider, c2:Collider){
 test('Collisions', () => {
     const frame = document.createElement("div");
     assert(frame); // we did create some element?
+    const body = document.getElementsByTagName("body")[0];
+    assert(body);
+    body.appendChild(frame);
     createTestRectangles(frame);
     const r1 = document.getElementById("R1");
     assert(r1); // We did find r1 ?
