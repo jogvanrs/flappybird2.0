@@ -33,14 +33,29 @@ test('Collisions', () => {
 
     createTestRectangles(frame);
     document.body.appendChild(frame);
-    const noOfRectangles = frame.childNodes.length;
-    const noOfBodyElements = document.body.childNodes.length;
-    const R0 = document.getElementById("R1");  // Somehow does not work.
-    assert(R0);
-    assert(R0.id == "R0");
-    //const r0 = frame.childNodes[0];
-    //assert(r0); // We did find r1 ?
-    //assert(r0.id == "R0");
-    const c1 = new Collider(r1);
-    expectNoCollision(c1, c2);
+
+    const  c0 = new Collider(document.getElementById( "R0"));
+    const  c1 = new Collider(document.getElementById( "R1"));
+    const  c2 = new Collider(document.getElementById( "R2"));
+    const  c3 = new Collider(document.getElementById( "R3"));
+    const  c4 = new Collider(document.getElementById( "R4"));
+    const  c5 = new Collider(document.getElementById( "R5"));
+    const  c6 = new Collider(document.getElementById( "R6"));
+    const  c7 = new Collider(document.getElementById( "R7"));
+    const  c8 = new Collider(document.getElementById( "R8"));
+    const  c9 = new Collider(document.getElementById( "R9"));
+    const c10 = new Collider(document.getElementById("R10"));
+    const c11 = new Collider(document.getElementById("R11"));
+    const c12 = new Collider(document.getElementById("R12"));
+    const c13 = new Collider(document.getElementById("R13"));
+    const c14 = new Collider(document.getElementById("R14"));
+    const c15 = new Collider(document.getElementById("R15"));
+    const c16 = new Collider(document.getElementById("R16"));
+    const c17 = new Collider(document.getElementById("R17"));
+    const c18 = new Collider(document.getElementById("R18"));
+    const c19 = new Collider(document.getElementById("R19"));
+    const c20 = new Collider(document.getElementById("R20"));
+    assert(c0);
+    assert(c1);
+    expectNoCollision(c0, c1);
 })

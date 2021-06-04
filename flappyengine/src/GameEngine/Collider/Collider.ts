@@ -23,7 +23,7 @@ export class Collider{
         return false;
     }
 
-    public collidesWith(mayCollideWith: Collider) {
+    public collidesWith(otherCollider: Collider) {
     /*
     May be more elaborate in subclasses.
      */
