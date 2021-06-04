@@ -1,4 +1,5 @@
 import { Collider } from './Collider';
+import { createTestRectangles } from './CreateTestRectangles';
 import assert from "assert";
 /*
 Mostly taken from previous project:
@@ -23,8 +24,10 @@ function expectNoCollision(c1:Collider, c2:Collider){
 
 test('Collisions', () => {
     const frame = document.createElement("div");
+    assert(frame); // we did create some element?
     createTestRectangles(frame);
     const r1 = document.getElementById("R1");
+    assert(r1); // We did find r1 ?
     const c1 = new Collider(r1);
     expectNoCollision(c1, c2);
 })
