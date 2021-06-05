@@ -203,7 +203,7 @@ test('Collisions', () => {
     expectCollision(c8, c8);
     expectNoCollision(c8, c6);
     expectNoCollision(c8, c7);
-    expectNoCollision(c8, c8);
+    expectNollision(c8, c8);
     expectNoCollision(c8, c9);
     expectCollision(c8, c10);
     expectCollision(c8, c11);
