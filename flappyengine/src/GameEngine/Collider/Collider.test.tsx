@@ -36,7 +36,7 @@ test('Collisions', () => {
     createTestRectangles(frame);
     document.body.appendChild(frame);
 
-    const  c0 = new Collider(document.getElementById("R0") as HTMLElement);
+    const  c0 = new Collider(document.getElementById( "R0") as HTMLElement);
     const  c1 = new Collider(document.getElementById( "R1") as HTMLElement);
     const  c2 = new Collider(document.getElementById( "R2") as HTMLElement);
     const  c3 = new Collider(document.getElementById( "R3") as HTMLElement);
