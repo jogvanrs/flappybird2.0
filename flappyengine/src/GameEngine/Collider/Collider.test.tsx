@@ -58,7 +58,7 @@ test('Collisions', () => {
     const c20 = new Collider(document.getElementById("R20"));
     assert(c0);
     assert(c1);
-    expectNoCollision(c0, c0);
+    expectCollision(c0, c0);
     expectNoCollision(c0, c1);
     expectNoCollision(c0, c2);
     expectNoCollision(c0, c3);
@@ -79,6 +79,7 @@ test('Collisions', () => {
     expectNoCollision(c0, c18);
     expectNoCollision(c0, c19);
     expectCollision(c0, c20); // One common pixel
+    expectCollision(c1,c1);
     expectNoCollision(c1, c2);
     expectNoCollision(c1, c3);
     expectNoCollision(c1, r4);
