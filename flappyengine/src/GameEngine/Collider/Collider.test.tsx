@@ -18,11 +18,11 @@ test('constructor from html', () => {
     assert(domRect);
 })
 
-function expectCollision(c1:Collider, c2:Collidec){
+function expectCollision(c1:Collider, c2:Collider){
     expect(c1.collidesWith(c2));
     expect(c2.collidesWith(c1));
 }
-function expectNoCollision(c1:Collider, c2:Collidec){
+function expectNoCollision(c1:Collider, c2:Collider){
     assert(c1 != c2);
     expect(! c1.collidesWith(c2));
     expect(! c2.collidesWith(c1));
