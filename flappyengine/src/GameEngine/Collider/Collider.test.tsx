@@ -14,7 +14,8 @@ test('constructor from html', () => {
     const r = document.createElement("div");
     const collider = new Collider(r);
     assert(collider);
-    const domRect = r.getBoundingClientRect();
+    const domRect: DOMRect = r.getBoundingClientRect();
+    assert(domRect);
 })
 
 function expectCollision(c1:Collider, c2:Collidec){
@@ -215,7 +216,7 @@ test('Collisions', () => {
     expectNoCollision(c8, c20);
     expectCollision(c9, c9);
     expectNoCollision(c9, c10);
-    expectnoCollision(c9, c11);
+    expectNoCollision(c9, c11);
     expectNoCollision(c9, c12);
     expectNoCollision(c9, c13);
     expectNoCollision(c9, c14);
