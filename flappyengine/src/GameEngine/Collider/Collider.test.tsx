@@ -57,8 +57,7 @@ test('Collisions', () => {
     const c18 = new Collider(document.getElementById("R18") as HTMLElement);
     const c19 = new Collider(document.getElementById("R19") as HTMLElement);
     const c20 = new Collider(document.getElementById("R20") as HTMLElement);
-    assert(c0);
-    assert(c1);
+
     expectCollision(c0, c0);
     expectNoCollision(c0, c1);
     expectNoCollision(c0, c2);
@@ -80,6 +79,7 @@ test('Collisions', () => {
     expectNoCollision(c0, c18);
     expectNoCollision(c0, c19);
     expectCollision(c0, c20); // One common pixel
+
     expectCollision(c1,c1);
     expectNoCollision(c1, c2);
     expectNoCollision(c1, c3);
@@ -100,6 +100,7 @@ test('Collisions', () => {
     expectNoCollision(c1, c18);
     expectNoCollision(c1, c19);
     expectNoCollision(c1, c20);
+
     expectCollision(c2, c2);
     expectNoCollision(c2, c3);
     expectNoCollision(c2, c4);
@@ -119,6 +120,7 @@ test('Collisions', () => {
     expectNoCollision(c2, c18);
     expectNoCollision(c2, c19);
     expectNoCollision(c2, c20);
+
     expectCollision(c3, c3); // Collides with itself
     expectNoCollision(c3, c4);
     expectNoCollision(c3, c5);
@@ -137,6 +139,7 @@ test('Collisions', () => {
     expectNoCollision(c3, c18);
     expectNoCollision(c3, c19);
     expectNoCollision(c3, c20);
+
     expectCollision(c4, c4);
     expectNoCollision(c4, c5);
     expectNoCollision(c4, c6);
@@ -154,6 +157,7 @@ test('Collisions', () => {
     expectNoCollision(c4, c18);
     expectNoCollision(c4, c19);
     expectNoCollision(c4, c20);
+
     expectCollision(c5, c5);
     expectNoCollision(c5, c6);
     expectNoCollision(c5, c7);
@@ -186,6 +190,7 @@ test('Collisions', () => {
     expectNoCollision(c6, c18);
     expectCollision(c6, c19);
     expectNoCollision(c6, c20);
+
     expectCollision(c7, c7);
     expectNoCollision(c7, c8);
     expectNoCollision(c7, c9);
@@ -214,6 +219,7 @@ test('Collisions', () => {
     expectNoCollision(c8, c18);
     expectNoCollision(c8, c19);
     expectNoCollision(c8, c20);
+
     expectCollision(c9, c9);
     expectNoCollision(c9, c10);
     expectNoCollision(c9, c11);
@@ -226,7 +232,6 @@ test('Collisions', () => {
     expectNoCollision(c9, c18);
     expectNoCollision(c9, c19);
     expectNoCollision(c9, c20);
-
 
     expectCollision(c10, c10);
     expectNoCollision(c10, c11);
@@ -299,5 +304,8 @@ test('Collisions', () => {
     expectNoCollision(c18, c19);
     expectNoCollision(c18, c20);
 
+    expectCollision(c19, c19);
+    expectNoCollision(c19, c20);
 
+    expectCollision(c20, c20);
 })
