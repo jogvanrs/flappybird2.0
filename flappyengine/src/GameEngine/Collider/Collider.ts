@@ -2,7 +2,7 @@ import React from 'react';
 import { strict as assert } from 'assert'; // from https://tinyurl.com/393vux8e
 export class Collider{
     private left: number;
-    private top:number;
+    private top: number;
     private width: number;
     private height: number;
     constructor(htmlElement: HTMLElement){
@@ -13,6 +13,19 @@ export class Collider{
         this.width = domRect.width;
         this.height = domRect.height;
     };
+    private getTop(){
+        return this.top;
+    };
+    private getLeft(){
+        return this.left;
+    }
+    private getRight(){
+        return this.left + this.width;
+    }
+    private getBottom() {
+        this.top + this.height;
+    }
+
 
     private mayCollideWith(otherCollider: Collider){
         /*
