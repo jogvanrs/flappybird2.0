@@ -32,8 +32,19 @@ export class Collider{
         Return true if the bounding rectangles of
         this and otherCollider overlap.
          */
-        assert(false);
-        return false;
+        if (this.getTop() > otherCollider.getBottom()){
+            return false;
+        }
+        if (this.getBottom() < otherCollider.getTop()){
+            return false;
+        }
+        if (this.getLeft() > otherCollider.getRight()){
+            return false;
+        }
+        if (this.getRight() < otherCollider.getLeft()){
+            return false;
+        }
+        return true;
     }
 
     public collidesWith(otherCollider: Collider) {
