@@ -28,7 +28,7 @@ function createTestRectangle(id, top, left, height, width){
     const R6  = createTestRectangle("R6",200,40,40,40);
     const R7  = createTestRectangle("R7",200,120,40,40);
     const R8  = createTestRectangle("R8",200,200,40,40);
-    const R9 = createTestRectangle("R9",0,240,40,40);
+    const R9  = createTestRectangle("R9",0,240,40,40);
     const R10 = createTestRectangle("R10",240,240,40,40);
     const R11 = createTestRectangle("R11",60,60,160,160);
     const R12 = createTestRectangle("R12",120,320,40,200);
