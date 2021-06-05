@@ -1,21 +1,24 @@
-import assert from "assert";
+// import assert from "assert";
 /*
 Using Javascript, because the .ts file extension for Typescript got the server confused about MIME types.
  */
 
 function createTestRectangle(id, top, left, height, width){
     const R = document.createElement("div");
-    //R.setAttribute("style", "position:absolute; top:10; left:10; height:10; width:10;")
     R.style.position = "absolute";
     R.style.top = top + "px";
     R.style.left = left + "px";
     R.style.height = height + "px";
     R.style.width = width + "px";
     R.id = id;
+    R.appendChild(document.createTextNode(id));
     return R;
 }
 
-export function createTestRectangles(root){
+// Include 'export' to run test, remove 'export' to generate TestRectangles.html.
+// export function createTestRectangles(root){
+// function createTestRectangles(root){
+    export function createTestRectangles(root){
     const R0  = createTestRectangle("R0",40,40,40,40);
     const R1  = createTestRectangle("R1",40,120,40,40);
     const R2  = createTestRectangle("R2",40,200,40,40);
@@ -37,8 +40,8 @@ export function createTestRectangles(root){
     const R18 = createTestRectangle("R18",80,360,120,120);
     const R19 = createTestRectangle("R19",240,0,40,40);
     const R20 = createTestRectangle("R20",0,0,40,40);
-    assert(root);
-    assert(R0);
+    // assert(root);
+    // assert(R0);
     root.appendChild(R0);
     root.appendChild(R1);
     root.appendChild(R2);
