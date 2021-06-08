@@ -1,5 +1,5 @@
 import { Physics } from './Physics';
-import { render, screen } from '@testing-library/react';
+import assert from 'assert';
 // npm i --save-dev @types/jest
 // not enough, try:
 // npm install --save-dev jest
