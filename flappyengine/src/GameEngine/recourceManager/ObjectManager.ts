@@ -20,18 +20,5 @@ export class ObjectManager{
         }
     }
 
-    public static getPosition(name:string){
-        console.log(name);
-        if(ObjectManager.gameObject[name] !== undefined){
-            let y =  ObjectManager.gameObject[name].getBoundingClientRect().left;
-            let x = ObjectManager.gameObject[name].getBoundingClientRect().top;
-            let pos = {x,y};
-            return pos;
-        }
-        else{
-            console.error("object does not exist");
-        }
-
-    }
     
 }
