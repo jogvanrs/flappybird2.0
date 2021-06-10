@@ -3,8 +3,9 @@ export class Position{
 
     public getPosition(object: HTMLDivElement){
         if(object != null || object != undefined){
-            let x = object.getBoundingClientRect().x;
-            let y = object.getBoundingClientRect().y;
+            let x: number = object.getBoundingClientRect().x;
+            let y: number = object.getBoundingClientRect().y;
+        
             let pos = {x,y};
             return pos;
         }
