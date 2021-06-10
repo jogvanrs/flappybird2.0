@@ -5,6 +5,7 @@ export class Collider{
     private top: number;
     private width: number;
     private height: number;
+    
     constructor(htmlElement: HTMLElement){
         let domRect = htmlElement.getBoundingClientRect();
         assert(domRect);
