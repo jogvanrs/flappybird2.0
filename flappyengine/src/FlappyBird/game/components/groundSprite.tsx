@@ -1,4 +1,4 @@
-import groundSprite from '../assets/src/baseDupe.png'
+import groundSprite from '../../assets/src/baseDupe.png'
 
 const Ground = (props:any) => {
   

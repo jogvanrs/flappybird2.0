@@ -1,4 +1,4 @@
-import birdPng from '../assets/src/bluebird-downflap.png';
+import birdPng from '../../assets/src/bluebird-downflap.png';
 
 import './sprite.css';
 

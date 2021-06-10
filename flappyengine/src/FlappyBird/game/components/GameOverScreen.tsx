@@ -1,5 +1,5 @@
-import gameOverpng from '../assets/src/gameover.png'
-import playButton from '../assets/src/playButton.png'
+import gameOverpng from '../../assets/src/gameover.png'
+import playButton from '../../assets/src/playButton.png'
 
 function GameOverScreen (){
 
