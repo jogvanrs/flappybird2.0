@@ -14,7 +14,7 @@ function Flappybird() {
         <div id='gameWindow'>
 
                 <PlayerSprite/>
-             
+                <PipesFirst />
         </div>
     )
  
@@ -23,14 +23,20 @@ function Flappybird() {
 
 let gameLoop = new GameLoop();
 window.onload = function() {
+    let test = document.getElementById('pipesBothFirst');
+    test.style.left = 400 + 'px';
 
-
-let playerobject = new ObjectManager('playerSprite' , 1, 1, 1, 1)
+let playerobject = new ObjectManager('playerSprite' , 2, 2, 2, 2)
+let pipeObject = new ObjectManager('pipesBothFirst', 0, -25, 0, 0)
 gameLoop.platformStart(calledFunctions);
 
 let counter: number = 0;
 function calledFunctions() {
-    playerobject.startmove();
+    
+    //playerobject.startmoveX();
+    playerobject.moveY();
+    pipeObject.moveX();
+
     console.log("asd");
 
     counter++;

@@ -10,6 +10,7 @@ export class ObjectManager{
     private hAcceleration: number = 0;
     private vAcceleration: number = 0;
     private physics: Physics;
+    private time: number = (1000/1000)/24;
 
     constructor(object:string, hAcceleration: number, hVelocity: number, vAcceleration: number, vVelocity: number){
         //this.gameObject = document.getElementById(object);
@@ -34,14 +35,24 @@ export class ObjectManager{
 
     
 
-    startmove(){
-        this.physics.step((1000/1000)/24);
+    moveX(){
+        this.physics.step(this.time);
         this.x = this.physics.getHorizontalPosition();
         console.log('velocity ' + this.physics.getHorizontalVelocity())
+        this.gameObject.style.left = this.x + 'px'
+        
+        console.log('Player x= ' + this.x)
+    }
+
+    moveY(){
+        this.physics.step(this.time);
+        this.x = this.physics.getVerticalPosition();
+        console.log('velocity ' + this.physics.getVerticalVelocity())
         this.gameObject.style.top = this.x + 'px'
         
-        console.log('x= ' + this.x)
+        console.log('Pipe x= ' + this.x)
     }
+    
 
 
 
