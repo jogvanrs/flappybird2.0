@@ -17,6 +17,7 @@ function Flappybird() {
 
                 <PlayerSprite/>
                 <PipesFirst />
+                <Ground></Ground>
         </div>
     )
 }
@@ -28,6 +29,13 @@ let run = false;
 
 window.onload = function() {
 
+// Pipe spawnar frá høgru
+let test = document.getElementById('pipesBothFirst');
+test.style.left = 500 + 'px';
+
+let playerobject = new ObjectManager('playerSprite' , 2, 2, 2, 20);
+let pipeObject = new ObjectManager('pipesBothFirst', 0, -150, 0, 0);
+
     eventHandler.keyPressDown('Space', event => {
         run = true;
     
@@ -35,33 +43,32 @@ window.onload = function() {
         while (run) {
         gameLoop.platformStart(calledFunctions());
     }
-    // Pipe spawnar frá høgru
-    let test = document.getElementById('pipesBothFirst');
 
-    test.style.left = 500 + 'px';
+function calledFunctions() {
 
-    let playerobject = new ObjectManager('playerSprite' , 2, 2, 2, 2);
-    let pipeObject = new ObjectManager('pipesBothFirst', 0, -45, 0, 0);
-
-    function calledFunctions() {
+let playerCollider = new Collider(document.getElementById('playerSprite')); 
+let pipe1Collider = new Collider(document.getElementById('pipeLowerFirst'));
+let groundCollider = new Collider(document.getElementById('ground'));
+let pipe1uppCollider = new Collider(document.getElementById('pipeUpperFirst'))
+    //playerobject.startmoveX();
 
         //playerobject.startmoveX();
+    console.log('collide ' +  playerCollider.collidesWith(groundCollider))
+    console.log('collide ' +  groundCollider.collidesWith(playerCollider))
+    console.log('collide2 ' +  pipe1Collider.collidesWith(playerCollider))
 
-        playerobject.moveY();
-        pipeObject.moveX();
-        
-        let playerCollider = new Collider(document.getElementById('playerSprite')) 
-        let pipe1Collider = new Collider(document.getElementById('pipeLowerFirst'))
-
-        playerCollider.collidesWith(pipe1Collider)
-        console.log('collide ' +  playerCollider.collidesWith(pipe1Collider))
-        console.log('collide2 ' +  pipe1Collider.collidesWith(playerCollider))
+    function gameOver(){
+    if(playerCollider.collidesWith(pipe1Collider) || 
+    playerCollider.collidesWith(groundCollider) || 
+    playerCollider.collidesWith(pipe1uppCollider)){
+       return true;
     
-        if (pipe1Collider.collidesWith(playerCollider) ) {
-
-                gameLoop.platformStop();
-        }
     }
+   }    
+   if(gameOver()){
+        gameLoop.platformStop();
+    }
+}
 }
 
 export default Flappybird;
