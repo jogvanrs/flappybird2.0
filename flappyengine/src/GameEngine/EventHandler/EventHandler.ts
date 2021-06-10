@@ -7,7 +7,7 @@ export class EventHandler{
 
     
 
-    public keyPressDown(keycode : string, method: any) {
+    keyPressDown(keycode : string, method: any) {
 
         window.addEventListener("keydown", event => {
             event.preventDefault();
@@ -18,7 +18,7 @@ export class EventHandler{
         });
     }
 
-    public keyPressUp(keycode : string, method: any) {
+    keyPressUp(keycode : string, method: any) {
 
         window.addEventListener("keyup", event => {
             event.preventDefault();
