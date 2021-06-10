@@ -32,7 +32,7 @@ window.onload = function() {
 let test = document.getElementById('pipesBothFirst');
 test.style.left = 500 + 'px';
 
-let playerobject = new ObjectManager('playerSprite' , 2, 2, 2, 1);
+let playerobject = new ObjectManager('playerSprite' , 2, 2, 2, 20);
 let pipeObject = new ObjectManager('pipesBothFirst', 0, -150, 0, 0);
 gameLoop.platformStart(calledFunctions);
 
