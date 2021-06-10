@@ -31,14 +31,13 @@ export class Physics{
         this.y = y;
     }
     getVerticalPosition(){
-        // Most likely only needed for testing
         return this.y;
     }
 
     setHorizontalVelocity(horizontalVelocity: number){
         this.hVelocity = horizontalVelocity;
-    }getHorizontalVelocity(){
-        // Most likely only needed for testing
+    }
+    getHorizontalVelocity(){
         return this.hVelocity;
     }
 
@@ -65,11 +64,11 @@ export class Physics{
         return this.hAcceleration;
     }
 
-    hyperMove(x:number, y:number){
+    hyperMove(horizontalJump:number, verticalJump:number){
         // Instant 'hyperspace' move, changing position
         // without changing speed or acceleration.
-        this.x += x;
-        this.y +=y;
+        this.x += horizontalJump;
+        this.y +=verticalJump;
     }
 
     step(time:number){
