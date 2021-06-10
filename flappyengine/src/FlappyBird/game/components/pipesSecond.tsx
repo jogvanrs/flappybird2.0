@@ -5,17 +5,22 @@ import './sprite.css';
 
 const PipesSecond = (props:any) => {
 
-    let gap = 450;
-    let bottomY = Math.random() * 170;
+      let gap = 350;
+      let bottomY = Math.random() * 150;
+  
 
     return(
             <div id='pipesBothSecond'>
     
             <div id='pipeUpperSecond' style={{
             width: 60,
+            overflow: 'hidden',
             height: 200,
             bottom: bottomY + gap // Bottom pipe y + gap
-            }}><img src={pipeN} alt="null"/></div>
+            }}><img src={pipeN} alt="null" style={{
+                  width: '100%',
+                  height: '100%'
+            }}/></div>
     
             <div id='pipeLowerSecond' style={{
             width: 60,
