@@ -8,13 +8,14 @@ import ScoreBoard from './ScoreBoard'
 import { ObjectManager } from '../../../GameEngine/recourceManager/ObjectManager'
 import { GameLoop } from '../../../GameEngine/GameLoop/GameLoop'
 import './sprite.css';
+import { Collider } from "../../../GameEngine/Collider/Collider";
 
 function Flappybird() {
     return(
         <div id='gameWindow'>
 
                 <PlayerSprite/>
-             
+                <PipesFirst />
         </div>
     )
  
@@ -22,29 +23,38 @@ function Flappybird() {
 
 
 let gameLoop = new GameLoop();
+
 window.onload = function() {
 
+// Pipe spawnar frá høgru
+let test = document.getElementById('pipesBothFirst');
+test.style.left = 500 + 'px';
 
-let playerobject = new ObjectManager('playerSprite' , 1, 1, 1, 1)
+let playerobject = new ObjectManager('playerSprite' , 2, 2, 2, 2);
+let pipeObject = new ObjectManager('pipesBothFirst', 0, -45, 0, 0);
+
 gameLoop.platformStart(calledFunctions);
 
-let counter: number = 0;
+
 function calledFunctions() {
-    playerobject.startmove();
-    console.log("asd");
+    
+    //playerobject.startmoveX();
 
-    counter++;
+    playerobject.moveY();
+    pipeObject.moveX();
 
-    console.log(counter);
+    let playerCollider = new Collider(document.getElementById('playerSprite')) 
+    let pipe1Collider = new Collider(document.getElementById('pipeLowerFirst'))
 
-    if (counter > 4000) {
+    playerCollider.collidesWith(pipe1Collider)
+    console.log('collide ' +  playerCollider.collidesWith(pipe1Collider))
+    console.log('collide2 ' +  pipe1Collider.collidesWith(playerCollider))
+ 
+    if (pipe1Collider.collidesWith(playerCollider) ) {
 
-        gameLoop.platformStop();
+            gameLoop.platformStop();
     }
 }
 
 }
-
-
-
 export default Flappybird;
