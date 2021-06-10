@@ -3,24 +3,29 @@
  * To be used with player actions
  */
 
-export function keyPressDown(keycode : string, method: any) {
+export class EventHandler{
 
-    window.addEventListener("keydown", event => {
-        event.preventDefault();
+    
 
-        if (event.isComposing || event.code === keycode) {
-            method();
-        }
-    });
-}
+    public keyPressDown(keycode : string, method: any) {
 
-export function keyPressUp(keycode : string, method: any) {
+        window.addEventListener("keydown", event => {
+            event.preventDefault();
 
-    window.addEventListener("keyup", event => {
-        event.preventDefault();
+            if (event.isComposing || event.code === keycode) {
+                method();
+            }
+        });
+    }
 
-        if (event.isComposing || event.code === keycode) {
-            method();
-        }
-    });
+    public keyPressUp(keycode : string, method: any) {
+
+        window.addEventListener("keyup", event => {
+            event.preventDefault();
+
+            if (event.isComposing || event.code === keycode) {
+                method();
+            }
+        });
+    }
 }
