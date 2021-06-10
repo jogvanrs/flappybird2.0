@@ -9,7 +9,7 @@ import { ObjectManager } from '../../../GameEngine/recourceManager/ObjectManager
 import { GameLoop } from '../../../GameEngine/GameLoop/GameLoop'
 import './sprite.css';
 import { Collider } from "../../../GameEngine/Collider/Collider";
-import { group } from "console";
+import { EventHandler } from '../../../GameEngine/EventHandler/EventHandler'
 
 function Flappybird() {
     return(
@@ -20,11 +20,12 @@ function Flappybird() {
                 <Ground></Ground>
         </div>
     )
- 
 }
 
 
 let gameLoop = new GameLoop();
+let eventHandler = new EventHandler();
+let run = false;
 
 window.onload = function() {
 
@@ -34,8 +35,14 @@ test.style.left = 500 + 'px';
 
 let playerobject = new ObjectManager('playerSprite' , 2, 2, 2, 20);
 let pipeObject = new ObjectManager('pipesBothFirst', 0, -150, 0, 0);
-gameLoop.platformStart(calledFunctions);
 
+    eventHandler.keyPressDown('Space', event => {
+        run = true;
+    
+    });
+        while (run) {
+        gameLoop.platformStart(calledFunctions());
+    }
 
 function calledFunctions() {
 
@@ -45,9 +52,7 @@ let groundCollider = new Collider(document.getElementById('ground'));
 let pipe1uppCollider = new Collider(document.getElementById('pipeUpperFirst'))
     //playerobject.startmoveX();
 
-    playerobject.moveY();
-    pipeObject.moveX();
-
+        //playerobject.startmoveX();
     console.log('collide ' +  playerCollider.collidesWith(groundCollider))
     console.log('collide ' +  groundCollider.collidesWith(playerCollider))
     console.log('collide2 ' +  pipe1Collider.collidesWith(playerCollider))
@@ -64,8 +69,6 @@ let pipe1uppCollider = new Collider(document.getElementById('pipeUpperFirst'))
         gameLoop.platformStop();
     }
 }
-
-
-
 }
+
 export default Flappybird;
