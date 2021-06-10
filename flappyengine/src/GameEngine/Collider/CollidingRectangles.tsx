@@ -6,7 +6,7 @@ https://github.com/Slow4life/FlappyBirdReact/blob/main/src/components/MockRect.t
 
  */
 
-declare var MockRect: any
+declare var MockRect : any;
 
 export class CollidingRectangles extends React.Component{
     // To actually see these rectangles, and which of them collide:

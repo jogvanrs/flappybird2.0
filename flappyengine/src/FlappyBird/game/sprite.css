@@ -1,0 +1,47 @@
+#playerSprite {
+    position: absolute;
+    width: 34;
+}
+
+#pipesBothFirst {
+    position: absolute;
+    bottom: 0;
+}
+
+#pipesBothSecond {
+    position: absolute;
+    bottom: 0;
+}
+
+#pipesBothThird {
+    position: absolute;
+    bottom: 0;
+}
+
+#pipeUpperFirst, #pipeLowerFirst, #pipeUpperSecond, #pipeLowerSecond, #pipeUpperThird, #pipeLowerThird {
+
+    position: absolute;
+}
+
+#ground {
+    height: 112px;
+    max-width: 500px;
+    position: absolute;
+    overflow: hidden;
+    bottom: 0px;
+    z-index: +1;
+  }
+
+  #gameWindow {
+    background-image: url(../assets/src/background-day.png);
+    text-align: center;
+    position: relative;
+    background-position: center bottom;
+    width: 500px;
+    height: 512px;
+    border: 3px solid green;
+    font-size: calc(10px + 2vmin);
+    color: black;
+    overflow: hidden;
+  }
+  
