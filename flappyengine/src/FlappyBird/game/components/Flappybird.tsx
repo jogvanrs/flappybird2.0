@@ -12,51 +12,39 @@ import './sprite.css';
 function Flappybird() {
     return(
         <div id='gameWindow'>
-                <Ground/>
+
                 <PlayerSprite/>
-                <PipesFirst/>
-                <PipesSecond/>
-                <PipesThird/>
-                <GameOverScreen/>
-                <ScoreBoard/>
+             
         </div>
     )
  
 }
 
 
-
-ObjectManager.loadObject('game', 'gameover')
-ObjectManager.loadObject('ground', 'ground')
-ObjectManager.loadObject('game', 'pipesBothFirst')
-ObjectManager.loadObject('game', 'pipesBothSecond')
-ObjectManager.loadObject('game', 'pipesBothThird')
-ObjectManager.loadObject('game', 'playerSprite')
-ObjectManager.loadObject('game', 'scoreBoard')
-
-
-
-ObjectManager.getObject("ground")
-
 let gameLoop = new GameLoop();
+window.onload = function() {
 
-let counter: number = 0;
 
+let playerobject = new ObjectManager('playerSprite' , 1, 1, 1, 1)
 gameLoop.platformStart(calledFunctions);
 
+let counter: number = 0;
 function calledFunctions() {
-
+    playerobject.startmove();
     console.log("asd");
 
     counter++;
 
     console.log(counter);
 
-    if (counter > 40) {
+    if (counter > 4000) {
 
         gameLoop.platformStop();
     }
 }
+
+}
+
 
 
 export default Flappybird;
