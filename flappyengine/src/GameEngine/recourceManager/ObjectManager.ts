@@ -19,6 +19,4 @@ export class ObjectManager{
             console.error("object does not exist");
         }
     }
-
-    
 }
