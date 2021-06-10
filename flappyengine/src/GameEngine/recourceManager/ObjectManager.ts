@@ -30,27 +30,20 @@ export class ObjectManager{
         console.log()
     }
 
-    
-    
-
-    
-
     moveX(){
+
         this.physics.step(this.time);
         this.x = this.physics.getHorizontalPosition();
-        console.log('velocity ' + this.physics.getHorizontalVelocity())
+        //console.log('velocity ' + this.physics.getHorizontalVelocity())
         this.gameObject.style.left = this.x + 'px'
-        
-        console.log('Player x= ' + this.x)
     }
 
     moveY(){
+
         this.physics.step(this.time);
         this.x = this.physics.getVerticalPosition();
-        console.log('velocity ' + this.physics.getVerticalVelocity())
+       // console.log('velocity ' + this.physics.getVerticalVelocity())
         this.gameObject.style.top = this.x + 'px'
-        
-        console.log('Pipe x= ' + this.x)
     }
     
 
