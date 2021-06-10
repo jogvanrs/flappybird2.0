@@ -1,5 +1,5 @@
-import pipeN from '../assets/src/pipeN.png'
-import pipeS from '../assets/src/pipeS.png'
+import pipeN from '../../assets/src/pipeN.png'
+import pipeS from '../../assets/src/pipeS.png'
 
 import './sprite.css';
 

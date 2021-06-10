@@ -33,7 +33,7 @@
   }
 
   #gameWindow {
-    background-image: url(../assets/src/background-day.png);
+    background-image: url(../../assets/src/background-day.png);
     text-align: center;
     position: relative;
     background-position: center bottom;
