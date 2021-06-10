@@ -23,7 +23,7 @@ export class Collider{
         return this.left + this.width;
     }
     private getBottom() {
-        this.top + this.height;
+        return this.top + this.height;
     }
 
 
