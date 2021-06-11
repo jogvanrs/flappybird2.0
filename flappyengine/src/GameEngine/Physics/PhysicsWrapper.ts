@@ -1,4 +1,4 @@
-import {Physics} from '../Physics/Physics'
+import {Physics} from './Physics'
 
 export class PhysicsWrapper{
 

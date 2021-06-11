@@ -8,8 +8,7 @@ import ScoreBoard from './ScoreBoard'
 
 import './sprite.css';
 
-import { ObjectManager } from '../../../GameEngine/recourceManager/ObjectManager'
-import { PhysicsWrapper } from '../../../GameEngine/recourceManager/ObjectManager'
+import { PhysicsWrapper } from '../../../GameEngine/Physics/PhysicsWrapper'
 import { GameLoop } from '../../../GameEngine/GameLoop/GameLoop'
 import { Collider } from "../../../GameEngine/Collider/Collider";
 import { EventHandler } from '../../../GameEngine/EventHandler/EventHandler'
@@ -45,10 +44,10 @@ window.onload = function() {
 
     let run = false;
 
-    let playerobject = new ObjectManager('playerSprite' , 2, 2, 2, 20);
-    let firtPipeObject = new ObjectManager('pipesBothFirst', 1, -150, 1, 1);
-    let secPipeObject = new ObjectManager('pipesBothSecond', 1, -150, 1, 1);
-    let thirdPipeObject = new ObjectManager('pipesBothThird', 1, -150, 1, 1);
+    let playerobject = new PhysicsWrapper('playerSprite' , 2, 2, 2, 20);
+    let firtPipeObject = new PhysicsWrapper('pipesBothFirst', 1, -150, 1, 1);
+    let secPipeObject = new PhysicsWrapper('pipesBothSecond', 1, -150, 1, 1);
+    let thirdPipeObject = new PhysicsWrapper('pipesBothThird', 1, -150, 1, 1);
 
     eventHandler.keyPressDown('Space', event => {
         run = false;
