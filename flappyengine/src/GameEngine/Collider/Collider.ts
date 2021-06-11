@@ -1,5 +1,19 @@
-import React from 'react';
-import { strict as assert } from 'assert'; // from https://tinyurl.com/393vux8e
+import { strict as assert } from 'assert';
+import {Physics} from "../Physics/Physics"; // from https://tinyurl.com/393vux8e
+/*
+Colliders can be used to check if their corresponding gameObjects collide.
+Can also be used to detect collisions with ground of ceiling,
+whether or not those are considered gameObjects.
+
+Note that any Collider collides with itself!
+This is unavoidable, as two different object occupying the same space
+should obviously collide.
+
+So : Make sure to handle situations where objects
+might be tested for collision with itself.
+Testing for object equality between Collider objects is no solution.
+Two separate Collider object might represent the same game object
+ */
 export class Collider{
     private left: number;
     private top: number;
@@ -14,6 +28,37 @@ export class Collider{
         this.width = domRect.width;
         this.height = domRect.height;
     };
+    /*
+    The collider does not move on its own.
+    Please update its position from a Physics object.
+     */
+    public setPosition(physics: Physics){
+        this.left = physics.getHorizontalPosition();
+        this.top  = physics.getVerticalPosition();
+    }
+    public setLeft(left: number) {
+        this.left = left;
+    }
+    public setTop(top: number) {
+        this.top = top;
+    }
+    public updatePosition(htmlElement: HTMLElement) {
+        let domRect = htmlElement.getBoundingClientRect();
+        assert(domRect);
+        this.left = domRect.left;
+        this.top = domRect.top;
+    }
+
+    /*
+    In case the size changes
+     */
+    public setSize(htmlElement: HTMLElement) {
+        let domRect = htmlElement.getBoundingClientRect();
+        assert(domRect);
+        this.width = domRect.width;
+        this.height = domRect.height;
+    }
+
     private getTop(){
         return this.top;
     };
@@ -43,16 +88,20 @@ export class Collider{
             return false;
         }
         if (this.getRight() < otherCollider.getLeft()){
+            // Can be 'simplified', but easier to read in this form.
             return false;
         }
         return true;
     }
 
     public collidesWith(otherCollider: Collider) {
-    /*
-    May be more elaborate in subclasses.
-     */
-    return this.mayCollideWith(otherCollider);
+        /*
+        May be more elaborate in subclasses.
+         */
+        return this.mayCollideWith(otherCollider);
+    }
+    public static collides(c1:Collider, c2:Collider){
+        return c1.collidesWith(c2);
     }
 
 
