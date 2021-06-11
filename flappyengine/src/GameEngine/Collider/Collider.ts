@@ -1,5 +1,5 @@
-import React from 'react';
-import { strict as assert } from 'assert'; // from https://tinyurl.com/393vux8e
+import { strict as assert } from 'assert';
+import {Physics} from "../Physics/Physics"; // from https://tinyurl.com/393vux8e
 export class Collider{
     private left: number;
     private top: number;
@@ -14,6 +14,37 @@ export class Collider{
         this.width = domRect.width;
         this.height = domRect.height;
     };
+    /*
+    The collider does not move on its own.
+    Please update its position from a Physics object.
+     */
+    public setPosition(physics: Physics){
+        this.left = physics.getHorizontalPosition();
+        this.top  = physics.getVerticalPosition();
+    }
+    public setLeft(left: number) {
+        this.left = left;
+    }
+    public setTop(top: number) {
+        this.top = top;
+    }
+    public updatePosition(htmlElement: HTMLElement) {
+        let domRect = htmlElement.getBoundingClientRect();
+        assert(domRect);
+        this.left = domRect.left;
+        this.top = domRect.top;
+    }
+
+    /*
+    In case the size changes
+     */
+    public setSize(htmlElement: HTMLElement) {
+        let domRect = htmlElement.getBoundingClientRect();
+        assert(domRect);
+        this.width = domRect.width;
+        this.height = domRect.height;
+    }
+
     private getTop(){
         return this.top;
     };
