@@ -34,7 +34,10 @@ function movePlayer(player: PhysicsWrapper){
 let gameLoop = new GameLoop();
 let eventHandler = new EventHandler();
 
-window.onload = function() {
+gameLoop.init(FlappyBirdGame);
+
+function FlappyBirdGame() {
+
     let gameOverScreen = document.getElementById("gameover")
     gameOverScreen.style.display = "none"
     
@@ -44,10 +47,11 @@ window.onload = function() {
         object.style.left = px + 'px';
     }
 
-    // Variables for setting pipes
+     // Variables for setting pipes
     spawnObject('pipesBothFirst', 500);
     spawnObject('pipesBothSecond', 800);
     spawnObject('pipesBothThird', 1100);
+    
 
     // Object instances with parameter for horizontal/vertical acceleration and velocity
     let playerobject = new PhysicsWrapper('playerSprite' , 2, 2, 60, 20);
@@ -56,6 +60,24 @@ window.onload = function() {
     let thirdPipeObject = new PhysicsWrapper('pipesBothThird', 0, -100, 0, 1);
 
     playerobject.setPosition(0,250);
+
+    let playerdiv = document.getElementById('playerSprite');
+    
+    function initialstate(){  
+        // Variables for setting pipes
+
+        firstPipeObject.setPosition(500,firstPipeObject.getHorizontalPosition());
+        secPipeObject.setPosition(800, secPipeObject.getHorizontalPosition());
+        thirdPipeObject.setPosition(1100, thirdPipeObject.getHorizontalPosition());
+        playerobject.setPosition(0,250);
+        gameOverScreen.style.display = "none";
+        run = true;
+
+        scoreCounter = 0;
+
+    }
+
+    
     
     let run = true; // Boolean for running functionality once
     let scoreCounter = 0; // Counter for when bird passes pillar
@@ -73,8 +95,8 @@ window.onload = function() {
         movePlayer(playerobject);
     });
 
-    let playerdiv = document.getElementById('playerSprite');
-    playerdiv.style.top = '35%';
+
+
     
     // Functions for moving, checking collision and game over screen
     function calledFunctions() {
@@ -138,31 +160,28 @@ window.onload = function() {
         }   
         scoreBoardDiv.innerHTML = 'Score: ' + scoreCounter;
 
-    function gameOver(){
-        if( playerCollider.collidesWith(groundCollider) ||
-            playerCollider.collidesWith(firstLowerPipeCollider) || playerCollider.collidesWith(firstUpperPipeCollider) ||
-            playerCollider.collidesWith(secLowerPipeCollider) || playerCollider.collidesWith(secUpperPipeCollider) ||
-            playerCollider.collidesWith(thirdLowerPipeCollider) || playerCollider.collidesWith(thirdUpperPipeCollider)) 
-            {
-                return true;
-        }
-    }  
+        function gameOver(){
+            if( playerCollider.collidesWith(groundCollider) ||
+                playerCollider.collidesWith(firstLowerPipeCollider) || playerCollider.collidesWith(firstUpperPipeCollider) ||
+                playerCollider.collidesWith(secLowerPipeCollider) || playerCollider.collidesWith(secUpperPipeCollider) ||
+                playerCollider.collidesWith(thirdLowerPipeCollider) || playerCollider.collidesWith(thirdUpperPipeCollider)) 
+                {
+                    return true;
+            }
+        }  
 
+        if(gameOver()){
+            gameOverScreen.style.display = "block";
+            let gameDeathScore = document.getElementById('deathScore');
+            
+            gameDeathScore.innerHTML = 'Score: ' + scoreCounter;
 
-    
-    if(gameOver()){
-        gameOverScreen.style.display = "block";
-        let gameDeathScore = document.getElementById('deathScore');
-        let gameHighScore = document.getElementById('highScore');
-
-        gameDeathScore.innerHTML = 'Score: ' + scoreCounter;
-
-        if (gameDeathScore.innerHTML > gameHighScore.innerHTML){
-             gameHighScore.innerHTML = 'HighScore: ' + scoreCounter;
-        }
             gameLoop.stop();
+            document.getElementById('playAgain').addEventListener('click', function() {
+                        initialstate();
+            });
         }
-}
+    }
 }
 
 export default Flappybird;
