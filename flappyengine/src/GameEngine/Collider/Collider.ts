@@ -19,9 +19,11 @@ export class Collider{
     private top: number;
     private width: number;
     private height: number;
+    private HTMLElement: HTMLElement;
     
     constructor(htmlElement: HTMLElement){
-        let domRect = htmlElement.getBoundingClientRect();
+        this.HTMLElement = htmlElement;
+        let domRect = this.HTMLElement.getBoundingClientRect();
         assert(domRect);
         this.left = domRect.left;
         this.top = domRect.top;
@@ -59,21 +61,22 @@ export class Collider{
         this.height = domRect.height;
     }
 
-    private getTop(){
-        return this.top;
+    private getTop(){    
+        return this.HTMLElement.getBoundingClientRect().top;
     };
     private getLeft(){
-        return this.left;
+        return this.HTMLElement.getBoundingClientRect().left;
     }
     private getRight(){
-        return this.left + this.width;
+        return this.HTMLElement.getBoundingClientRect().left + this.HTMLElement.getBoundingClientRect().width;
     }
     private getBottom() {
-        return this.top + this.height;
+        return this.HTMLElement.getBoundingClientRect().top + this.HTMLElement.getBoundingClientRect().height
     }
 
 
     private mayCollideWith(otherCollider: Collider){
+
         /*
         Return true if the bounding rectangles of
         this and otherCollider overlap.
