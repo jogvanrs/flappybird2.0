@@ -15,51 +15,13 @@ Testing for object equality between Collider objects is no solution.
 Two separate Collider object might represent the same game object
  */
 export class Collider{
-    private left: number;
-    private top: number;
-    private width: number;
-    private height: number;
+
     private HTMLElement: HTMLElement;
     
     constructor(htmlElement: HTMLElement){
         this.HTMLElement = htmlElement;
-        let domRect = this.HTMLElement.getBoundingClientRect();
-        assert(domRect);
-        this.left = domRect.left;
-        this.top = domRect.top;
-        this.width = domRect.width;
-        this.height = domRect.height;
-    };
-    /*
-    The collider does not move on its own.
-    Please update its position from a Physics object.
-     */
-    public setPosition(physics: Physics){
-        this.left = physics.getHorizontalPosition();
-        this.top  = physics.getVerticalPosition();
-    }
-    public setLeft(left: number) {
-        this.left = left;
-    }
-    public setTop(top: number) {
-        this.top = top;
-    }
-    public updatePosition(htmlElement: HTMLElement) {
-        let domRect = htmlElement.getBoundingClientRect();
-        assert(domRect);
-        this.left = domRect.left;
-        this.top = domRect.top;
-    }
 
-    /*
-    In case the size changes
-     */
-    public setSize(htmlElement: HTMLElement) {
-        let domRect = htmlElement.getBoundingClientRect();
-        assert(domRect);
-        this.width = domRect.width;
-        this.height = domRect.height;
-    }
+    };
 
     private getTop(){    
         return this.HTMLElement.getBoundingClientRect().top;

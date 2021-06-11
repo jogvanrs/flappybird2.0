@@ -47,9 +47,35 @@ export class PhysicsWrapper{
     }
 
     setPosition(xCoord: number, yCoord: number){
-        this.physics.hyperMove(xCoord, yCoord);
-        
+        this.physics.setPosition(xCoord, yCoord);
+        this.x = xCoord;
+        this.y = yCoord;
     }
+
+    setHorizontalAcceleration(hAcceleration: number){
+        this.physics.setHorizontalAcceleration(hAcceleration);
+    }
+
+    setVerticalAcceleration(vAccelleration: number){
+        this.physics.setVerticalAcceleration(vAccelleration);
+    }
+
+    getVerticalPosition(){
+        return this.y;
+    }
+
+    getHorizontalPosition(){
+        return this.x;
+    }
+
+
+
+
+
+
+
+
+
     
 
 
