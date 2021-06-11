@@ -14,7 +14,7 @@ export class PhysicsWrapper{
 
     constructor(object:string, hAcceleration: number, hVelocity: number, vAcceleration: number, vVelocity: number){
         //this.gameObject = document.getElementById(object);
-        if(object != null || object != undefined){
+        if(object !== null || object !== undefined){
            this.gameObject = document.getElementById(object)
            let tmp = this.gameObject.getBoundingClientRect() as DOMRect;
            this.x = tmp.x;
@@ -67,18 +67,4 @@ export class PhysicsWrapper{
     getHorizontalPosition(){
         return this.x;
     }
-
-
-
-
-
-
-
-
-
-    
-
-
-
- 
 }
