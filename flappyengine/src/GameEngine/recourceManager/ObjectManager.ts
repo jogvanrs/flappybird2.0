@@ -14,7 +14,7 @@ export class ObjectManager{
 
     constructor(object:string, hAcceleration: number, hVelocity: number, vAcceleration: number, vVelocity: number){
         //this.gameObject = document.getElementById(object);
-        if(object != null || object != undefined){
+        if(object !== null || object !== undefined){
            this.gameObject = document.getElementById(object)
            let tmp = this.gameObject.getBoundingClientRect() as DOMRect;
            this.x = tmp.x;
@@ -45,9 +45,4 @@ export class ObjectManager{
        // console.log('velocity ' + this.physics.getVerticalVelocity())
         this.gameObject.style.top = this.y + 'px'
     }
-    
-
-
-
- 
 }
