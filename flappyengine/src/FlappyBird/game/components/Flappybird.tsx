@@ -30,12 +30,12 @@ function movePlayer(player: PhysicsWrapper){
     //player.hyperMove(-75,-75);
     player.setVerticalVelocity(-100)
 }
-
+        
 let gameLoop = new GameLoop();
 let eventHandler = new EventHandler();
 
 window.onload = function() {
-
+    
     // Pipe spawnar frá høgru
     function spawnObject(div: string, px: number) {
         let object = document.getElementById(div);
@@ -53,7 +53,8 @@ window.onload = function() {
     let secPipeObject = new PhysicsWrapper('pipesBothSecond', 0, -100, 0, 1);
     let thirdPipeObject = new PhysicsWrapper('pipesBothThird', 0, -100, 0, 1);
     
-    let run = true; // Boolean for running functionality once
+    let run: boolean = true; // Boolean for running functionality once
+    let scoreCounter: number = 0; // Counter for when bird passes pillar
 
     // Input handler for jumping
     eventHandler.keyPressDown('Space', event => {
@@ -73,7 +74,6 @@ window.onload = function() {
     let playerdiv = document.getElementById('playerSprite');
     playerdiv.style.top = '35%';
     
-
     // Functions for moving, checking collision and game over screen
     function calledFunctions() {
 
@@ -110,31 +110,37 @@ window.onload = function() {
         let pipeThreeLowerDiv = document.getElementById('pipeLowerThird')
         let pipeThreeUpperDiv = document.getElementById('pipeUpperThird')
 
-        let scoreCounter: number = 0;
+        let scoreBoardDiv = document.getElementById('scoreBoard')
+
         // Resets pipes according to which pillar is infront of itself for a consistent look
         if(firstPipeObject.getHorizontalPosition() < -60) {
-
+                
+            scoreCounter++;
             firstPipeObject.setPosition(thirdPipeObject.getHorizontalPosition() + 300, thirdPipeObject.getVerticalPosition());
             let rand= Math.random() * 150 ;
             pipeOneLowerDiv.style.bottom = rand+ 'px'
             pipeOneUpperDiv.style.bottom = rand + 350 + 'px';
-            
         }
-        if(secPipeObject.getHorizontalPosition() < -60) {
 
+        if(secPipeObject.getHorizontalPosition() < -60) {
+                
+            scoreCounter++;
             secPipeObject.setPosition(firstPipeObject.getHorizontalPosition() + 300, firstPipeObject.getVerticalPosition());
             let rand= Math.random() * 150;
             pipeTwoLowerDiv.style.bottom = rand + 'px'
             pipeTwoUpperDiv.style.bottom = rand + 350 + 'px';
         }
-        if(thirdPipeObject.getHorizontalPosition() < -60) {
 
+        if(thirdPipeObject.getHorizontalPosition() < -60) {
+            
+            scoreCounter++;
             thirdPipeObject.setPosition(secPipeObject.getHorizontalPosition() + 300, secPipeObject.getVerticalPosition());
             let rand= Math.random() * 150;
             pipeThreeLowerDiv.style.bottom = rand + 'px'
             pipeThreeUpperDiv.style.bottom = rand + 350 + 'px';
-        }
-
+            
+        }   
+        scoreBoardDiv.innerHTML = 'Score: ' + scoreCounter;     
 
     function gameOver(){
         // if( playerCollider.collidesWith(groundCollider) ||
