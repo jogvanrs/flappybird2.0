@@ -5,7 +5,7 @@ import PipesSecond from './pipesSecond';
 import PipesThird from './pipesThird';
 import GameOverScreen from './GameOverScreen'
 import ScoreBoard from './ScoreBoard'
-import { PhysicsWrapper } from '../../../GameEngine/recourceManager/ObjectManager'
+import { PhysicsWrapper } from '../../../GameEngine/Physics/PhysicsWrapper'
 import { GameLoop } from '../../../GameEngine/GameLoop/GameLoop'
 import './sprite.css';
 import { Collider } from "../../../GameEngine/Collider/Collider";

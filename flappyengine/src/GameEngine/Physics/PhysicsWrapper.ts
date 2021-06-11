@@ -1,4 +1,4 @@
-import {Physics} from '../Physics/Physics'
+import {Physics} from './Physics'
 
 export class PhysicsWrapper{
 
@@ -48,8 +48,6 @@ export class PhysicsWrapper{
 
     setPosition(xCoord: number, yCoord: number){
         this.physics.setPosition(xCoord, yCoord);
-        this.x = xCoord;
-        this.y = yCoord;
     }
 
     setHorizontalAcceleration(hAcceleration: number){
