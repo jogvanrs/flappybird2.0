@@ -1,0 +1,38 @@
+#playerSprite {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background-color: red;
+}
+
+#blockFirst {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background-color: black;
+}
+
+#blockSecond {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background-color: black;
+}
+
+#blockThird {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background-color: black;
+}
+
+  #gameWindow {
+    background-image: url(../../assets/src/bg.png);
+    text-align: center;
+    position: relative;
+    background-position: center bottom;
+    font-size: calc(10px + 2vmin);
+    color: black;
+    overflow: hidden;
+  }
+  

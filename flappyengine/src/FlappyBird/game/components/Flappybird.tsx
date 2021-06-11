@@ -87,7 +87,7 @@ function FlappyBirdGame() {
         
         // Starts all functionality when 'space' is entered first time, runs once
         if(run) {
-            gameLoop.start(calledFunctions);
+            gameLoop.start(calledFunctions, 1000/60);
             run = false;
         }
 
