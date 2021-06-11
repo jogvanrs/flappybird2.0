@@ -143,18 +143,18 @@ window.onload = function() {
         scoreBoardDiv.innerHTML = 'Score: ' + scoreCounter;     
 
     function gameOver(){
-        // if( playerCollider.collidesWith(groundCollider) ||
-        //     playerCollider.collidesWith(firstLowerPipeCollider) || playerCollider.collidesWith(firstUpperPipeCollider) ||
-        //     playerCollider.collidesWith(secLowerPipeCollider) || playerCollider.collidesWith(secUpperPipeCollider) ||
-        //     playerCollider.collidesWith(thirdLowerPipeCollider) || playerCollider.collidesWith(thirdUpperPipeCollider)) 
-        //     {
-        //         return true;
-        // }
+        if( playerCollider.collidesWith(groundCollider) ||
+            playerCollider.collidesWith(firstLowerPipeCollider) || playerCollider.collidesWith(firstUpperPipeCollider) ||
+            playerCollider.collidesWith(secLowerPipeCollider) || playerCollider.collidesWith(secUpperPipeCollider) ||
+            playerCollider.collidesWith(thirdLowerPipeCollider) || playerCollider.collidesWith(thirdUpperPipeCollider)) 
+            {
+                return true;
+        }
     }  
 
-    // if(gameOver()){
-    //         gameLoop.stop();
-    //     }
+    if(gameOver()){
+            gameLoop.stop();
+        }
 }
 }
 
