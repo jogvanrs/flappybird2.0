@@ -1,6 +1,6 @@
 import {Physics} from '../Physics/Physics'
 
-export class ObjectManager{
+export class PhysicsWrapper{
 
     private gameObject :  HTMLElement;
     private x: number = 0;
@@ -44,5 +44,27 @@ export class ObjectManager{
         this.y = this.physics.getVerticalPosition();
        // console.log('velocity ' + this.physics.getVerticalVelocity())
         this.gameObject.style.top = this.y + 'px'
+    }
+
+    setPosition(xCoord: number, yCoord: number){
+        this.physics.setPosition(xCoord, yCoord);
+        this.x = xCoord;
+        this.y = yCoord;
+    }
+
+    setHorizontalAcceleration(hAcceleration: number){
+        this.physics.setHorizontalAcceleration(hAcceleration);
+    }
+
+    setVerticalAcceleration(vAccelleration: number){
+        this.physics.setVerticalAcceleration(vAccelleration);
+    }
+
+    getVerticalPosition(){
+        return this.y;
+    }
+
+    getHorizontalPosition(){
+        return this.x;
     }
 }

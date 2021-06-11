@@ -15,65 +15,30 @@ Testing for object equality between Collider objects is no solution.
 Two separate Collider object might represent the same game object
  */
 export class Collider{
-    private left: number;
-    private top: number;
-    private width: number;
-    private height: number;
+
+    private HTMLElement: HTMLElement;
     
     constructor(htmlElement: HTMLElement){
-        let domRect = htmlElement.getBoundingClientRect();
-        assert(domRect);
-        this.left = domRect.left;
-        this.top = domRect.top;
-        this.width = domRect.width;
-        this.height = domRect.height;
+        this.HTMLElement = htmlElement;
+
     };
-    /*
-    The collider does not move on its own.
-    Please update its position from a Physics object.
-     */
-    public setPosition(physics: Physics){
-        this.left = physics.getHorizontalPosition();
-        this.top  = physics.getVerticalPosition();
-    }
-    public setLeft(left: number) {
-        this.left = left;
-    }
-    public setTop(top: number) {
-        this.top = top;
-    }
-    public updatePosition(htmlElement: HTMLElement) {
-        let domRect = htmlElement.getBoundingClientRect();
-        assert(domRect);
-        this.left = domRect.left;
-        this.top = domRect.top;
-    }
 
-    /*
-    In case the size changes
-     */
-    public setSize(htmlElement: HTMLElement) {
-        let domRect = htmlElement.getBoundingClientRect();
-        assert(domRect);
-        this.width = domRect.width;
-        this.height = domRect.height;
-    }
-
-    private getTop(){
-        return this.top;
+    private getTop(){    
+        return this.HTMLElement.getBoundingClientRect().top;
     };
     private getLeft(){
-        return this.left;
+        return this.HTMLElement.getBoundingClientRect().left;
     }
     private getRight(){
-        return this.left + this.width;
+        return this.HTMLElement.getBoundingClientRect().left + this.HTMLElement.getBoundingClientRect().width;
     }
     private getBottom() {
-        return this.top + this.height;
+        return this.HTMLElement.getBoundingClientRect().top + this.HTMLElement.getBoundingClientRect().height
     }
 
 
     private mayCollideWith(otherCollider: Collider){
+
         /*
         Return true if the bounding rectangles of
         this and otherCollider overlap.

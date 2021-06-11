@@ -9,6 +9,7 @@ import ScoreBoard from './ScoreBoard'
 import './sprite.css';
 
 import { ObjectManager } from '../../../GameEngine/recourceManager/ObjectManager'
+import { PhysicsWrapper } from '../../../GameEngine/recourceManager/ObjectManager'
 import { GameLoop } from '../../../GameEngine/GameLoop/GameLoop'
 import { Collider } from "../../../GameEngine/Collider/Collider";
 import { EventHandler } from '../../../GameEngine/EventHandler/EventHandler'
@@ -70,14 +71,15 @@ window.onload = function() {
 
         let firstLowerPipeCollider = new Collider(document.getElementById('pipeLowerFirst'));
         let firstUpperPipeCollider = new Collider(document.getElementById('pipeUpperFirst'));
+        
         let secLowerPipeCollider = new Collider(document.getElementById('pipeLowerSecond'));
         let secUpperPipeCollider = new Collider(document.getElementById('pipeUpperSecond'));
+        
         let thirdLowerPipeCollider = new Collider(document.getElementById('pipeLowerThird'));
         let thirdUpperPipeCollider = new Collider(document.getElementById('pipeUpperThird'));
 
         //playerobject.startmoveX();
-
-        //playerobject.startmoveX();
+      
         console.log('collide with ground ' +  playerCollider.collidesWith(groundCollider));
         console.log('collide with ground ' +  groundCollider.collidesWith(playerCollider));
         console.log('collide first pipe lower ' +  firstLowerPipeCollider.collidesWith(playerCollider));
