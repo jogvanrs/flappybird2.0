@@ -25,6 +25,12 @@ function Flappybird() {
         </div>
     )
 }
+
+function movePlayer(player: PhysicsWrapper){
+    //player.hyperMove(-75,-75);
+    player.setVerticalVelocity(-100)
+}
+        
 let gameLoop = new GameLoop();
 let eventHandler = new EventHandler();
 
@@ -42,7 +48,7 @@ window.onload = function() {
     let pipeThree = new spawnObject('pipesBothThird', 1100);
 
     // Object instances with parameter for horizontal/vertical acceleration and velocity
-    let playerobject = new PhysicsWrapper('playerSprite' , 2, 2, 2, 20);
+    let playerobject = new PhysicsWrapper('playerSprite' , 2, 2, 60, 20);
     let firstPipeObject = new PhysicsWrapper('pipesBothFirst', 0, -100, 0, 1);
     let secPipeObject = new PhysicsWrapper('pipesBothSecond', 0, -100, 0, 1);
     let thirdPipeObject = new PhysicsWrapper('pipesBothThird', 0, -100, 0, 1);
@@ -59,7 +65,7 @@ window.onload = function() {
             run = false;
         }
         // Update position of bird
-        playerobject.setPosition(playerobject.getHorizontalPosition() + 0, playerobject.getVerticalPosition() - 35)
+        movePlayer(playerobject);
         console.log("pressed");
         console.log(run);
         
@@ -137,18 +143,18 @@ window.onload = function() {
         scoreBoardDiv.innerHTML = 'Score: ' + scoreCounter;     
 
     function gameOver(){
-        if( playerCollider.collidesWith(groundCollider) ||
-            playerCollider.collidesWith(firstLowerPipeCollider) || playerCollider.collidesWith(firstUpperPipeCollider) ||
-            playerCollider.collidesWith(secLowerPipeCollider) || playerCollider.collidesWith(secUpperPipeCollider) ||
-            playerCollider.collidesWith(thirdLowerPipeCollider) || playerCollider.collidesWith(thirdUpperPipeCollider)) 
-            {
-                return true;
-        }
+        // if( playerCollider.collidesWith(groundCollider) ||
+        //     playerCollider.collidesWith(firstLowerPipeCollider) || playerCollider.collidesWith(firstUpperPipeCollider) ||
+        //     playerCollider.collidesWith(secLowerPipeCollider) || playerCollider.collidesWith(secUpperPipeCollider) ||
+        //     playerCollider.collidesWith(thirdLowerPipeCollider) || playerCollider.collidesWith(thirdUpperPipeCollider)) 
+        //     {
+        //         return true;
+        // }
     }  
 
-    if(gameOver()){
-            gameLoop.stop();
-        }
+    // if(gameOver()){
+    //         gameLoop.stop();
+    //     }
 }
 }
 
