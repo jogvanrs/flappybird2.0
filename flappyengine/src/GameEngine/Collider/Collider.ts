@@ -4,6 +4,15 @@ import {Physics} from "../Physics/Physics"; // from https://tinyurl.com/393vux8e
 Colliders can be used to check if their corresponding gameObjects collide.
 Can also be used to detect collisions with ground of ceiling,
 whether or not those are considered gameObjects.
+
+Note that any Collider collides with itself!
+This is unavoidable, as two different object occupying the same space
+should obviously collide.
+
+So : Make sure to handle situations where objects
+might be tested for collision with itself.
+Testing for object equality between Collider objects is no solution.
+Two separate Collider object might represent the same game object
  */
 export class Collider{
     private left: number;
