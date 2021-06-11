@@ -41,16 +41,18 @@ let pipeObject = new ObjectManager('pipesBothFirst', 1, -150, 1, 1);
         run = false;
         console.log("pressed")
         console.log(run)
-        gameLoop.platformStart(calledFunctions);
+        gameLoop.start(calledFunctions);
     });
 
+    let playerdiv = document.getElementById('playerSprite')
 
 function calledFunctions() {
 
     playerobject.moveY();
     pipeObject.moveX();
 
-let playerCollider = new Collider(document.getElementById('playerSprite')); 
+
+let playerCollider = new Collider(playerdiv); 
 let pipe1Collider = new Collider(document.getElementById('pipeLowerFirst'));
 let groundCollider = new Collider(document.getElementById('ground'));
 let pipe1uppCollider = new Collider(document.getElementById('pipeUpperFirst'))
@@ -70,7 +72,7 @@ let pipe1uppCollider = new Collider(document.getElementById('pipeUpperFirst'))
     }
    }    
    if(gameOver()){
-        gameLoop.platformStop();
+        gameLoop.stop();
     }
 }
 }
