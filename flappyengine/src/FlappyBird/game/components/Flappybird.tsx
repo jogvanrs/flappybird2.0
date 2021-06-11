@@ -5,7 +5,7 @@ import PipesSecond from './pipesSecond';
 import PipesThird from './pipesThird';
 import GameOverScreen from './GameOverScreen'
 import ScoreBoard from './ScoreBoard'
-import { ObjectManager } from '../../../GameEngine/recourceManager/ObjectManager'
+import { PhysicsWrapper } from '../../../GameEngine/recourceManager/ObjectManager'
 import { GameLoop } from '../../../GameEngine/GameLoop/GameLoop'
 import './sprite.css';
 import { Collider } from "../../../GameEngine/Collider/Collider";
@@ -34,8 +34,8 @@ let test = document.getElementById('pipesBothFirst');
 test.style.left = 500 + 'px';
 let run = false;
  
-let playerobject = new ObjectManager('playerSprite' , 2, 2, 2, 20);
-let pipeObject = new ObjectManager('pipesBothFirst', 1, -150, 1, 1);
+let playerobject = new PhysicsWrapper('playerSprite' , 2, 2, 2, 20);
+let pipeObject = new PhysicsWrapper('pipesBothFirst', 1, -150, 1, 1);
 
   eventHandler.keyPressDown('Space', event => {
         run = false;
@@ -44,16 +44,16 @@ let pipeObject = new ObjectManager('pipesBothFirst', 1, -150, 1, 1);
         gameLoop.platformStart(calledFunctions);
     });
 
-
+let playerCollider = new Collider(document.getElementById('playerSprite')); 
+let pipe1Collider = new Collider(document.getElementById('pipeLowerFirst'));
+let groundCollider = new Collider(document.getElementById('ground'));
+let pipe1uppCollider = new Collider(document.getElementById('pipeUpperFirst'))
 function calledFunctions() {
 
     playerobject.moveY();
     pipeObject.moveX();
 
-let playerCollider = new Collider(document.getElementById('playerSprite')); 
-let pipe1Collider = new Collider(document.getElementById('pipeLowerFirst'));
-let groundCollider = new Collider(document.getElementById('ground'));
-let pipe1uppCollider = new Collider(document.getElementById('pipeUpperFirst'))
+
     //playerobject.startmoveX();
 
         //playerobject.startmoveX();

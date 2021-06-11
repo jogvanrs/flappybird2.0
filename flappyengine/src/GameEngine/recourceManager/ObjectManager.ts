@@ -1,6 +1,6 @@
 import {Physics} from '../Physics/Physics'
 
-export class ObjectManager{
+export class PhysicsWrapper{
 
     private gameObject :  HTMLElement;
     private x: number = 0;
@@ -44,6 +44,11 @@ export class ObjectManager{
         this.x = this.physics.getVerticalPosition();
        // console.log('velocity ' + this.physics.getVerticalVelocity())
         this.gameObject.style.top = this.x + 'px'
+    }
+
+    setPosition(xCoord: number, yCoord: number){
+        this.physics.hyperMove(xCoord, yCoord);
+        
     }
     
 
