@@ -29,7 +29,6 @@ function Flappybird() {
 let gameLoop = new GameLoop();
 let eventHandler = new EventHandler();
 
-
 window.onload = function() {
 
     // Pipe spawnar frá høgru
@@ -38,30 +37,43 @@ window.onload = function() {
         object.style.left = px + 'px';
     }
 
+    // Variables for resetting pipes
     let pipeOne = new spawnObject('pipesBothFirst', 500);
     let pipeTwo = new spawnObject('pipesBothSecond', 800);
     let pipeThree = new spawnObject('pipesBothThird', 1100);
 
-    let run = false;
-
+    // Object instances with parameter for horizontal/vertical acceleration and velocity
     let playerobject = new PhysicsWrapper('playerSprite' , 2, 2, 2, 20);
-    let firtPipeObject = new PhysicsWrapper('pipesBothFirst', 1, -150, 1, 1);
-    let secPipeObject = new PhysicsWrapper('pipesBothSecond', 1, -150, 1, 1);
-    let thirdPipeObject = new PhysicsWrapper('pipesBothThird', 1, -150, 1, 1);
+    let firstPipeObject = new PhysicsWrapper('pipesBothFirst', 0, -100, 0, 1);
+    let secPipeObject = new PhysicsWrapper('pipesBothSecond', 0, -100, 0, 1);
+    let thirdPipeObject = new PhysicsWrapper('pipesBothThird', 0, -100, 0, 1);
+    
+    let run = true; // Boolean for running functionality once
 
+    // Input handler for jumping
     eventHandler.keyPressDown('Space', event => {
-        run = false;
+        
+        // Starts all functionality when 'space' is entered first time, runs once
+        if(run) {
+            gameLoop.start(calledFunctions);
+            run = false;
+        }
+        // Update position of bird
+        playerobject.setPosition(playerobject.getHorizontalPosition() + 0, playerobject.getVerticalPosition() - 35)
         console.log("pressed");
         console.log(run);
-        gameLoop.start(calledFunctions);
+        
     });
 
-    let playerdiv = document.getElementById('playerSprite')
+    let playerdiv = document.getElementById('playerSprite');
+    playerdiv.style.top = '35%';
+    
 
+    // Functions for moving, checking collision and game over screen
     function calledFunctions() {
 
         playerobject.moveY();
-        firtPipeObject.moveX();
+        firstPipeObject.moveX();
         secPipeObject.moveX();
         thirdPipeObject.moveX();
 
@@ -76,8 +88,6 @@ window.onload = function() {
         
         let thirdLowerPipeCollider = new Collider(document.getElementById('pipeLowerThird'));
         let thirdUpperPipeCollider = new Collider(document.getElementById('pipeUpperThird'));
-
-        //playerobject.startmoveX();
       
         console.log('collide with ground ' +  playerCollider.collidesWith(groundCollider));
         console.log('collide with ground ' +  groundCollider.collidesWith(playerCollider));
@@ -88,19 +98,53 @@ window.onload = function() {
         console.log('collide third pipe lower ' + thirdLowerPipeCollider.collidesWith(playerCollider));
         console.log('collide third pipe upper ' + thirdUpperPipeCollider.collidesWith(playerCollider));
 
-        function gameOver(){
-            if( playerCollider.collidesWith(groundCollider) ||
-                playerCollider.collidesWith(firstLowerPipeCollider) || playerCollider.collidesWith(firstUpperPipeCollider) ||
-                playerCollider.collidesWith(secLowerPipeCollider) || playerCollider.collidesWith(secUpperPipeCollider) ||
-                playerCollider.collidesWith(thirdLowerPipeCollider) || playerCollider.collidesWith(thirdUpperPipeCollider)) {
-                    return true;
+        let pipeOneLowerDiv = document.getElementById('pipeLowerFirst')
+        let pipeOneUpperDiv = document.getElementById('pipeUpperFirst')
+        let pipeTwoLowerDiv = document.getElementById('pipeLowerSecond')
+        let pipeTwoUpperDiv = document.getElementById('pipeUpperSecond')
+        let pipeThreeLowerDiv = document.getElementById('pipeLowerThird')
+        let pipeThreeUpperDiv = document.getElementById('pipeUpperThird')
+
+        let scoreCounter: number = 0;
+        // Resets pipes according to which pillar is infront of itself for a consistent look
+        if(firstPipeObject.getHorizontalPosition() < -60) {
+
+            firstPipeObject.setPosition(thirdPipeObject.getHorizontalPosition() + 300, thirdPipeObject.getVerticalPosition());
+            let rand= Math.random() * 150 ;
+            pipeOneLowerDiv.style.bottom = rand+ 'px'
+            pipeOneUpperDiv.style.bottom = rand + 350 + 'px';
+            
+        }
+        if(secPipeObject.getHorizontalPosition() < -60) {
+
+            secPipeObject.setPosition(firstPipeObject.getHorizontalPosition() + 300, firstPipeObject.getVerticalPosition());
+            let rand= Math.random() * 150;
+            pipeTwoLowerDiv.style.bottom = rand + 'px'
+            pipeTwoUpperDiv.style.bottom = rand + 350 + 'px';
+        }
+        if(thirdPipeObject.getHorizontalPosition() < -60) {
+
+            thirdPipeObject.setPosition(secPipeObject.getHorizontalPosition() + 300, secPipeObject.getVerticalPosition());
+            let rand= Math.random() * 150;
+            pipeThreeLowerDiv.style.bottom = rand + 'px'
+            pipeThreeUpperDiv.style.bottom = rand + 350 + 'px';
         }
 
-    }    
+
+    function gameOver(){
+        if( playerCollider.collidesWith(groundCollider) ||
+            playerCollider.collidesWith(firstLowerPipeCollider) || playerCollider.collidesWith(firstUpperPipeCollider) ||
+            playerCollider.collidesWith(secLowerPipeCollider) || playerCollider.collidesWith(secUpperPipeCollider) ||
+            playerCollider.collidesWith(thirdLowerPipeCollider) || playerCollider.collidesWith(thirdUpperPipeCollider)) 
+            {
+                return true;
+        }
+    }  
+
     if(gameOver()){
             gameLoop.stop();
         }
-    }
+}
 }
 
 export default Flappybird;

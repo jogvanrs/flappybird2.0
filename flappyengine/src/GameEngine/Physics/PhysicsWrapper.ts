@@ -48,8 +48,8 @@ export class PhysicsWrapper{
 
     setPosition(xCoord: number, yCoord: number){
         this.physics.setPosition(xCoord, yCoord);
-        this.x = xCoord;
-        this.y = yCoord;
+        //this.x = xCoord;
+        //this.y = yCoord;
     }
 
     setHorizontalAcceleration(hAcceleration: number){
