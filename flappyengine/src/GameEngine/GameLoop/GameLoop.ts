@@ -15,9 +15,9 @@ export class GameLoop {
     /*
     Platformer functions
     */
-    start(functions:any):void {
+    start(functions:any, interval:number):void {
 
-        this.interval = setInterval(functions, 24)
+        this.interval = setInterval(functions, interval)
     }
 
     stop():void {
