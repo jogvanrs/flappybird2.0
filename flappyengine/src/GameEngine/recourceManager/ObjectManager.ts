@@ -41,9 +41,9 @@ export class PhysicsWrapper{
     moveY(){
 
         this.physics.step(this.time);
-        this.x = this.physics.getVerticalPosition();
+        this.y = this.physics.getVerticalPosition();
        // console.log('velocity ' + this.physics.getVerticalVelocity())
-        this.gameObject.style.top = this.x + 'px'
+        this.gameObject.style.top = this.y + 'px'
     }
 
     setPosition(xCoord: number, yCoord: number){

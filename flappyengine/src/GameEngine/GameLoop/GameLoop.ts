@@ -2,18 +2,18 @@
 
 export class GameLoop {
 
-    platformInterval:any;
+    interval:any;
 
     /*
     Platformer functions
     */
-    platformStart(functions:any):void {
+    start(functions:any):void {
 
-        this.platformInterval = setInterval(functions, 24)
+        this.interval = setInterval(functions, 24)
     }
 
-    platformStop():void {
+    stop():void {
 
-        clearInterval(this.platformInterval)
+        clearInterval(this.interval)
     }
 }

@@ -41,18 +41,20 @@ let pipeObject = new PhysicsWrapper('pipesBothFirst', 1, -150, 1, 1);
         run = false;
         console.log("pressed")
         console.log(run)
-        gameLoop.platformStart(calledFunctions);
+        gameLoop.start(calledFunctions);
     });
 
 let playerCollider = new Collider(document.getElementById('playerSprite')); 
 let pipe1Collider = new Collider(document.getElementById('pipeLowerFirst'));
 let groundCollider = new Collider(document.getElementById('ground'));
 let pipe1uppCollider = new Collider(document.getElementById('pipeUpperFirst'))
+
+    let playerdiv = document.getElementById('playerSprite')
+
 function calledFunctions() {
 
     playerobject.moveY();
     pipeObject.moveX();
-
 
     //playerobject.startmoveX();
 
@@ -70,7 +72,7 @@ function calledFunctions() {
     }
    }    
    if(gameOver()){
-        gameLoop.platformStop();
+        gameLoop.stop();
     }
 }
 }
