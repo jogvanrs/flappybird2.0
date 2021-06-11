@@ -25,26 +25,30 @@ function Flappybird() {
 
 let gameLoop = new GameLoop();
 let eventHandler = new EventHandler();
-let run = false;
+
 
 window.onload = function() {
 
 // Pipe spawnar frá høgru
 let test = document.getElementById('pipesBothFirst');
 test.style.left = 500 + 'px';
-
+let run = false;
+ 
 let playerobject = new ObjectManager('playerSprite' , 2, 2, 2, 20);
-let pipeObject = new ObjectManager('pipesBothFirst', 0, -150, 0, 0);
+let pipeObject = new ObjectManager('pipesBothFirst', 1, -150, 1, 1);
 
-    eventHandler.keyPressDown('Space', event => {
-        run = true;
-    
+  eventHandler.keyPressDown('Space', event => {
+        run = false;
+        console.log("pressed")
+        console.log(run)
+        gameLoop.platformStart(calledFunctions);
     });
-        while (run) {
-        gameLoop.platformStart(calledFunctions());
-    }
+
 
 function calledFunctions() {
+
+    playerobject.moveY();
+    pipeObject.moveX();
 
 let playerCollider = new Collider(document.getElementById('playerSprite')); 
 let pipe1Collider = new Collider(document.getElementById('pipeLowerFirst'));
