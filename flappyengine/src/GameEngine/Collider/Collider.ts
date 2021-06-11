@@ -91,6 +91,9 @@ export class Collider{
          */
         return this.mayCollideWith(otherCollider);
     }
+    public static collides(c1:Collider, c2:Collider){
+        return c1.collidesWith(c2);
+    }
 
 
 

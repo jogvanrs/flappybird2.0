@@ -21,11 +21,15 @@ test('constructor from html', () => {
 function expectCollision(c1:Collider, c2:Collider){
     expect(c1.collidesWith(c2));
     expect(c2.collidesWith(c1));
+    expect(Collider.collides(c1,c2));
+    expect(Collider.collides(c2,c1));
 }
 function expectNoCollision(c1:Collider, c2:Collider){
     assert(c1 != c2);
     expect(! c1.collidesWith(c2));
     expect(! c2.collidesWith(c1));
+    expect(!Collider.collides(c1,c2));
+    expect(!Collider.collides(c2,c1));
 }
 
 test('Collisions', () => {
