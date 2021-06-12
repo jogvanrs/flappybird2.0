@@ -12,8 +12,9 @@ export class PhysicsWrapper{
     private physics: Physics;
     private time: number = (1000/1000)/24;
 
-    constructor(object:string, hAcceleration: number, hVelocity: number, vAcceleration: number, vVelocity: number){
-        //this.gameObject = document.getElementById(object);
+    constructor(object:string, hAcceleration: number, hVelocity: number,
+                vAcceleration: number, vVelocity: number) {
+        
         if(object !== null || object !== undefined){
            this.gameObject = document.getElementById(object)
            let tmp = this.gameObject.getBoundingClientRect() as DOMRect;
@@ -25,16 +26,12 @@ export class PhysicsWrapper{
            this.vVelocity = vVelocity
            this.physics = new Physics(this.x,this.y,this.hVelocity,this.vVelocity,this.hAcceleration,this.vAcceleration)
         }
-        console.log(this.gameObject);
-        console.log('vacc ' + this.hVelocity)
-        console.log()
     }
 
     moveX(){
 
         this.physics.step(this.time);
         this.x = this.physics.getHorizontalPosition();
-        //console.log('velocity ' + this.physics.getHorizontalVelocity())
         this.gameObject.style.left = this.x + 'px'
     }
 
@@ -42,14 +39,11 @@ export class PhysicsWrapper{
 
         this.physics.step(this.time);
         this.y = this.physics.getVerticalPosition();
-       // console.log('velocity ' + this.physics.getVerticalVelocity())
         this.gameObject.style.top = this.y + 'px'
     }
 
     setPosition(xCoord: number, yCoord: number){
         this.physics.setPosition(xCoord, yCoord);
-        //this.x = xCoord;
-        //this.y = yCoord;
     }
 
     setHorizontalAcceleration(hAcceleration: number){

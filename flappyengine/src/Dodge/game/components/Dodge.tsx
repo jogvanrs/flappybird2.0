@@ -10,7 +10,7 @@ import { PhysicsWrapper } from '../../../GameEngine/Physics/PhysicsWrapper'
 import { GameLoop } from '../../../GameEngine/GameLoop/GameLoop'
 import { Collider } from "../../../GameEngine/Collider/Collider";
 import { EventHandler } from '../../../GameEngine/EventHandler/EventHandler'
-import { Sound } from '../../../GameEngine/AudioManager/Sound'
+import { Sound } from '../../../GameEngine/SoundManager/Sound'
 
 const windowWidth = 399;
 const windowHeight = 399;
@@ -99,6 +99,9 @@ function init() {
 
         playerObject.setPosition(199, 375);
 
+        fallSound.play();
+        fallSound2.play();
+        fallSound3.play();
         blockFirstObject.setPosition(Math.floor(Math.random()*(windowWidth - 13) + 1), -16);
         blockSecondObject.setPosition(Math.floor(Math.random()*(windowWidth - 13) + 1), -149);
         blockThirdObject.setPosition(Math.floor(Math.random()*(windowWidth - 13) + 1), -282);

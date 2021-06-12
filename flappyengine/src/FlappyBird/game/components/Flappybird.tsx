@@ -12,7 +12,7 @@ import { PhysicsWrapper } from '../../../GameEngine/Physics/PhysicsWrapper'
 import { GameLoop } from '../../../GameEngine/GameLoop/GameLoop'
 import { Collider } from "../../../GameEngine/Collider/Collider";
 import { EventHandler } from '../../../GameEngine/EventHandler/EventHandler'
-import { Sound } from '../../../GameEngine/AudioManager/Sound'
+import { Sound } from '../../../GameEngine/SoundManager/Sound'
 
 function Flappybird() {
     return(
@@ -175,7 +175,6 @@ function FlappyBirdGame() {
                     wingSound.setVolume(0);
                     dieSound.play();
                     return true; 
-                    
             }
         }  
 
