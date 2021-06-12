@@ -12,6 +12,7 @@ import { PhysicsWrapper } from '../../../GameEngine/Physics/PhysicsWrapper'
 import { GameLoop } from '../../../GameEngine/GameLoop/GameLoop'
 import { Collider } from "../../../GameEngine/Collider/Collider";
 import { EventHandler } from '../../../GameEngine/EventHandler/EventHandler'
+import {Sound} from '../../../GameEngine/AudioManager/SoundEffect'
 
 function Flappybird() {
     return(
@@ -37,6 +38,9 @@ let eventHandler = new EventHandler();
 gameLoop.init(FlappyBirdGame);
 
 function FlappyBirdGame() {
+
+    let dieSound = new Sound(process.env.PUBLIC_URL + 'Audio/flappysound/die.wav/', 0.7, false);
+    let wingsound = new Sound('../flappysound/wing.wav/', 0.7, false);
 
     let gameOverScreen = document.getElementById("gameover")
     gameOverScreen.style.display = "none"
@@ -93,6 +97,7 @@ function FlappyBirdGame() {
 
         // Update position of bird
         movePlayer(playerobject);
+        wingsound.play();
     });
 
 

@@ -1,52 +1,41 @@
-/*class for individual sound effects
-* the audio manager calls this class to create a HTMLAduioElement
-*/
-export class SoundEffect {
-    private sound: HTMLAudioElement;
-   
-    /*creating the sound effect
-    @param assetPath: path to the audio file.
-    @param loop: if the file should loop or played once.
-    */
-    public constructor(assetPath: string, loop: boolean, volume: number){
-        this.sound = new Audio(assetPath);
-        this.sound.loop = loop;
-        this.sound.volume = volume
+
+export class Sound {
+
+    private Sound: HTMLAudioElement;
+
+    constructor(audioPath: string, volume: number, loop: boolean){
+        this.Sound = new Audio(audioPath);
+        this.Sound.volume = volume;
+        this.Sound.loop = loop;
+        this.Sound.canPlayType('wav')
     }
 
-    //getter for the loop
-    public get loop(): boolean{
-        return this.sound.loop;
+    getLoop(): boolean{
+        return this.Sound.loop;
     }
 
-    //setter for if the sound effect should loop or not
-    public set loop(value: boolean){
-        this.sound.loop = value;
+    setLoop(loop: boolean){
+        this.Sound.loop = loop;
+    } 
+
+    getVolume(){
+        return this.Sound.volume;
     }
 
-    // plays the sound effect if the sound effect is being played
-    // it will be reset before being played again
-    public play(): void {
-        if (!this.sound.paused) {
+    setVolume(volume: number){
+        this.Sound.volume = volume;
+    }
+
+    play(){
+        if(!this.Sound.paused){
             this.stop();
         }
-        this.sound.play();
+        this.Sound.play();
     }
 
-    //pauses the sound effect and resets it.
-    public stop(): void {
-        this.sound.pause();
-        this.sound.currentTime = 0;
-    }
-
-    //get volume of sound effect
-    public get volume(): number{
-        return this.sound.volume;
-    }
-
-    //set the volume of sound effect
-    public set volume(value: number){
-        this.sound.volume = value;
+    stop(){
+        this.Sound.pause()
+        this.Sound.currentTime = 0;
     }
     
 }
