@@ -5,11 +5,19 @@ export class GameLoop {
     interval:any;
 
     /*
+    makes function calls after page is loaded
+    */
+    init(initfunc: any): void{
+        window.onload = initfunc;
+
+    }
+
+    /*
     Platformer functions
     */
-    start(functions:any):void {
+    start(functions:any, interval:number):void {
 
-        this.interval = setInterval(functions, 24)
+        this.interval = setInterval(functions, interval)
     }
 
     stop():void {

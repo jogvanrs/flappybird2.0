@@ -22,83 +22,164 @@ function Flappybird() {
             <PipesThird />
             <Ground />
             <ScoreBoard />
+            <GameOverScreen />
         </div>
     )
 }
 
+function movePlayer(player: PhysicsWrapper){
+    player.setVerticalVelocity(-100)
+}
+        
 let gameLoop = new GameLoop();
 let eventHandler = new EventHandler();
 
+gameLoop.init(FlappyBirdGame);
 
-window.onload = function() {
+function FlappyBirdGame() {
 
+    let gameOverScreen = document.getElementById("gameover")
+    gameOverScreen.style.display = "none"
+    
     // Pipe spawnar frá høgru
     function spawnObject(div: string, px: number) {
         let object = document.getElementById(div);
         object.style.left = px + 'px';
     }
 
-    let pipeOne = new spawnObject('pipesBothFirst', 500);
-    let pipeTwo = new spawnObject('pipesBothSecond', 800);
-    let pipeThree = new spawnObject('pipesBothThird', 1100);
+     // Variables for setting pipes
+    spawnObject('pipesBothFirst', 500);
+    spawnObject('pipesBothSecond', 800);
+    spawnObject('pipesBothThird', 1100);
+    
 
-    let run = false;
+    // Object instances with parameter for horizontal/vertical acceleration and velocity
+    let playerobject = new PhysicsWrapper('playerSprite' , 2, 2, 60, 20);
+    let firstPipeObject = new PhysicsWrapper('pipesBothFirst', 0, -100, 0, 1);
+    let secPipeObject = new PhysicsWrapper('pipesBothSecond', 0, -100, 0, 1);
+    let thirdPipeObject = new PhysicsWrapper('pipesBothThird', 0, -100, 0, 1);
 
-    let playerobject = new PhysicsWrapper('playerSprite' , 2, 2, 2, 20);
-    let firtPipeObject = new PhysicsWrapper('pipesBothFirst', 1, -150, 1, 1);
-    let secPipeObject = new PhysicsWrapper('pipesBothSecond', 1, -150, 1, 1);
-    let thirdPipeObject = new PhysicsWrapper('pipesBothThird', 1, -150, 1, 1);
+    playerobject.setPosition(0,250);
 
+    let playerdiv = document.getElementById('playerSprite');
+    
+    function initialstate(){  
+        // Variables for setting pipes
+
+        firstPipeObject.setPosition(500,firstPipeObject.getHorizontalPosition());
+        secPipeObject.setPosition(800, secPipeObject.getHorizontalPosition());
+        thirdPipeObject.setPosition(1100, thirdPipeObject.getHorizontalPosition());
+        playerobject.setPosition(0,250);
+        gameOverScreen.style.display = "none";
+        run = true;
+
+        scoreCounter = 0;
+
+    }
+
+    
+    
+    let run = true; // Boolean for running functionality once
+    let scoreCounter = 0; // Counter for when bird passes pillar
+
+    // Input handler for jumping
     eventHandler.keyPressDown('Space', event => {
-        run = false;
-        console.log("pressed");
-        console.log(run);
-        gameLoop.start(calledFunctions);
+        
+        // Starts all functionality when 'space' is entered first time, runs once
+        if(run) {
+            gameLoop.start(calledFunctions, 1000/60);
+            run = false;
+        }
+
+        // Update position of bird
+        movePlayer(playerobject);
     });
 
-    let playerdiv = document.getElementById('playerSprite')
 
+
+    
+    // Functions for moving, checking collision and game over screen
     function calledFunctions() {
 
         playerobject.moveY();
-        firtPipeObject.moveX();
+        firstPipeObject.moveX();
         secPipeObject.moveX();
         thirdPipeObject.moveX();
 
+        let pipeOneLowerDiv = document.getElementById('pipeLowerFirst');
+        let pipeOneUpperDiv = document.getElementById('pipeUpperFirst');
+        let pipeTwoLowerDiv = document.getElementById('pipeLowerSecond');
+        let pipeTwoUpperDiv = document.getElementById('pipeUpperSecond');
+        let pipeThreeLowerDiv = document.getElementById('pipeLowerThird');
+        let pipeThreeUpperDiv = document.getElementById('pipeUpperThird');
+        let scoreBoardDiv = document.getElementById('scoreBoard');
+        let groundDiv = document.getElementById('ground');
+
         let playerCollider = new Collider(playerdiv); 
-        let groundCollider = new Collider(document.getElementById('ground'));
+        let groundCollider = new Collider(groundDiv);
 
-        let firstLowerPipeCollider = new Collider(document.getElementById('pipeLowerFirst'));
-        let firstUpperPipeCollider = new Collider(document.getElementById('pipeUpperFirst'));
+        let firstLowerPipeCollider = new Collider(pipeOneLowerDiv);
+        let firstUpperPipeCollider = new Collider(pipeOneUpperDiv);
         
-        let secLowerPipeCollider = new Collider(document.getElementById('pipeLowerSecond'));
-        let secUpperPipeCollider = new Collider(document.getElementById('pipeUpperSecond'));
+        let secLowerPipeCollider = new Collider(pipeTwoLowerDiv);
+        let secUpperPipeCollider = new Collider(pipeTwoUpperDiv);
         
-        let thirdLowerPipeCollider = new Collider(document.getElementById('pipeLowerThird'));
-        let thirdUpperPipeCollider = new Collider(document.getElementById('pipeUpperThird'));
+        let thirdLowerPipeCollider = new Collider(pipeThreeLowerDiv);
+        let thirdUpperPipeCollider = new Collider(pipeThreeUpperDiv);
 
-        //playerobject.startmoveX();
-      
-        console.log('collide with ground ' +  playerCollider.collidesWith(groundCollider));
-        console.log('collide with ground ' +  groundCollider.collidesWith(playerCollider));
-        console.log('collide first pipe lower ' +  firstLowerPipeCollider.collidesWith(playerCollider));
-        console.log('collide first pipe upper ' + firstUpperPipeCollider.collidesWith(playerCollider));
-        console.log('collide second pipe lower ' + secLowerPipeCollider.collidesWith(playerCollider));
-        console.log('collide second pipe upper ' + secUpperPipeCollider.collidesWith(playerCollider));
-        console.log('collide third pipe lower ' + thirdLowerPipeCollider.collidesWith(playerCollider));
-        console.log('collide third pipe upper ' + thirdUpperPipeCollider.collidesWith(playerCollider));
+        let gap = 350;
+        let randBuffer = 150;
+
+        // Resets pipes according to which pillar is infront of itself for a consistent look
+        if(firstPipeObject.getHorizontalPosition() < -60) {
+                
+            scoreCounter++;
+            firstPipeObject.setPosition(thirdPipeObject.getHorizontalPosition() + 300, thirdPipeObject.getVerticalPosition());
+            let rand= Math.random() * randBuffer ;
+            pipeOneLowerDiv.style.bottom = rand + 'px'
+            pipeOneUpperDiv.style.bottom = rand + gap + 'px';
+        }
+
+        if(secPipeObject.getHorizontalPosition() < -60) {
+                
+            scoreCounter++;
+            secPipeObject.setPosition(firstPipeObject.getHorizontalPosition() + 300, firstPipeObject.getVerticalPosition());
+            let rand= Math.random() * randBuffer;
+            pipeTwoLowerDiv.style.bottom = rand + 'px'
+            pipeTwoUpperDiv.style.bottom = rand + gap + 'px';
+        }
+
+        if(thirdPipeObject.getHorizontalPosition() < -60) {
+            
+            scoreCounter++;
+            thirdPipeObject.setPosition(secPipeObject.getHorizontalPosition() + 300, secPipeObject.getVerticalPosition());
+            let rand= Math.random() * randBuffer;
+            pipeThreeLowerDiv.style.bottom = rand + 'px'
+            pipeThreeUpperDiv.style.bottom = rand + gap + 'px';
+            
+        }   
+        scoreBoardDiv.innerHTML = 'Score: ' + scoreCounter;
 
         function gameOver(){
             if( playerCollider.collidesWith(groundCollider) ||
                 playerCollider.collidesWith(firstLowerPipeCollider) || playerCollider.collidesWith(firstUpperPipeCollider) ||
                 playerCollider.collidesWith(secLowerPipeCollider) || playerCollider.collidesWith(secUpperPipeCollider) ||
-                playerCollider.collidesWith(thirdLowerPipeCollider) || playerCollider.collidesWith(thirdUpperPipeCollider)) {
+                playerCollider.collidesWith(thirdLowerPipeCollider) || playerCollider.collidesWith(thirdUpperPipeCollider)) 
+                {
                     return true;
-        }
+            }
+        }  
 
-    }    
-    if(gameOver()){
+        if(gameOver()){
+            gameOverScreen.style.display = "block";
+            let gameDeathScore = document.getElementById('deathScore');
+            
+            gameDeathScore.innerHTML = 'Score: ' + scoreCounter;
+
             gameLoop.stop();
+            document.getElementById('playAgain').addEventListener('click', function() {
+                        initialstate();
+            });
         }
     }
 }

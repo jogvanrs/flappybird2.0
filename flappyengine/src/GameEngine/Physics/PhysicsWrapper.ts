@@ -48,8 +48,8 @@ export class PhysicsWrapper{
 
     setPosition(xCoord: number, yCoord: number){
         this.physics.setPosition(xCoord, yCoord);
-        this.x = xCoord;
-        this.y = yCoord;
+        //this.x = xCoord;
+        //this.y = yCoord;
     }
 
     setHorizontalAcceleration(hAcceleration: number){
@@ -60,11 +60,24 @@ export class PhysicsWrapper{
         this.physics.setVerticalAcceleration(vAccelleration);
     }
 
+    setVerticalVelocity(speed: number){
+        this.physics.setVerticalVelocity(speed)
+    }
+
+    setHorizontalVelocity(speed: number){
+        this.physics.setHorizontalVelocity(speed)
+    }
+
+
     getVerticalPosition(){
         return this.y;
     }
 
     getHorizontalPosition(){
         return this.x;
+    }
+
+    hyperMove(one: number, two: number){
+        this.physics.hyperMove(one, two)
     }
 }

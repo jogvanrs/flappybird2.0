@@ -26,7 +26,6 @@ function GameOverScreen (){
             }}>
             <img src={gameOverpng} alt="null"></img>
             <div id="deathScore" style = {pStyle}>Score: </div>
-            <div id="highScore" style = {pStyle}>Score: </div><br/>
  
             <button style={buttonStyle} id="playAgain"></button>
         </div>

@@ -1,8 +1,9 @@
 import './App.css';
-import Flappybird from './FlappyBird/game/components/Flappybird'
+//import Game from './FlappyBird/game/components/Flappybird'
+import Game from './Dodge/game/components/Dodge'
 
 function App() {
-  return ( <Flappybird></Flappybird> );
+  return ( <Game></Game> );
 }
 
 export default App;
