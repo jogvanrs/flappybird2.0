@@ -14,12 +14,6 @@ import { Collider } from "../../../GameEngine/Collider/Collider";
 import { EventHandler } from '../../../GameEngine/EventHandler/EventHandler'
 import { Sound } from '../../../GameEngine/AudioManager/Sound'
 
-let wingSound = new Sound(process.env.PUBLIC_URL + './sound/wing.wav', 1, false);
-let dieSound = new Sound(process.env.PUBLIC_URL + './sound/die.wav', 1, false);
-let pointSound = new Sound(process.env.PUBLIC_URL + './sound/point.wav', 1, false);
-
-console.log(process.env.PUBLIC_URL)
-
 function Flappybird() {
     return(
         <div id='gameWindow'>
@@ -34,17 +28,16 @@ function Flappybird() {
     )
 }
 
-function movePlayer(player: PhysicsWrapper){
-    player.setVerticalVelocity(-100)
-    wingSound.play();
-}
-        
 let gameLoop = new GameLoop();
 let eventHandler = new EventHandler();
 
 gameLoop.init(FlappyBirdGame);
 
 function FlappyBirdGame() {
+
+    let wingSound = new Sound(process.env.PUBLIC_URL + './sound/wing.wav', 1, false);
+    let dieSound = new Sound(process.env.PUBLIC_URL + './sound/die.wav', 1, false);
+    let pointSound = new Sound(process.env.PUBLIC_URL + './sound/point.wav', 1, false);
 
     let gameOverScreen = document.getElementById("gameover")
     gameOverScreen.style.display = "none"
@@ -60,7 +53,6 @@ function FlappyBirdGame() {
     spawnObject('pipesBothSecond', 800);
     spawnObject('pipesBothThird', 1100);
     
-
     // Object instances with parameter for horizontal/vertical acceleration and velocity
     let playerobject = new PhysicsWrapper('playerSprite' , 2, 2, 60, 20);
     let firstPipeObject = new PhysicsWrapper('pipesBothFirst', 0, -100, 0, 1);
@@ -86,7 +78,10 @@ function FlappyBirdGame() {
 
     }
 
-    
+    function movePlayer(player: PhysicsWrapper){
+        player.setVerticalVelocity(-100)
+        wingSound.play();
+    }
     
     let run = true; // Boolean for running functionality once
     let scoreCounter = 0; // Counter for when bird passes pillar

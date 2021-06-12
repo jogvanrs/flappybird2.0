@@ -28,29 +28,26 @@ function Dodge() {
     )
 }
 
-let fallSound = new Sound(process.env.PUBLIC_URL + './sound/fall.wav', 1, false);
-let fallSound2 = new Sound(process.env.PUBLIC_URL + './sound/fall.wav', 1, false);
-let fallSound3 = new Sound(process.env.PUBLIC_URL + './sound/fall.wav', 1, false);
-let pointSound = new Sound(process.env.PUBLIC_URL + './sound/point.wav', 1, false);
-let dieDound = new Sound(process.env.PUBLIC_URL + './sound/demodie.wav', 1, false);
-
-
-
 let gameLoop = new GameLoop();
+let eventHandler = new EventHandler();
 
 gameLoop.init(init);
 
 function init() {
 
     let run = true;
-    let scoreCounter:number = 0; 
-
-    let eventHandler = new EventHandler();
+    let scoreCounter:number = 0;
     
     let playerObject = new PhysicsWrapper('playerSprite', 0, 0, 0, 0);
     let blockFirstObject = new PhysicsWrapper('blockFirst', 0, 0, 3, 30);
     let blockSecondObject = new PhysicsWrapper('blockSecond', 0, 0, 3, 30);
     let blockThirdObject = new PhysicsWrapper('blockThird', 0, 0, 3, 30);
+
+    let fallSound = new Sound(process.env.PUBLIC_URL + './sound/fall.wav', 1, false);
+    let fallSound2 = new Sound(process.env.PUBLIC_URL + './sound/fall.wav', 1, false);
+    let fallSound3 = new Sound(process.env.PUBLIC_URL + './sound/fall.wav', 1, false);
+    let pointSound = new Sound(process.env.PUBLIC_URL + './sound/point.wav', 1, false);
+    let dieDound = new Sound(process.env.PUBLIC_URL + './sound/demodie.wav', 1, false);
     
     let player = document.getElementById('playerSprite');
     let blockFirst = document.getElementById('blockFirst');
@@ -63,7 +60,6 @@ function init() {
     blockThird.style.display='none'
     
     // Inital positions
-
     function initialState() {
 
         player.style.left = 200 + 'px';
@@ -87,7 +83,6 @@ function init() {
         scoreCounter = 0;
     }
 
-
     eventHandler.keyPressDown('Space', event => {
     
         if(run) {
@@ -95,7 +90,7 @@ function init() {
             start();
             gameLoop.start(calledFunctions, 1000/24);
             run = false;
-            
+
             initialState();
         }
     });
