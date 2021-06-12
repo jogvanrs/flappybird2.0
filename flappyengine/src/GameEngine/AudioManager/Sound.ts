@@ -1,5 +1,3 @@
-import { runInThisContext } from "vm";
-
 export class Sound {
 
     private Sound: HTMLAudioElement;
@@ -9,10 +7,6 @@ export class Sound {
 
         this.Sound.volume = volume;
         this.Sound.loop = loop;
-        //this.Sound.crossOrigin = 'anonymous';
-        //this.Sound.canPlayType('audio/wav');
-
-        
     }
 
     getLoop(): boolean{
@@ -33,10 +27,8 @@ export class Sound {
 
     play(){
 
-  
         this.stop();
         this.Sound.play()
-        
     }
 
     stop(){
@@ -44,5 +36,4 @@ export class Sound {
         this.Sound.pause();
         this.Sound.currentTime = 0;
     }
-    
 }
