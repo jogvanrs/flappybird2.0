@@ -1,10 +1,10 @@
 export class Physics{
-    x: number;  // Corresponding to a state of a rendered object
-    y: number;  // Corresponding to a state of a rendered object
-    hVelocity: number;
-    vVelocity: number;
-    hAcceleration: number;
-    vAcceleration: number;
+    private x: number;  // Corresponding to a state of a rendered object
+    private y: number;  // Corresponding to a state of a rendered object
+    private hVelocity: number;
+    private vVelocity: number;
+    private hAcceleration: number;
+    private vAcceleration: number;
 
     constructor(x: number, y: number, hVelocity: number, vVelocity: number, hAcceleration: number, vAcceleration: number){
         this.x = x;
@@ -68,7 +68,7 @@ export class Physics{
         // Instant 'hyperspace' move, changing position
         // without changing speed or acceleration.
         this.x += horizontalJump;
-        this.y +=verticalJump;
+        this.y += verticalJump;
     }
 
     step(time:number){

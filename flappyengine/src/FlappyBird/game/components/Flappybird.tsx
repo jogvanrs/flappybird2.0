@@ -12,7 +12,7 @@ import { PhysicsWrapper } from '../../../GameEngine/Physics/PhysicsWrapper'
 import { GameLoop } from '../../../GameEngine/GameLoop/GameLoop'
 import { Collider } from "../../../GameEngine/Collider/Collider";
 import { EventHandler } from '../../../GameEngine/EventHandler/EventHandler'
-import { Sound } from '../../../GameEngine/AudioManager/Sound'
+import { Sound } from '../../../GameEngine/SoundManager/Sound'
 
 let wingSound = new Sound(process.env.PUBLIC_URL + './sound/wing.wav', 1, false);
 let dieSound = new Sound(process.env.PUBLIC_URL + './sound/die.wav', 1, false);
@@ -180,7 +180,6 @@ function FlappyBirdGame() {
                     wingSound.setVolume(0);
                     dieSound.play();
                     return true; 
-                    
             }
         }  
 
