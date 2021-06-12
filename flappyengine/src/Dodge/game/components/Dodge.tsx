@@ -10,6 +10,7 @@ import { PhysicsWrapper } from '../../../GameEngine/Physics/PhysicsWrapper'
 import { GameLoop } from '../../../GameEngine/GameLoop/GameLoop'
 import { Collider } from "../../../GameEngine/Collider/Collider";
 import { EventHandler } from '../../../GameEngine/EventHandler/EventHandler'
+import { Sound } from '../../../GameEngine/AudioManager/Sound'
 
 const windowWidth = 399;
 const windowHeight = 399;
@@ -26,6 +27,14 @@ function Dodge() {
         </div>
     )
 }
+
+let fallSound = new Sound(process.env.PUBLIC_URL + './sound/fall.wav', 1, false);
+let fallSound2 = new Sound(process.env.PUBLIC_URL + './sound/fall.wav', 1, false);
+let fallSound3 = new Sound(process.env.PUBLIC_URL + './sound/fall.wav', 1, false);
+let pointSound = new Sound(process.env.PUBLIC_URL + './sound/point.wav', 1, false);
+let dieDound = new Sound(process.env.PUBLIC_URL + './sound/demodie.wav', 1, false);
+
+
 
 let gameLoop = new GameLoop();
 
@@ -86,7 +95,7 @@ function init() {
             start();
             gameLoop.start(calledFunctions, 1000/24);
             run = false;
-
+            
             initialState();
         }
     });
@@ -121,7 +130,7 @@ function init() {
         // Player move left
         eventHandler.keyPressDown('ArrowLeft', event => {
 
-                playerObject.setHorizontalVelocity(-40);
+            playerObject.setHorizontalVelocity(-40);
         })
 
         eventHandler.keyPressUp('ArrowLeft', event => {
@@ -143,6 +152,9 @@ function init() {
         // Relocates blocks if ground is touched
         if (blockFirstObject.getVerticalPosition() > windowHeight) {
 
+            fallSound.play();
+            pointSound.play();
+
             let randomX = Math.floor(Math.random()*(windowWidth - 13) + 1);
 
             blockFirstObject.setPosition(randomX, -16);
@@ -151,6 +163,9 @@ function init() {
         }
 
         if (blockSecondObject.getVerticalPosition() > windowHeight) {
+
+            fallSound2.play();
+            pointSound.play();
 
             let randomX = Math.floor(Math.random()*(windowWidth - 13) + 1);
 
@@ -161,6 +176,9 @@ function init() {
 
         if (blockThirdObject.getVerticalPosition() > windowHeight) {
 
+            fallSound3.play();
+            pointSound.play();
+
             let randomX = Math.floor(Math.random()*(windowWidth - 13) + 1);
 
             blockThirdObject.setPosition(randomX, -16);
@@ -170,6 +188,7 @@ function init() {
 
         // Moves player to opposite side of wall is touched
         if (playerObject.getHorizontalPosition() < 1) {
+        
 
             playerObject.setPosition(windowWidth - 25, playerObject.getVerticalPosition())
         }
@@ -186,6 +205,11 @@ function init() {
             if(playerCollider.collidesWith(blockFirstCollider) ||
                playerCollider.collidesWith(blockSecondCollider) ||
                playerCollider.collidesWith(blockThirdCollider)) {
+                
+                fallSound.stop();
+                fallSound2.stop();
+                fallSound3.stop();
+                dieDound.play();
 
                 return true;
             }
