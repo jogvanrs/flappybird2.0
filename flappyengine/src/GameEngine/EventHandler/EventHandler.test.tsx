@@ -1,7 +1,9 @@
 
 import React from 'react';
-import { fireEvent} from '@testing-library/react';
+import { render, screen, fireEvent} from '@testing-library/react';
 import {EventHandler} from './EventHandler'
+import assert from "assert";
+import  Flappybird  from '../../FlappyBird/game/components/Flappybird';
 
 let gotSpaceDown: boolean | undefined;
 let gotUppercaseXDown: boolean | undefined;
@@ -20,6 +22,8 @@ function init(){
 }
 
 test("no reaction to no event", ()=>{
+    render(<Flappybird />);
+    assert(window);
     init();
     const eventHandler = new EventHandler();
     eventHandler.keyPressDown(" ", () =>{
@@ -35,13 +39,14 @@ test("no reaction to no event", ()=>{
     expect(! gotSpaceDown);
 })
 test("Reaction to X", ()=>{
+    render(<Flappybird />);
     init();
     const eventHandler = new EventHandler();
     eventHandler.keyPressDown("X", () =>{
-        gotSpaceDown = true;
+        gotUppercaseXDown = true;
     })
     fireEvent.keyDown(window,"a");
-    fireEvent.keyDown(window,'X');
+    fireEvent.keyDown(window,"X");
     fireEvent.keyDown(window,"a");
     expect(gotSpaceDown).toBeUndefined();
     expect(gotUppercaseXDown).toBeDefined();
