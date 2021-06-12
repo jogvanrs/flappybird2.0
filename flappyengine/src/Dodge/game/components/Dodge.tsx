@@ -60,7 +60,6 @@ function init() {
     blockThird.style.display='none'
     
     // Inital positions
-
     function initialState() {
 
         player.style.left = 200 + 'px';
@@ -83,7 +82,6 @@ function init() {
 
         scoreCounter = 0;
     }
-
 
     eventHandler.keyPressDown('Space', event => {
     
