@@ -9,7 +9,7 @@ export class EventHandler{
 
     keyPressDown(keycode : string, method: any) {
 
-        window.addEventListener("keydown", event => {
+        window.addEventListener("keydown", (event:KeyboardEvent) => {
             event.preventDefault();
 
             if (event.isComposing || event.code === keycode) {
@@ -20,7 +20,7 @@ export class EventHandler{
 
     keyPressUp(keycode : string, method: any) {
 
-        window.addEventListener("keyup", event => {
+        window.addEventListener("keyup", (event:KeyboardEvent) => {
             event.preventDefault();
 
             if (event.isComposing || event.code === keycode) {
