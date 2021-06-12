@@ -1,3 +1,4 @@
+import { runInThisContext } from "vm";
 
 export class Sound {
 
@@ -5,9 +6,13 @@ export class Sound {
 
     constructor(audioPath: string, volume: number, loop: boolean){
         this.Sound = new Audio(audioPath);
+
         this.Sound.volume = volume;
         this.Sound.loop = loop;
-        this.Sound.canPlayType('wav')
+        //this.Sound.crossOrigin = 'anonymous';
+        //this.Sound.canPlayType('audio/wav');
+
+        
     }
 
     getLoop(): boolean{
@@ -27,14 +32,16 @@ export class Sound {
     }
 
     play(){
-        if(!this.Sound.paused){
-            this.stop();
-        }
-        this.Sound.play();
+
+  
+        this.stop();
+        this.Sound.play()
+        
     }
 
     stop(){
-        this.Sound.pause()
+        
+        this.Sound.pause();
         this.Sound.currentTime = 0;
     }
     

@@ -12,7 +12,13 @@ import { PhysicsWrapper } from '../../../GameEngine/Physics/PhysicsWrapper'
 import { GameLoop } from '../../../GameEngine/GameLoop/GameLoop'
 import { Collider } from "../../../GameEngine/Collider/Collider";
 import { EventHandler } from '../../../GameEngine/EventHandler/EventHandler'
-import {Sound} from '../../../GameEngine/AudioManager/SoundEffect'
+import { Sound } from '../../../GameEngine/AudioManager/Sound'
+
+let wingSound = new Sound(process.env.PUBLIC_URL + './sound/wing.wav', 1, false);
+let dieSound = new Sound(process.env.PUBLIC_URL + './sound/die.wav', 1, false);
+let pointSound = new Sound(process.env.PUBLIC_URL + './sound/point.wav', 1, false);
+
+console.log(process.env.PUBLIC_URL)
 
 function Flappybird() {
     return(
@@ -30,6 +36,7 @@ function Flappybird() {
 
 function movePlayer(player: PhysicsWrapper){
     player.setVerticalVelocity(-100)
+    wingSound.play();
 }
         
 let gameLoop = new GameLoop();
@@ -38,9 +45,6 @@ let eventHandler = new EventHandler();
 gameLoop.init(FlappyBirdGame);
 
 function FlappyBirdGame() {
-
-    let dieSound = new Sound(process.env.PUBLIC_URL + 'Audio/flappysound/die.wav/', 0.7, false);
-    let wingsound = new Sound('../flappysound/wing.wav/', 0.7, false);
 
     let gameOverScreen = document.getElementById("gameover")
     gameOverScreen.style.display = "none"
@@ -76,6 +80,7 @@ function FlappyBirdGame() {
         playerobject.setPosition(0,250);
         gameOverScreen.style.display = "none";
         run = true;
+        wingSound.setVolume(1);
 
         scoreCounter = 0;
 
@@ -97,12 +102,10 @@ function FlappyBirdGame() {
 
         // Update position of bird
         movePlayer(playerobject);
-        wingsound.play();
+
+
     });
 
-
-
-    
     // Functions for moving, checking collision and game over screen
     function calledFunctions() {
 
@@ -139,6 +142,7 @@ function FlappyBirdGame() {
         if(firstPipeObject.getHorizontalPosition() < -60) {
                 
             scoreCounter++;
+            pointSound.play();
             firstPipeObject.setPosition(thirdPipeObject.getHorizontalPosition() + 300, thirdPipeObject.getVerticalPosition());
             let rand= Math.random() * randBuffer ;
             pipeOneLowerDiv.style.bottom = rand + 'px'
@@ -148,6 +152,7 @@ function FlappyBirdGame() {
         if(secPipeObject.getHorizontalPosition() < -60) {
                 
             scoreCounter++;
+            pointSound.play();
             secPipeObject.setPosition(firstPipeObject.getHorizontalPosition() + 300, firstPipeObject.getVerticalPosition());
             let rand= Math.random() * randBuffer;
             pipeTwoLowerDiv.style.bottom = rand + 'px'
@@ -157,6 +162,7 @@ function FlappyBirdGame() {
         if(thirdPipeObject.getHorizontalPosition() < -60) {
             
             scoreCounter++;
+            pointSound.play();
             thirdPipeObject.setPosition(secPipeObject.getHorizontalPosition() + 300, secPipeObject.getVerticalPosition());
             let rand= Math.random() * randBuffer;
             pipeThreeLowerDiv.style.bottom = rand + 'px'
@@ -171,7 +177,10 @@ function FlappyBirdGame() {
                 playerCollider.collidesWith(secLowerPipeCollider) || playerCollider.collidesWith(secUpperPipeCollider) ||
                 playerCollider.collidesWith(thirdLowerPipeCollider) || playerCollider.collidesWith(thirdUpperPipeCollider)) 
                 {
-                    return true;
+                    wingSound.setVolume(0);
+                    dieSound.play();
+                    return true; 
+                    
             }
         }  
 
@@ -179,6 +188,8 @@ function FlappyBirdGame() {
             gameOverScreen.style.display = "block";
             let gameDeathScore = document.getElementById('deathScore');
             
+           
+
             gameDeathScore.innerHTML = 'Score: ' + scoreCounter;
 
             gameLoop.stop();
