@@ -4,12 +4,14 @@
  */
 
 export class EventHandler{
-
-    
+    /*
+    The event types "keydown" and "keyup" implies keyboard events only
+    A future development will be handling other events, like mouse clicks.
+     */
 
     keyPressDown(keycode : string, method: any) {
 
-        window.addEventListener("keydown", event => {
+        window.addEventListener("keydown", (event: KeyboardEvent) => {
             event.preventDefault();
 
             if (event.isComposing || event.code === keycode) {
@@ -20,7 +22,7 @@ export class EventHandler{
 
     keyPressUp(keycode : string, method: any) {
 
-        window.addEventListener("keyup", event => {
+        window.addEventListener("keyup", (event:KeyboardEvent) => {
             event.preventDefault();
 
             if (event.isComposing || event.code === keycode) {
