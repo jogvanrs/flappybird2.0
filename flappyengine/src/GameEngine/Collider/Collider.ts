@@ -1,5 +1,3 @@
-import { strict as assert } from 'assert';
-import {Physics} from "../Physics/Physics"; // from https://tinyurl.com/393vux8e
 /*
 Colliders can be used to check if their corresponding gameObjects collide.
 Can also be used to detect collisions with ground of ceiling,
@@ -68,9 +66,4 @@ export class Collider{
     public static collides(c1:Collider, c2:Collider){
         return c1.collidesWith(c2);
     }
-
-
-
-
-
 }
