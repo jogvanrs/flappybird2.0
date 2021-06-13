@@ -35,7 +35,7 @@ gameLoop.init(init);
 
 function init() {
 
-    let run = true;
+    let waitingForUserToStartGame = true;
     let scoreCounter:number = 0;
     
     let playerObject = new PhysicsWrapper('playerSprite', 0, 0, 0, 0);
@@ -85,11 +85,11 @@ function init() {
 
     eventHandler.keyPressDown('Space', event => {
     
-        if(run) {
+        if(waitingForUserToStartGame) {
 
             start();
             gameLoop.start(calledFunctions, 1000/24);
-            run = false;
+            waitingForUserToStartGame = false;
 
             initialState();
         }
@@ -216,7 +216,7 @@ function init() {
         if(gameOver()){
 
             gameLoop.stop();
-            run = true;
+            waitingForUserToStartGame = true;
         }
     }
 }

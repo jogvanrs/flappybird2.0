@@ -71,7 +71,7 @@ function FlappyBirdGame() {
         thirdPipeObject.setPosition(1100, thirdPipeObject.getHorizontalPosition());
         playerobject.setPosition(0,250);
         gameOverScreen.style.display = "none";
-        run = true;
+        waitingForUserToStartGame = true;
         wingSound.setVolume(1);
 
         scoreCounter = 0;
@@ -83,16 +83,16 @@ function FlappyBirdGame() {
         wingSound.play();
     }
     
-    let run = true; // Boolean for running functionality once
+    let waitingForUserToStartGame = true; // Boolean for running functionality once
     let scoreCounter = 0; // Counter for when bird passes pillar
 
     // Input handler for jumping
     eventHandler.keyPressDown('Space', event => {
         
         // Starts all functionality when 'space' is entered first time, runs once
-        if(run) {
+        if(waitingForUserToStartGame) {
             gameLoop.start(calledFunctions, 1000/60);
-            run = false;
+            waitingForUserToStartGame = false;
         }
 
         // Update position of bird
