@@ -83,7 +83,7 @@ function initGame() {
         scoreCounter = 0;
     }
 
-    eventHandler.keyPressDown('Space', event => {
+    eventHandler.keyPressDown('Space', () => {
     
         if(waitingForUserToStartGame) {
 
@@ -126,23 +126,23 @@ function initGame() {
         let blockThirdCollider = new Collider(blockThird);
 
         // Player move left
-        eventHandler.keyPressDown('ArrowLeft', event => {
+        eventHandler.keyPressDown('ArrowLeft', () => {
 
             playerObject.setHorizontalVelocity(-40);
         })
 
-        eventHandler.keyPressUp('ArrowLeft', event => {
+        eventHandler.keyPressUp('ArrowLeft', () => {
 
             playerObject.setHorizontalVelocity(0);
         })
 
         // Player move right
-        eventHandler.keyPressDown('ArrowRight', event => {
+        eventHandler.keyPressDown('ArrowRight', () => {
 
             playerObject.setHorizontalVelocity(40);
         })
 
-        eventHandler.keyPressUp('ArrowRight', event => {
+        eventHandler.keyPressUp('ArrowRight', () => {
 
             playerObject.setHorizontalVelocity(0);
         })
