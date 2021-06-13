@@ -47,7 +47,7 @@ function init() {
     let fallSound2 = new Sound(process.env.PUBLIC_URL + './sound/fall.wav', 1, false);
     let fallSound3 = new Sound(process.env.PUBLIC_URL + './sound/fall.wav', 1, false);
     let pointSound = new Sound(process.env.PUBLIC_URL + './sound/point.wav', 1, false);
-    let dieDound = new Sound(process.env.PUBLIC_URL + './sound/demodie.wav', 1, false);
+    let dieSound = new Sound(process.env.PUBLIC_URL + './sound/demodie.wav', 1, false);
     
     let player = document.getElementById('playerSprite');
     let blockFirst = document.getElementById('blockFirst');
@@ -59,7 +59,7 @@ function init() {
     blockSecond.style.display='none'
     blockThird.style.display='none'
     
-    // Inital positions
+    // Initial positions
     function initialState() {
 
         player.style.left = 200 + 'px';
@@ -207,7 +207,7 @@ function init() {
                 fallSound.stop();
                 fallSound2.stop();
                 fallSound3.stop();
-                dieDound.play();
+                dieSound.play();
 
                 return true;
             }
