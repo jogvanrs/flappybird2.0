@@ -3,7 +3,7 @@ import './App.css';
 import Game from './Dodge/game/components/Dodge'
 
 function App() {
-  return ( <Game></Game> );
+  return ( <Game/> );
 }
 
 export default App;
