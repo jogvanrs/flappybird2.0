@@ -32,7 +32,7 @@ PhysicsWrapper, which takes object velocity and acceleration as arguments, allow
 
 Example of how to use PhysicsWrapper:
 
-**let playerObject = new PhysicsWrapper('playerSprite', 0, 0, 0, 0);** (Note: The four zeroes indicate the horizontal and vertical veocity of the HTMLElement).
+**let playerObject = new PhysicsWrapper('playerSprite', 0, 0, 0, 0);** (Note: The four zeroes indicate the horizontal and vertical velocity and acceleration of the HTMLElement).
 
 The Sound class takes audio file name, audio volume and loop boolean as arguments. In order for the audio file to be played, the game creator has to initialize a Sound object. Example: **let fallSound = new Sound(process.env.PUBLIC_URL + './sound/fall.wav', 1, false);**. Any audio that's to be played has to be stored inside the project's **public** directory.
 
