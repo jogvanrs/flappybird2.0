@@ -80,4 +80,16 @@ export class Collider{
     public isClearlyBelow(y: number){
         return this.getTop() > y;
     }
+    public mayBeLeftof(x:number){
+        return this.getLeft() <= x;
+    }
+    public mayBeRightof(x:number){
+        return this.getRight() >= x;
+    }
+    public mayBeAbove(y:number){
+        return this.getTop() <= y;
+    }
+    public mayBeBelow(y:number){
+        return this.getBottom() >= y;
+    }
 }
