@@ -1,37 +1,45 @@
 export class Physics{
-    private x: number;  // Corresponding to a state of a rendered object
-    private y: number;  // Corresponding to a state of a rendered object
+    private hPosition: number;  // Corresponding to a state of a rendered object
+    private vPosition: number;  // Corresponding to a state of a rendered object
     private hVelocity: number;
     private vVelocity: number;
     private hAcceleration: number;
     private vAcceleration: number;
 
-    constructor(x: number, y: number, hVelocity: number, vVelocity: number, hAcceleration: number, vAcceleration: number){
-        this.x = x;
-        this.y = y;
+    constructor(hPosition: number, vPosition: number, hVelocity: number, vVelocity: number, hAcceleration: number, vAcceleration: number){
+        this.hPosition = hPosition;
+        this.vPosition = vPosition;
         this.hAcceleration = hAcceleration;
         this.hVelocity = hVelocity;
         this.vAcceleration = vAcceleration;
         this.vVelocity = vVelocity
     }
 
-    setPosition(x: number, y: number){
-        this.x = x;
-        this.y = y;
+    setPosition(hPosition: number, vPosition: number){
+        // Instantly change absolute position
+        this.hPosition = hPosition;
+        this.vPosition = vPosition;
     }
 
-    setHorizontalPosition(x: number){
-        this.x = x;
+    relativeHyperMove(horizontalJump:number, verticalJump:number){
+        // Instant 'hyperspace' move, changing position
+        // without changing speed or acceleration.
+        // relative to current position
+        this.hPosition += horizontalJump;
+        this.vPosition += verticalJump;
+    }
+    setHorizontalPosition(hPosition: number){
+        this.hPosition = hPosition;
     }
     getHorizontalPosition(){
-        return this.x;
+        return this.hPosition;
     }
 
-    setVerticalPosition(y: number){
-        this.y = y;
+    setVerticalPosition(vPosition: number){
+        this.vPosition = vPosition;
     }
     getVerticalPosition(){
-        return this.y;
+        return this.vPosition;
     }
 
     setHorizontalVelocity(horizontalVelocity: number){
@@ -64,17 +72,10 @@ export class Physics{
         return this.hAcceleration;
     }
 
-    hyperMove(horizontalJump:number, verticalJump:number){
-        // Instant 'hyperspace' move, changing position
-        // without changing speed or acceleration.
-        this.x += horizontalJump;
-        this.y += verticalJump;
-    }
-
     step(time:number){
         // Move through one game loop interval, according to Newton's laws.
-        this.x = this.x + this.hVelocity*time + (this.hAcceleration*time**2)/2;
-        this.y = this.y + this.vVelocity*time + (this.vAcceleration*time**2)/2;
+        this.hPosition = this.hPosition + this.hVelocity*time + (this.hAcceleration*time**2)/2;
+        this.vPosition = this.vPosition + this.vVelocity*time + (this.vAcceleration*time**2)/2;
         this.hVelocity += this.hAcceleration * time;
         this.vVelocity += this.vAcceleration * time;
     }

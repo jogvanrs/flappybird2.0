@@ -72,6 +72,6 @@ export class PhysicsWrapper{
     }
 
     hyperMove(one: number, two: number){
-        this.physics.hyperMove(one, two)
+        this.physics.relativeHyperMove(one, two)
     }
 }
