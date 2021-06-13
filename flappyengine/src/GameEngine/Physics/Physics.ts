@@ -30,6 +30,7 @@ export class Physics{
     }
     setHorizontalPosition(hPosition: number){
         this.hPosition = hPosition;
+
     }
     getHorizontalPosition(){
         return this.hPosition;

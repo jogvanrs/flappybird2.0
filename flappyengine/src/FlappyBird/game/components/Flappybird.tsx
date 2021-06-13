@@ -102,10 +102,10 @@ function FlappyBirdGame() {
     // Functions for moving, checking collision and game over screen
     function calledFunctions() {
 
-        playerObject.moveY();
-        firstPipeObject.moveX();
-        secPipeObject.moveX();
-        thirdPipeObject.moveX();
+        playerObject.moveVertical();
+        firstPipeObject.moveHorizontal();
+        secPipeObject.moveHorizontal();
+        thirdPipeObject.moveHorizontal();
 
         let pipeOneLowerDiv = document.getElementById('pipeLowerFirst');
         let pipeOneUpperDiv = document.getElementById('pipeUpperFirst');
