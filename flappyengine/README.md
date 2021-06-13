@@ -13,17 +13,25 @@ Example:
 
 **gameLoop.start(calledFunctions, 1000/24);** // calledFunctions is the name of the function that holds all function to be called inside the game loop.
 
-If the game needs collision, a Collider object is instantiated. It's constructor takes a HTMLElement as an argument.
+If the game needs collision, a Collider object is instantiated. It's constructor takes an HTMLElement as an argument.
+
 Example: **let playerCollider = new Collider(player);**
 
-The EventHandler class contains two functions, keyPressUp() and keyPressDown, both of which take any given key (string type) as an argument, after which, for the rest of the game, eventListeners listen for said key input.
+The EventHandler class contains two functions, keyPressUp() and keyPressDown(), both of which take any given key (string type) as an argument, after which, for the rest of the game, eventListeners listen for said key input.
+
 Example:
+
 **let eventHandler = new EventHandler();**
+
 **eventHandler.keyPressDown('ArrowLeft', () => { playerObject.setHorizontalVelocity(-40); })**
 
-The Physics class contains needed in order to update an object's physics. None of it's functions are in direct relation with the game.
+The Physics class contains functions needed in order to update an object's physics. None of it's functions are in direct relation with the game, instead, the PhysicsWrapper class is used.
 
-PhysicsWrapper, which takes object velocity and acceleration as arguments, allows the game creator to instantiate and update the physics of any given game object, using the functions provided in the Physics class. It acts as a wrapper for the Physics class. Example of how to use PhysicsWrapper: **let playerObject = new PhysicsWrapper('playerSprite', 0, 0, 0, 0);** (Note: The four zeroes indicate the horizontal and vertical veocity of the HTMLElement).
+PhysicsWrapper, which takes object velocity and acceleration as arguments, allows the game creator to instantiate and update the physics of any given game object, using the functions provided in the Physics class. It acts as a wrapper for the Physics class.
+
+Example of how to use PhysicsWrapper:
+
+**let playerObject = new PhysicsWrapper('playerSprite', 0, 0, 0, 0);** (Note: The four zeroes indicate the horizontal and vertical veocity of the HTMLElement).
 
 The Sound class takes audio file name, audio volume and loop boolean as arguments. In order for the audio file to be played, the game creator has to initialize a Sound object. Example: **let fallSound = new Sound(process.env.PUBLIC_URL + './sound/fall.wav', 1, false);**. Any audio that's to be played has to be stored inside the project's **public** directory.
 
