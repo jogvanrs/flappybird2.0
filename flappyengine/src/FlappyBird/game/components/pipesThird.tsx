@@ -3,6 +3,8 @@ import pipeS from '../../assets/src/pipeS.png'
 
 import './sprite.css';
 
+// The PipesThird component is reused from previous project found on github : https://github.com/Slow4life/FlappyBirdReact/blob/main/src/components/PipesThird.tsx
+
 const PipesThird = (props:any) => {
 
       let gap = 350;
