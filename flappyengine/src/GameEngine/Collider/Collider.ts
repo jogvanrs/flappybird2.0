@@ -66,4 +66,18 @@ export class Collider{
     public static collides(c1:Collider, c2:Collider){
         return c1.collidesWith(c2);
     }
+
+    // Methods to aid collision detection among many Colliders:
+    public isClearlyLeftOf(x:number){
+        return this.getRight() < x;
+    }
+    public isClearlyRightOf(x:number){
+        return this.getLeft() > x;
+    }
+    public isClearlyAbove(y: number){
+        return this.getBottom() < y;
+    }
+    public isClearlyBelow(y: number){
+        return this.getTop() > y;
+    }
 }
