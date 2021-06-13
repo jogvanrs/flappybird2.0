@@ -5,8 +5,9 @@ function ScoreBoard(){
 
             position: 'absolute',
             zIndex: 2000,
-            }}>Score: </div>
-        )
+            }}>Score: 
+        </div>
+    )
 }
 
 export default ScoreBoard
