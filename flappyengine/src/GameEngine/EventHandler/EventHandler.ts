@@ -1,6 +1,8 @@
 /*
     These functions are used to handle whether a key has been pressed or is not beeing pressed anymore.
     To be used with player actions
+
+    Inspirated by: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
 */
 
 export class EventHandler{
