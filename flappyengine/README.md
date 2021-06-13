@@ -4,7 +4,7 @@
 
 This game engine consists of several classes. In order for your game to utilize any needed functions, the game has to directly import the appropriate classes containing said functions. The engine consists of the following classes: Collider, EventHandler, GameLoop, Physics, PhysicsWrapper and Sound.
 
-The GameLoop class holds three functions, all of which are essential for the game to run. Through Init(), the game creator decides which elements need to be initialied on window load. The other two functions start and stop the game loop. Inside the game, the game creator passes all needed functions as an argument to the GameLoop.start() function, after which the game loop runs until stop() is called.
+The GameLoop class holds three functions, all of which are essential for the game to run. Through init(), the game creator decides which elements need to be initialied on window load. The other two functions start and stop the game loop. Inside the game, the game creator passes all needed functions as an argument to the start() function, after which the game loop runs until stop() is called. Thus, with every update, the game loop (update frequency is decided by the game creator) calls all desired functions, resulting in a loop, within which the game is played.
 
 If the game needs collision, a Collider object is instantiated. It's constructor takes a HTMLElement as an argument. Example: **let playerCollider = new Collider(player);**
 
@@ -12,7 +12,7 @@ The EventHandler class contains two functions, keyPressUp() and keyPressDown, bo
 
 The Physics class contains needed in order to update an object's physics. None of it's functions are in direct relation with the game.
 
-PhysicsWrapper, which takes object position, velocity and acceleration as arguments, allows the game creator to instantiate and update the physics of any given game object, using the functions provided in the Physics class. It acts as a wrapper for the Physics class. Example of how to use PhysicsWrapper: **let playerObject = new PhysicsWrapper('playerSprite', 0, 0, 0, 0);**
+PhysicsWrapper, which takes object velocity and acceleration as arguments, allows the game creator to instantiate and update the physics of any given game object, using the functions provided in the Physics class. It acts as a wrapper for the Physics class. Example of how to use PhysicsWrapper: **let playerObject = new PhysicsWrapper('playerSprite', 0, 0, 0, 0);** (Note: The four zeroes indicate the horizontal and vertical veocity of the HTMLElement).
 
 # Getting Started with Create React App
 
