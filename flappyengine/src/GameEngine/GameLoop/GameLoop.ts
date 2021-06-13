@@ -2,7 +2,7 @@
 
 export class GameLoop {
 
-    interval:any;
+    interval:NodeJS.Timeout;
 
     /*
     makes function calls after page is loaded
