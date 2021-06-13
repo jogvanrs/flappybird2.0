@@ -1,6 +1,8 @@
 import gameOverpng from '../../assets/src/gameover.png'
 import playButton from '../../assets/src/playButton.png'
 
+// The GameoverScreen component is reused from previous project found on github : https://github.com/Slow4life/FlappyBirdReact/blob/main/src/components/GameOverScreen.tsx
+
 function GameOverScreen (){
 
     const pStyle = {color: '##ffad33', fontFamily: 'Trebuchet MS'}
@@ -30,7 +32,6 @@ function GameOverScreen (){
             <button style={buttonStyle} id="playAgain"></button>
         </div>
     )
-    
 }
 
 export default GameOverScreen;
