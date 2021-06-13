@@ -3,8 +3,8 @@ import {Physics} from './Physics'
 export class PhysicsWrapper{
 
     private gameObject :  HTMLElement;
-    private x: number = 0;
-    private y: number = 0;
+    private hPosition: number = 0;
+    private vPosition: number = 0;
     private hVelocity: number = 0;
     private vVelocity: number = 0;
     private hAcceleration: number = 0;
@@ -15,31 +15,31 @@ export class PhysicsWrapper{
     constructor(object:string, hAcceleration: number, hVelocity: number,
                 vAcceleration: number, vVelocity: number) {
         
-        if(object !== null || object !== undefined){
+        if(object !== null && object !== undefined){
            this.gameObject = document.getElementById(object)
            let tmp = this.gameObject.getBoundingClientRect() as DOMRect;
-           this.x = tmp.x;
-           this.y = tmp.y;
+           this.hPosition = tmp.x;
+           this.vPosition = tmp.y;
            this.hAcceleration = hAcceleration;
            this.hVelocity = hVelocity;
            this.vAcceleration = vAcceleration;
            this.vVelocity = vVelocity
-           this.physics = new Physics(this.x,this.y,this.hVelocity,this.vVelocity,this.hAcceleration,this.vAcceleration)
+           this.physics = new Physics(this.hPosition,this.vPosition,this.hVelocity,this.vVelocity,this.hAcceleration,this.vAcceleration)
         }
     }
 
-    moveX(){
+    moveHorizontal(){
 
         this.physics.step(this.time);
-        this.x = this.physics.getHorizontalPosition();
-        this.gameObject.style.left = this.x + 'px'
+        this.hPosition = this.physics.getHorizontalPosition();
+        this.gameObject.style.left = this.hPosition + 'px'
     }
 
-    moveY(){
+    moveVertical(){
 
         this.physics.step(this.time);
-        this.y = this.physics.getVerticalPosition();
-        this.gameObject.style.top = this.y + 'px'
+        this.vPosition = this.physics.getVerticalPosition();
+        this.gameObject.style.top = this.vPosition + 'px'
     }
 
     setPosition(xCoord: number, yCoord: number){
@@ -64,14 +64,14 @@ export class PhysicsWrapper{
 
 
     getVerticalPosition(){
-        return this.y;
+        return this.vPosition;
     }
 
     getHorizontalPosition(){
-        return this.x;
+        return this.hPosition;
     }
 
-    hyperMove(one: number, two: number){
-        this.physics.relativeHyperMove(one, two)
+    hyperMove(deltaX: number, deltaY: number){
+        this.physics.relativeHyperMove(deltaX, deltaY)
     }
 }

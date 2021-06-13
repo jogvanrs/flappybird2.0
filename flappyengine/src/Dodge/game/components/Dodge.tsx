@@ -110,15 +110,15 @@ function initGame() {
     // Runs with each Game Loop
     function calledFunctions() {
 
-        playerObject.moveX();
-        playerObject.moveY();
+        playerObject.moveHorizontal();
+        playerObject.moveVertical();
 
-        blockFirstObject.moveY(); 
-        blockFirstObject.moveX();
-        blockSecondObject.moveY(); 
-        blockSecondObject.moveX();
-        blockThirdObject.moveY();
-        blockThirdObject.moveX();
+        blockFirstObject.moveVertical();
+        blockFirstObject.moveHorizontal();
+        blockSecondObject.moveVertical();
+        blockSecondObject.moveHorizontal();
+        blockThirdObject.moveVertical();
+        blockThirdObject.moveHorizontal();
 
         let playerCollider = new Collider(player); 
         let blockFirstCollider = new Collider(blockFirst);
