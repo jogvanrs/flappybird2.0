@@ -14,6 +14,7 @@ import { Collider } from "../../../GameEngine/Collider/Collider";
 import { EventHandler } from '../../../GameEngine/EventHandler/EventHandler'
 import { Sound } from '../../../GameEngine/SoundManager/Sound'
 
+// Parts of the Flappybird component is reused from previous project found on github : https://github.com/Slow4life/FlappyBirdReact/blob/main/src/components/Flappybird.tsx
 function Flappybird() {
     return(
         <div id='gameWindow'>
@@ -54,28 +55,27 @@ function FlappyBirdGame() {
     spawnObject('pipesBothThird', 1100);
     
     // Object instances with parameter for horizontal/vertical acceleration and velocity
-    let playerobject = new PhysicsWrapper('playerSprite' , 2, 2, 60, 20);
+    let playerObject = new PhysicsWrapper('playerSprite' , 2, 2, 60, 20);
     let firstPipeObject = new PhysicsWrapper('pipesBothFirst', 0, -100, 0, 1);
     let secPipeObject = new PhysicsWrapper('pipesBothSecond', 0, -100, 0, 1);
     let thirdPipeObject = new PhysicsWrapper('pipesBothThird', 0, -100, 0, 1);
 
-    playerobject.setPosition(0,250);
+    playerObject.setPosition(0,250);
 
     let playerdiv = document.getElementById('playerSprite');
     
-    function initialstate(){  
+    function initialState(){  
         // Variables for setting pipes
 
         firstPipeObject.setPosition(500,firstPipeObject.getHorizontalPosition());
         secPipeObject.setPosition(800, secPipeObject.getHorizontalPosition());
         thirdPipeObject.setPosition(1100, thirdPipeObject.getHorizontalPosition());
-        playerobject.setPosition(0,250);
+        playerObject.setPosition(0,250);
         gameOverScreen.style.display = "none";
         run = true;
         wingSound.setVolume(1);
 
         scoreCounter = 0;
-
     }
 
     function movePlayer(player: PhysicsWrapper){
@@ -96,15 +96,13 @@ function FlappyBirdGame() {
         }
 
         // Update position of bird
-        movePlayer(playerobject);
-
-
+        movePlayer(playerObject);
     });
 
     // Functions for moving, checking collision and game over screen
     function calledFunctions() {
 
-        playerobject.moveY();
+        playerObject.moveY();
         firstPipeObject.moveX();
         secPipeObject.moveX();
         thirdPipeObject.moveX();
@@ -130,40 +128,49 @@ function FlappyBirdGame() {
         let thirdLowerPipeCollider = new Collider(pipeThreeLowerDiv);
         let thirdUpperPipeCollider = new Collider(pipeThreeUpperDiv);
 
+        //set the gap between pipes
         let gap = 350;
+
+        // used to randomize where on y-axis the pipes will 'respawn'
         let randBuffer = 150;
 
+        //when the pipes position is 60 px of the screen from the left hand side, they should be moved
+        let outOfBoundsLeft = -60;
+
+        //space between pipes
+        let pipeSpace = 300;
+
         // Resets pipes according to which pillar is infront of itself for a consistent look
-        if(firstPipeObject.getHorizontalPosition() < -60) {
+        if(firstPipeObject.getHorizontalPosition() < outOfBoundsLeft) {
                 
             scoreCounter++;
             pointSound.play();
-            firstPipeObject.setPosition(thirdPipeObject.getHorizontalPosition() + 300, thirdPipeObject.getVerticalPosition());
+            firstPipeObject.setPosition(thirdPipeObject.getHorizontalPosition() + pipeSpace, thirdPipeObject.getVerticalPosition());
             let rand= Math.random() * randBuffer ;
             pipeOneLowerDiv.style.bottom = rand + 'px'
             pipeOneUpperDiv.style.bottom = rand + gap + 'px';
         }
 
-        if(secPipeObject.getHorizontalPosition() < -60) {
+        if(secPipeObject.getHorizontalPosition() < outOfBoundsLeft) {
                 
             scoreCounter++;
             pointSound.play();
-            secPipeObject.setPosition(firstPipeObject.getHorizontalPosition() + 300, firstPipeObject.getVerticalPosition());
+            secPipeObject.setPosition(firstPipeObject.getHorizontalPosition() + pipeSpace, firstPipeObject.getVerticalPosition());
             let rand= Math.random() * randBuffer;
             pipeTwoLowerDiv.style.bottom = rand + 'px'
             pipeTwoUpperDiv.style.bottom = rand + gap + 'px';
         }
 
-        if(thirdPipeObject.getHorizontalPosition() < -60) {
+        if(thirdPipeObject.getHorizontalPosition() < outOfBoundsLeft) {
             
             scoreCounter++;
             pointSound.play();
-            thirdPipeObject.setPosition(secPipeObject.getHorizontalPosition() + 300, secPipeObject.getVerticalPosition());
+            thirdPipeObject.setPosition(secPipeObject.getHorizontalPosition() + pipeSpace, secPipeObject.getVerticalPosition());
             let rand= Math.random() * randBuffer;
             pipeThreeLowerDiv.style.bottom = rand + 'px'
             pipeThreeUpperDiv.style.bottom = rand + gap + 'px';
-            
-        }   
+        }
+
         scoreBoardDiv.innerHTML = 'Score: ' + scoreCounter;
 
         function gameOver(){
@@ -182,13 +189,11 @@ function FlappyBirdGame() {
             gameOverScreen.style.display = "block";
             let gameDeathScore = document.getElementById('deathScore');
             
-           
-
             gameDeathScore.innerHTML = 'Score: ' + scoreCounter;
 
             gameLoop.stop();
             document.getElementById('playAgain').addEventListener('click', function() {
-                        initialstate();
+                        initialState();
             });
         }
     }

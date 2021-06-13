@@ -31,9 +31,9 @@ function Dodge() {
 let gameLoop = new GameLoop();
 let eventHandler = new EventHandler();
 
-gameLoop.init(init);
+gameLoop.init(initGame);
 
-function init() {
+function initGame() {
 
     let run = true;
     let scoreCounter:number = 0;

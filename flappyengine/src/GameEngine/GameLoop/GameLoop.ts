@@ -1,5 +1,14 @@
-// Game loop
-
+/*
+    Game Loop
+    
+    This class is used to control game engine behaviour.
+    
+    init() - initializes game engine
+    
+    start() - starts the game engine
+    
+    stop() - stops the game engine
+ */
 export class GameLoop {
 
     interval:any;
