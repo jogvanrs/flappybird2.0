@@ -87,7 +87,7 @@ function FlappyBirdGame() {
     let scoreCounter = 0; // Counter for when bird passes pillar
 
     // Input handler for jumping
-    eventHandler.keyPressDown('Space', event => {
+    eventHandler.keyPressDown('Space', () => {
         
         // Starts all functionality when 'space' is entered first time, runs once
         if(waitingForUserToStartGame) {
@@ -98,6 +98,8 @@ function FlappyBirdGame() {
         // Update position of bird
         movePlayer(playerObject);
     });
+
+    
 
     // Functions for moving, checking collision and game over screen
     function calledFunctions() {
