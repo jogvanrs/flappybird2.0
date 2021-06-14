@@ -1,6 +1,6 @@
 <mxfile>
     <diagram id="PtY_qRNGKdMkOisBtqZE" name="Page-1">
-        <mxGraphModel dx="1009" dy="575" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="792" dy="575" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -13,25 +13,25 @@
                 <mxCell id="17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="3" target="4" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="3" value="Create React Components" style="html=1;dashed=0;whitespace=wrap;" parent="1" vertex="1">
+                <mxCell id="3" value="Create React Components" style="html=1;dashed=0;whitespace=wrap;rounded=1;" parent="1" vertex="1">
                     <mxGeometry x="224" y="110" width="160" height="50" as="geometry"/>
                 </mxCell>
                 <mxCell id="18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="4" target="5" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="4" value="Initialize Game" style="html=1;dashed=0;whitespace=wrap;" parent="1" vertex="1">
+                <mxCell id="4" value="Initialize Game" style="html=1;dashed=0;whitespace=wrap;rounded=1;" parent="1" vertex="1">
                     <mxGeometry x="254" y="220" width="100" height="50" as="geometry"/>
                 </mxCell>
                 <mxCell id="19" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="5" target="6" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="5" value="Objects Created" style="html=1;dashed=0;whitespace=wrap;" parent="1" vertex="1">
+                <mxCell id="5" value="Objects Created" style="html=1;dashed=0;whitespace=wrap;rounded=1;" parent="1" vertex="1">
                     <mxGeometry x="254" y="310" width="100" height="50" as="geometry"/>
                 </mxCell>
                 <mxCell id="20" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="6" target="15" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="6" value="Start GameLoop" style="html=1;dashed=0;whitespace=wrap;" parent="1" vertex="1">
+                <mxCell id="6" value="Start GameLoop" style="html=1;dashed=0;whitespace=wrap;rounded=1;" parent="1" vertex="1">
                     <mxGeometry x="254" y="400" width="100" height="50" as="geometry"/>
                 </mxCell>
                 <mxCell id="8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="7" target="9" edge="1">
@@ -63,7 +63,7 @@
                 <mxCell id="24" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="9" target="10" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="9" value="Gameloop stopped" style="html=1;dashed=0;whitespace=wrap;" parent="1" vertex="1">
+                <mxCell id="9" value="Gameloop stopped" style="html=1;dashed=0;whitespace=wrap;rounded=1;" parent="1" vertex="1">
                     <mxGeometry x="244" y="800" width="120" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="10" target="12" edge="1">
@@ -96,7 +96,7 @@
                 <mxCell id="21" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="15" target="7" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="15" value="Update Game" style="html=1;dashed=0;whitespace=wrap;" parent="1" vertex="1">
+                <mxCell id="15" value="Update Game" style="html=1;dashed=0;whitespace=wrap;rounded=1;" parent="1" vertex="1">
                     <mxGeometry x="254" y="510" width="100" height="50" as="geometry"/>
                 </mxCell>
             </root>
