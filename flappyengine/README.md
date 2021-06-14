@@ -2,8 +2,6 @@
 
 ## How to use
 
-Firsly, a React project has to be created. Refer to https://reactjs.org/ for how.
-
 This game engine consists of several classes. In order for your game to utilize any needed functions, the game has to directly import the appropriate classes containing said functions. The engine consists of the following classes: Collider, EventHandler, GameLoop, Physics, PhysicsWrapper and Sound.
 
 The GameLoop class holds three functions, all of which are essential for the game to run. Through init(), the game creator decides which elements need to be initialized on window load. The other two functions start and stop the game loop. Inside the game, the game creator passes all needed functions as an argument to the start() function, after which the game loop runs until stop() is called. Thus, with every update, the game loop (update frequency is decided by the game creator) calls all desired functions, resulting in a loop, within which the game is played.
