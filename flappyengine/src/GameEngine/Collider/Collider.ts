@@ -12,15 +12,23 @@ might be tested for collision with itself.
 Testing for object equality between Collider objects is no solution.
 Two separate Collider object might represent the same game object
  */
+import assert from "assert";
+
 export class Collider{
 
     constructor(htmlElement: HTMLElement);
-    constructor(htmlElement: HTMLElement){
-        const boundingClientRect = htmlElement.getBoundingClientRect();
-        this.left = boundingClientRect.left
-        this.top = boundingClientRect.top;
-        this.right = boundingClientRect.right;
-        this.bottom = boundingClientRect.bottom;
+    constructor(left: number, top:number, right: number, bottom: number);
+    constructor(leftOrHTML: (HTMLElement | number), top?: number, right?: number, bottom?: number ){
+        const noOfArguments = arguments.length;
+        assert(noOfArguments===1 || noOfArguments===4);
+        if(noOfArguments===1){
+            const htmlElement = leftOrHTML as HTMLElement;
+            const boundingClientRect = htmlElement.getBoundingClientRect();
+            this.left = boundingClientRect.left
+            this.top = boundingClientRect.top;
+            this.right = boundingClientRect.right;
+            this.bottom = boundingClientRect.bottom;
+        }
 
     };
     private left: number;
