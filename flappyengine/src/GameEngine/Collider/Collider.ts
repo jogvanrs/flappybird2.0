@@ -13,7 +13,8 @@ Testing for object equality between Collider objects is no solution.
 Two separate Collider object might represent the same game object
  */
 export class Collider{
-    
+
+    constructor(htmlElement: HTMLElement);
     constructor(htmlElement: HTMLElement){
         const boundingClientRect = htmlElement.getBoundingClientRect();
         this.left = boundingClientRect.left
