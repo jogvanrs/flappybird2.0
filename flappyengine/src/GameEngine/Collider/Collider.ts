@@ -15,7 +15,6 @@ Two separate Collider object might represent the same game object
 import assert from "assert";
 
 export class Collider{
-
     constructor(htmlElement: HTMLElement);
     constructor(left: number, top:number, right: number, bottom: number);
     constructor(leftOrHTML: (HTMLElement | number), top?: number, right?: number, bottom?: number ){
@@ -28,6 +27,12 @@ export class Collider{
             this.top = boundingClientRect.top;
             this.right = boundingClientRect.right;
             this.bottom = boundingClientRect.bottom;
+        } else {
+            assert(noOfArguments===4);
+            this.left = leftOrHTML as number;
+            this.top = top;
+            this.right = right;
+            this.bottom = bottom;
         }
 
     };
