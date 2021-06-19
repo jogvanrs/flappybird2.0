@@ -20,6 +20,10 @@ export class Collider{
         this.HTMLElement = htmlElement;
 
     };
+    private left: number;
+    private top: number;
+    private right: number;
+    private bottom: number;
 
     private getTop(){    
         return this.HTMLElement.getBoundingClientRect().top;
