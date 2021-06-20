@@ -99,6 +99,7 @@ test('Collisions', () => {
     expectNoCollision(c1, c10);
     expectCollision(c1, c11);
     expectNoCollision(c1, c12);
+    expectNoCollision(c1, c12Parametric);
     expectNoCollision(c1, c13);
     expectNoCollision(c1, c14);
     expectNoCollision(c1, c15);
@@ -138,6 +139,7 @@ test('Collisions', () => {
     expectNoCollision(c3, c10);
     expectCollision(c3, c11);
     expectNoCollision(c3, c12);
+    expectNoCollision(c3, c12Parametric);
     expectNoCollision(c3, c13);
     expectNoCollision(c3, c14);
     expectNoCollision(c3, c15);
@@ -173,6 +175,7 @@ test('Collisions', () => {
     expectNoCollision(c5, c10);
     expectCollision(c5, c11);
     expectNoCollision(c5, c12);
+    expectNoCollision(c5, c12Parametric);
     expectNoCollision(c5, c13);
     expectNoCollision(c5, c14);
     expectNoCollision(c5, c15);
@@ -204,6 +207,7 @@ test('Collisions', () => {
     expectNoCollision(c7, c10);
     expectCollision(c7, c11);
     expectNoCollision(c7, c12);
+    expectNoCollision(c7, c12Parametric);
     expectNoCollision(c7, c13);
     expectNoCollision(c7, c14);
     expectNoCollision(c7, c15);
@@ -231,6 +235,7 @@ test('Collisions', () => {
     expectNoCollision(c9, c10);
     expectNoCollision(c9, c11);
     expectNoCollision(c9, c12);
+    expectNoCollision(c9, c12Parametric);
     expectNoCollision(c9, c13);
     expectNoCollision(c9, c14);
     expectNoCollision(c9, c15);
@@ -243,6 +248,7 @@ test('Collisions', () => {
     expectCollision(c10, c10);
     expectNoCollision(c10, c11);
     expectNoCollision(c10, c12);
+    expectNoCollision(c10, c12Parametric);
     expectNoCollision(c10, c13);
     expectNoCollision(c10, c14);
     expectNoCollision(c10, c15);
@@ -254,6 +260,7 @@ test('Collisions', () => {
 
     expectCollision(c11, c11);
     expectNoCollision(c11, c12);
+    expectNoCollision(c11, c12Parametric);
     expectNoCollision(c11, c13);
     expectNoCollision(c11, c14);
     expectNoCollision(c11, c15);
@@ -262,15 +269,32 @@ test('Collisions', () => {
     expectNoCollision(c11, c18);
     expectNoCollision(c11, c19);
     expectNoCollision(c11, c20);
-    expectCollision(c12, c12);
-    expectCollision(c12, c13);
-    expectCollision(c12, c14);
-    expectCollision(c12, c15);
-    expectCollision(c12, c16);
-    expectCollision(c12, c17);
-    expectCollision(c12, c18);
-    expectNoCollision(c12, c19);
-    expectNoCollision(c12, c20);
+    {
+        expectCollision(c12,           c12          );
+        expectCollision(c12,           c12Parametric);
+        expectCollision(c12Parametric, c12          );
+        expectCollision(c12Parametric, c12Parametric);
+    }
+    {
+        expectCollision(c12, c13);
+        expectCollision(c12, c14);
+        expectCollision(c12, c15);
+        expectCollision(c12, c16);
+        expectCollision(c12, c17);
+        expectCollision(c12, c18);
+        expectNoCollision(c12, c19);
+        expectNoCollision(c12, c20);
+    }
+    {
+        expectCollision(c12Parametric, c13);
+        expectCollision(c12Parametric, c14);
+        expectCollision(c12Parametric, c15);
+        expectCollision(c12Parametric, c16);
+        expectCollision(c12Parametric, c17);
+        expectCollision(c12Parametric, c18);
+        expectNoCollision(c12Parametric, c19);
+        expectNoCollision(c12Parametric, c20);
+    }
 
     expectCollision(c13, c13);
     expectCollision(c13, c14);
