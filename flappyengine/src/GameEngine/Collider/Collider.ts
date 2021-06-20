@@ -12,26 +12,46 @@ might be tested for collision with itself.
 Testing for object equality between Collider objects is no solution.
 Two separate Collider object might represent the same game object
  */
-export class Collider{
+import assert from "assert";
 
-    private HTMLElement: HTMLElement;
-    
-    constructor(htmlElement: HTMLElement){
-        this.HTMLElement = htmlElement;
+export class Collider{
+    constructor(htmlElement: HTMLElement);
+    constructor(left: number, top:number, right: number, bottom: number);
+    constructor(leftOrHTML: (HTMLElement | number), top?: number, right?: number, bottom?: number ){
+        const noOfArguments = arguments.length;
+        assert(noOfArguments===1 || noOfArguments===4);
+        if(noOfArguments===1){
+            const htmlElement = leftOrHTML as HTMLElement;
+            const boundingClientRect = htmlElement.getBoundingClientRect();
+            this.left = boundingClientRect.left
+            this.top = boundingClientRect.top;
+            this.right = boundingClientRect.right;
+            this.bottom = boundingClientRect.bottom;
+        } else {
+            assert(noOfArguments===4);
+            this.left = leftOrHTML as number;
+            this.top = top;
+            this.right = right;
+            this.bottom = bottom;
+        }
 
     };
+    private left: number;
+    private top: number;
+    private right: number;
+    private bottom: number;
 
     private getTop(){    
-        return this.HTMLElement.getBoundingClientRect().top;
+        return this.top;
     };
     private getLeft(){
-        return this.HTMLElement.getBoundingClientRect().left;
+        return this.left;
     }
     private getRight(){
-        return this.HTMLElement.getBoundingClientRect().left + this.HTMLElement.getBoundingClientRect().width;
+        return this.right;
     }
     private getBottom() {
-        return this.HTMLElement.getBoundingClientRect().top + this.HTMLElement.getBoundingClientRect().height
+        return this.bottom
     }
 
 
